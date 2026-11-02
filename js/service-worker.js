@@ -89,8 +89,8 @@ app.methods.setContextMenuItems = fieldsets => {
 }
 
 chrome.runtime.onInstalled.addListener(_ => {
-  // `chrome.storage.local.set(app.initialStorage)` is needed to access the initial fieldsets on Options page
-  // (see Initialization section)
+  // Calling chrome.storage.local.set(app.initialStorage) is required to access the initial fieldsets on the
+  // Options page (see the Initialization section)
   chrome.storage.local.set(app.initialStorage)
   chrome.storage.sync.get(null, storage => {
     if (!storage.fieldsets) {
