@@ -1,13 +1,4 @@
-
-/* global app, chrome */
-
-/**
- * @property chrome.contextMenus.onClicked
- * @property chrome.contextMenus.removeAll
- * @property chrome.storage.onChanged
- * @property chrome.runtime.onInstalled
- * @property chrome.storage.sync
- */
+// noinspection JSIgnoredPromiseFromCall,JSCheckFunctionSignatures
 
 const app = {}
 
