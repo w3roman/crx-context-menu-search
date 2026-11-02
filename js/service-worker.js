@@ -32,9 +32,9 @@ app.initialStorage = {
   }],
 }
 
-chrome.runtime.onInstalled.addListener(_ => {
+chrome.runtime.onInstalled.addListener(() => {
   // Calling chrome.storage.local.set(app.initialStorage) is required to access the initial fieldsets on the
-  // Options page (see the Initialization section)
+  // Options page (see the INITIALIZATION section)
   chrome.storage.local.set(app.initialStorage)
 
   chrome.storage.sync.get(null, storage => {
