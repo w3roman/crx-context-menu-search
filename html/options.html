@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Options</title>
   <link rel="stylesheet" href="../css/options.css">
   <script src="../lib/Sortable.min.js"></script>
@@ -10,9 +11,13 @@
 <body>
   <div id="app">
     <h1>Options</h1>
+    <div class="tooltip">
+      To save your changes, click the Save button<br>
+      To discard all changes, simply close this window
+    </div>
     <ul id="list-of-fieldsets"></ul>
-    <div id="save-add-buttons-wrapper">
-      <button id="add-button">Add</button>
+    <div class="save-add-buttons-box">
+      <button id="add-button">Add Search</button>
       <button id="add-separator-button">Add separator</button>
       <button id="save-button">
         <span id="saved-notification" class="hidden">Saved</span>
@@ -24,9 +29,6 @@
       <button id="sort-alphabetically-button">Sort alphabetically</button>
     </div>
     <hr>
-    <div id="import-load-defaults-tooltip">
-      After importing or loading default searches, be sure to click the "Save" button
-    </div>
     <div id="import-load-defaults-export-buttons-wrapper">
       <button id="import-button">Import</button>
       <button id="load-defaults-button">Load defaults</button>

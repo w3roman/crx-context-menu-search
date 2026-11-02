@@ -7,12 +7,14 @@
 }
 
 body {
+  color: #333;
   width: 500px;
 }
 
-#app button {
-  width: 27%;
-  padding: 0;
+button {
+  cursor: pointer;
+  width: 30%;
+  padding: .1rem;
 }
 
 .hidden {
@@ -25,15 +27,48 @@ body {
 
 h1,
 h2 {
+  margin: 0;
   text-align: center;
-  text-indent: -18px;
 }
 
 /* Fieldsets */
 
 ul {
   list-style: none;
+  margin-bottom: 1rem;
   padding-left: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: .5rem 0;
+}
+
+li span {
+  display: inline-block;
+}
+
+li span:first-child {
+  margin-top: -4px;
+}
+
+li span:last-child {
+  margin-top: -2px;
+}
+
+input,
+button {
+  border: 1px solid #bfbfbf;
+  border-radius: .3rem;
+  padding: .3rem;
+}
+
+input:focus,
+button:focus {
+  border: 1px solid #f00;
+  outline: 0;
 }
 
 ul#list-of-examples {
@@ -50,7 +85,7 @@ ul#list-of-examples .name {
 
 .up-down-arrow {
   cursor: move;
-  font-size: 25px;
+  font-size: 1.5rem;
   vertical-align: sub;
 }
 
@@ -77,7 +112,7 @@ ul#list-of-examples .name {
 
 /* Buttons */
 
-#save-add-buttons-wrapper,
+.save-add-buttons-box,
 #sort-alphabetically-button-wrapper,
 #import-load-defaults-export-buttons-wrapper {
   display: flex;
@@ -100,9 +135,9 @@ ul#list-of-examples .name {
   justify-content: center;
 }
 
-#import-load-defaults-tooltip {
+.tooltip {
   color: #f00;
-  margin-bottom: 14px;
+  margin: .5rem 0 1rem;
   text-align: center;
 }
 
