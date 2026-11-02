@@ -10,6 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const addSeparatorButton = document.getElementById('add-separator-button')
   const sortAZButton = document.getElementById('sort-a-z-button')
   const saveButton = document.getElementById('save-button')
+  const errorBag = document.getElementById('error-bag')
 
   /*
    * =============================================================================
@@ -147,6 +148,12 @@ window.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < fieldsets.length; i++) {
       const nameInput = fieldsets[i].querySelector('.name')
       if (nameInput) {
+        if (!nameInput.value) {
+          errorBag.textContent = 'The Search name must not be empty'
+          nameInput.focus()
+          setTimeout(() => errorBag.textContent = '', 1500)
+          return
+        }
         data.fieldsets.push({
           name: nameInput.value,
           url: fieldsets[i].querySelector('.url').value,

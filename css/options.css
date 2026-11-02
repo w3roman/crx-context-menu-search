@@ -110,8 +110,14 @@ button:focus {
 .buttons-box {
   display: flex;
   justify-content: space-between;
-  width: 467px;
-  margin-left: 16px;
+  position: relative;
+}
+
+#error-bag {
+  color: #f00;
+  position: absolute;
+  top: -1.3rem;
+  right: 0;
 }
 
 #save-button {
