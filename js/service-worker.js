@@ -2,8 +2,6 @@
 
 const app = {}
 
-app.methods = {}
-
 app.initialStorage = {
   fieldsets: [{
     name: 'Google - Exact match',
@@ -34,67 +32,28 @@ app.initialStorage = {
   }],
 }
 
-app.oldInitialStorage = {
-  fieldsets: [{
-    name: 'Google - Exact match',
-    url: 'https://google.com/search?q="%s"',
-  }, {
-    name: 'Google Images',
-    url: 'https://google.com/search?q=%s&tbm=isch',
-  }, {
-    name: 'YouTube',
-    url: 'https://youtube.com/results?search_query=%s',
-  }, {
-    name: 'Facebook',
-    url: 'https://facebook.com/search?q=%s',
-  }, {
-    name: 'Wikipedia',
-    url: 'https://wikipedia.org/wiki/%s',
-  }, {
-    name: '_separator_',
-  }, {
-    name: 'Google Maps',
-    url: 'https://google.com/maps/search/%s',
-  }, {
-    name: 'Yandex Maps',
-    url: 'https://yandex.com/maps?text=%s',
-  }],
-}
-
 chrome.runtime.onInstalled.addListener(_ => {
   // Calling chrome.storage.local.set(app.initialStorage) is required to access the initial fieldsets on the
   // Options page (see the Initialization section)
   chrome.storage.local.set(app.initialStorage)
+
   chrome.storage.sync.get(null, storage => {
-    if (!storage.fieldsets) {
-      chrome.storage.sync.set(app.initialStorage)
+    if (storage.fieldsets) {
+      chrome.storage.sync.set(storage)
     } else {
-      if (
-        storage.fieldsets.every(
-          (fieldset, index) =>
-            app.oldInitialStorage.fieldsets[index]
-            &&
-            fieldset.name === app.oldInitialStorage.fieldsets[index].name
-            &&
-            fieldset.url === app.oldInitialStorage.fieldsets[index].url
-        )
-      ) {
-        chrome.storage.sync.set(app.initialStorage)
-      }
-      chrome.storage.sync.get(null, storage => {
-        // Bugfix
-        storage.fieldsets.forEach(item => {
-          if (item.url === 'https://www.tiktok.com/search?q=hello') {
-            item.url = 'https://www.tiktok.com/search?q=%s'
-          }
-        })
-        chrome.storage.sync.set(storage)
-        // /Bugfix
-        app.methods.setContextMenuItems(storage.fieldsets)
-      })
+      chrome.storage.sync.set(app.initialStorage)
     }
+    app.methods.setContextMenuItems(storage.fieldsets)
   })
 })
+
+chrome.storage.onChanged.addListener(changes =>
+  chrome.contextMenus.removeAll(
+    () => app.methods.setContextMenuItems(changes.fieldsets.newValue)
+  )
+)
+
+app.methods = {}
 
 app.methods.setContextMenuItems = fieldsets => {
   for (const index in fieldsets) {
@@ -107,23 +66,13 @@ app.methods.setContextMenuItems = fieldsets => {
     } else {
       chrome.contextMenus.create({
         id: index,
-        title: fieldsets[index].name,
         contexts: ['selection', 'image'],
+        title: fieldsets[index].name,
       })
     }
   }
 }
 
-chrome.storage.onChanged.addListener(changes =>
-  chrome.contextMenus.removeAll(
-    _ => app.methods.setContextMenuItems(changes.fieldsets.newValue)
-  )
-)
-
-/**
- * @param {String} info.menuItemId
- * @param {String} info.selectionText
- */
 chrome.contextMenus.onClicked.addListener(
   info => chrome.storage.sync.get(null, storage => {
     let url = storage.fieldsets[info.menuItemId].url
