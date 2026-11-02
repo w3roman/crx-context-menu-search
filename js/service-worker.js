@@ -56,6 +56,16 @@ chrome.storage.onChanged.addListener(changes =>
 app.methods = {}
 
 app.methods.setContextMenuItems = fieldsets => {
+  chrome.contextMenus.create({
+    id: 'yandex-distribution',
+    contexts: ['selection', 'image'],
+    title: 'Yandex',
+  })
+  chrome.contextMenus.create({
+    id: 'yandex-distribution-separator',
+    contexts: ['selection', 'image'],
+    type: 'separator',
+  })
   for (const index in fieldsets) {
     if (fieldsets[index].name === '_separator_') {
       chrome.contextMenus.create({
@@ -73,20 +83,21 @@ app.methods.setContextMenuItems = fieldsets => {
   }
 }
 
-chrome.contextMenus.onClicked.addListener(
-  info => chrome.storage.sync.get(null, storage => {
-    let url = storage.fieldsets[info.menuItemId].url
+chrome.contextMenus.onClicked.addListener(info => {
+  chrome.storage.sync.get(null, storage => {
+    let url = info.menuItemId === 'yandex-distribution'
+      ? 'https://ya.ru/search/?clid=15524895&text=%s'
+      : storage.fieldsets[info.menuItemId].url
     url = url.replace('%s', encodeURIComponent(info.srcUrl || info.selectionText))
     chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    }, tabs => {
-      let currentTab = tabs[0]
-      chrome.tabs.create({
-        url: url,
-        index: currentTab.index + 1,
-        openerTabId: currentTab.id,
+      active: true, currentWindow: true},
+      tabs => {
+        let currentTab = tabs[0]
+        chrome.tabs.create({
+          url: url,
+          index: currentTab.index + 1,
+          openerTabId: currentTab.id,
+        })
       })
-    })
   })
-)
+})
