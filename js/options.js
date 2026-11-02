@@ -20,11 +20,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   chrome.storage.sync.get(null, storage => {
     setFieldsets(storage.fieldsets)
-    // If only Search remains, we hide the controls
-    if (document.querySelectorAll('.remove-fieldset-button').length === 1) {
-      document.querySelector('.remove-fieldset-button').classList.add('hidden')
-      document.querySelector('.up-down-arrow').classList.add('invisible')
-    }
   })
 
   function setFieldsets(fieldsets) {
