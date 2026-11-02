@@ -1,13 +1,7 @@
 
-/* global app, chrome */
-
-/**
- * @property chrome.downloads
- */
+/* global Sortable */
 
 window.addEventListener('DOMContentLoaded', _ => {
-
-  // Elements
 
   const listOfFieldsets = document.getElementById('list-of-fieldsets')
   const fieldsetTemplate = document.getElementById('fieldset-template')
@@ -15,14 +9,13 @@ window.addEventListener('DOMContentLoaded', _ => {
   const addButton = document.getElementById('add-button')
   const addSeparatorButton = document.getElementById('add-separator-button')
   const saveButton = document.getElementById('save-button')
-  const savedNotification = document.getElementById('saved-notification')
   const sortAlphabeticallyButton = document.getElementById('sort-alphabetically-button')
-  const listOfExamples = document.getElementById('list-of-examples')
 
   // Initialization
 
   chrome.storage.sync.get(null, storage => {
     setFieldsets(storage.fieldsets)
+    // If only Search remains, we hide the controls
     if (document.querySelectorAll('.remove-fieldset-button').length === 1) {
       document.querySelector('.remove-fieldset-button').classList.add('hidden')
       document.querySelector('.up-down-arrow').classList.add('invisible')
@@ -30,14 +23,9 @@ window.addEventListener('DOMContentLoaded', _ => {
   })
 
   function setFieldsets(fieldsets) {
-    if (!fieldsets) {
-      return
-    }
+    if (!fieldsets) return
     // Remove old fieldsets
-    const oldFieldsets = listOfFieldsets.querySelectorAll('li')
-    for (let i = 0; i < oldFieldsets.length; i++) {
-      oldFieldsets[i].remove()
-    }
+    listOfFieldsets.innerHTML = ''
     // Add new fieldsets
     for (let index in fieldsets) {
       let fieldset
@@ -57,49 +45,13 @@ window.addEventListener('DOMContentLoaded', _ => {
     preventOnFilter: false,
   })
 
-  // Initialization - Examples
-
-  ;(_ => {
-    chrome.storage.local.get(null, storage => {
-      for (const index in storage.fieldsets) {
-        const li = document.createElement('li')
-        const fieldset = storage.fieldsets[index]
-
-        if (fieldset.name === '_separator_') {
-          const spanSeparator = document.createElement('span')
-          spanSeparator.className = 'separator'
-          li.appendChild(spanSeparator)
-        } else {
-          const nameInput = document.createElement('input')
-          nameInput.disabled = true
-          nameInput.className = 'name'
-          nameInput.value = storage.fieldsets[index].name
-
-          const urlInput = document.createElement('input')
-          urlInput.disabled = true
-          urlInput.className = 'url'
-          urlInput.value = storage.fieldsets[index].url
-
-          li.appendChild(nameInput)
-          li.appendChild(urlInput)
-        }
-
-        listOfExamples.appendChild(li)
-      }
-    })
-  })()
-
   // Events
 
-  // Events - Add fieldset
-
-  addButton.addEventListener('click', _ => {
+  addButton.addEventListener('click', () => {
     listOfFieldsets.appendChild(fieldsetTemplate.content.cloneNode(true))
     document.querySelector('.remove-fieldset-button').classList.remove('hidden')
     document.querySelector('.up-down-arrow').classList.remove('invisible')
   })
-
-  // Events - Add separator fieldset
 
   addSeparatorButton.addEventListener('click', _ => {
     listOfFieldsets.appendChild(separatorTemplate.content.cloneNode(true))
@@ -107,27 +59,27 @@ window.addEventListener('DOMContentLoaded', _ => {
     document.querySelector('.up-down-arrow').classList.remove('invisible')
   })
 
-  // Events - Save fieldsets
-
-  saveButton.addEventListener('click', _ => {
-    const data = {
-      fieldsets: [],
-    }
+  saveButton.addEventListener('click', () => {
+    const data = { fieldsets: [] }
     const fieldsets = listOfFieldsets.querySelectorAll('li')
     for (let i = 0; i < fieldsets.length; i++) {
-      const name = fieldsets[i].querySelector('.name')
-      if (name) {
+      const nameInput = fieldsets[i].querySelector('.name')
+      if (nameInput) {
         data.fieldsets.push({
-          name: name.value,
+          name: nameInput.value,
           url: fieldsets[i].querySelector('.url').value,
         })
       } else {
         data.fieldsets.push({name: '_separator_'})
       }
     }
-    chrome.storage.sync.set(data, _ => {
-      savedNotification.classList.remove('hidden')
-      setTimeout(_ => savedNotification.classList.add('hidden'), 1000)
+    chrome.storage.sync.set(data, () => {
+      saveButton.textContent = 'Saved'
+      saveButton.style.color = '#f00'
+      setTimeout(() => {
+        saveButton.textContent = 'Save'
+        saveButton.style.color = 'inherit'
+      }, 1000)
     })
   })
 
@@ -215,12 +167,5 @@ window.addEventListener('DOMContentLoaded', _ => {
         })
       })
     })
-
-  // Events - Close option window
-
-  document
-    .getElementById('close-button-wrapper')
-    .querySelector('button')
-    .addEventListener('click', _ => close())
 
 })

@@ -6,9 +6,14 @@
   box-sizing: border-box;
 }
 
+html {
+  /*scrollbar-width: none;*/
+}
+
 body {
   color: #333;
   width: 500px;
+  overflow: scroll;
 }
 
 button {
@@ -35,7 +40,6 @@ h2 {
 
 ul {
   list-style: none;
-  margin-bottom: 1rem;
   padding-left: 0;
 }
 
@@ -71,18 +75,6 @@ button:focus {
   outline: 0;
 }
 
-ul#list-of-examples {
-  margin-left: 15px;
-}
-
-ul#list-of-examples li {
-  margin: 5px 0;
-}
-
-ul#list-of-examples .name {
-  margin-right: 4px;
-}
-
 .up-down-arrow {
   cursor: move;
   font-size: 1.5rem;
@@ -112,9 +104,14 @@ ul#list-of-examples .name {
 
 /* Buttons */
 
-.save-add-buttons-box,
-#sort-alphabetically-button-wrapper,
-#import-load-defaults-export-buttons-wrapper {
+.buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.buttons-box {
   display: flex;
   justify-content: space-between;
   width: 467px;
@@ -131,24 +128,9 @@ ul#list-of-examples .name {
   left: -43px;
 }
 
-#sort-alphabetically-button-wrapper {
-  justify-content: center;
-}
-
-.tooltip {
-  color: #f00;
-  margin: .5rem 0 1rem;
-  text-align: center;
-}
-
-#close-button-wrapper {
-  text-align: center;
-  text-indent: -18px;
-}
-
 hr {
   border: 0;
   border-bottom: 1px solid #bfbfbf;
   width: 467px;
-  margin: 14px auto;
+  margin: 1.5rem auto;
 }
