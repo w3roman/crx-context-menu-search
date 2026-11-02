@@ -167,7 +167,7 @@ window.addEventListener('DOMContentLoaded', () => {
       saveButton.style.color = '#f00'
       setTimeout(() => {
         saveButton.textContent = 'Save'
-        saveButton.style.color = 'inherit'
+        saveButton.style.color = 'initial'
       }, 1000)
     })
   })
