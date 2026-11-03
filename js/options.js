@@ -1,5 +1,3 @@
-/* global Sortable */
-
 window.addEventListener('DOMContentLoaded', () => {
 
   const listOfFieldsets = document.getElementById('list-of-fieldsets')
