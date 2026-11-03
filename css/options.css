@@ -11,6 +11,17 @@ body {
   width: 500px;
 }
 
+header {
+  position: relative;
+}
+
+header a {
+  font-size: .8rem;
+  position: absolute;
+  top: 20%;
+  right: 0;
+}
+
 button {
   cursor: pointer;
   width: 30%;
@@ -19,11 +30,6 @@ button {
 
 h1 {
   margin: 0;
-  text-align: center;
-}
-
-.donate-link-box {
-  margin: .5rem 0 .8rem;
   text-align: center;
 }
 
