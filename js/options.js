@@ -1,4 +1,3 @@
-
 /* global Sortable */
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -114,15 +113,14 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('export-button')
     .addEventListener('click', () => {
       chrome.storage.sync.get(null, (storage) => {
-        const result = JSON.stringify(storage)
-        // `unescape(encodeURIComponent())` is needed to avoid the following error:
-        // Failed to execute 'btoa' on 'Window':
-        // The string to be encoded contains characters outside of the Latin1 range.
-        const url = 'data:application/json;base64,' + btoa(unescape(encodeURIComponent(result)))
+        const jsonString = JSON.stringify(storage, null, 2)
+        const blob = new Blob([jsonString], { type: 'application/json' })
+        const url = URL.createObjectURL(blob)
         chrome.downloads.download({
           url: url,
-          filename: 'context-menu-search.json',
-        })
+          filename: 'crx-context-menu-search.json',
+          saveAs: false,
+        }, () => {})
       })
     })
 
