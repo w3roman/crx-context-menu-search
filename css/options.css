@@ -9,7 +9,6 @@
 body {
   color: #333;
   width: 500px;
-  overflow: scroll;
 }
 
 button {
@@ -18,10 +17,19 @@ button {
   padding: .1rem;
 }
 
-h1,
-h2 {
+h1 {
   margin: 0;
   text-align: center;
+}
+
+.donate-link-box {
+  margin: .5rem 0 .8rem;
+  text-align: center;
+}
+
+a {
+  color: #0f518c;
+  text-decoration: none;
 }
 
 /* Fieldsets */
@@ -54,7 +62,7 @@ input,
 button {
   border: 1px solid #bfbfbf;
   border-radius: .3rem;
-  padding: .3rem;
+  padding: .2rem;
 }
 
 input:focus,
@@ -96,6 +104,9 @@ button:focus {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.buttons-wrapper:not(:last-of-type) {
   margin-bottom: 2rem;
 }
 
