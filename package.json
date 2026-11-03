@@ -1,5 +1,5 @@
 {
-  "dependencies": {
+  "devDependencies": {
     "@types/chrome": "^0.3.7"
   }
 }
