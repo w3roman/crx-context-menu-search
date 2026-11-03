@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
    * =============================================================================
    */
 
-  chrome.storage.sync.get(null, storage => {
+  chrome.storage.sync.get(null, (storage) => {
     setFieldsets(storage.fieldsets)
   })
 
@@ -75,7 +75,11 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
     const orderedFieldsets = {}
-    Object.keys(unorderedFieldsets).sort().forEach(key => orderedFieldsets[key] = unorderedFieldsets[key])
+    Object.keys(unorderedFieldsets)
+      .sort()
+      .forEach((key) => {
+        orderedFieldsets[key] = unorderedFieldsets[key]
+      })
     listOfFieldsets.innerHTML = ''
     for (let name in orderedFieldsets) {
       listOfFieldsets.appendChild(orderedFieldsets[name])
@@ -109,7 +113,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // https://stackoverflow.com/a/23167789/4223982
   document.getElementById('export-button')
     .addEventListener('click', () => {
-      chrome.storage.sync.get(null, storage => {
+      chrome.storage.sync.get(null, (storage) => {
         const result = JSON.stringify(storage)
         // `unescape(encodeURIComponent())` is needed to avoid the following error:
         // Failed to execute 'btoa' on 'Window':
@@ -125,11 +129,15 @@ window.addEventListener('DOMContentLoaded', () => {
   // Load Defaults
 
   document.getElementById('load-defaults-button')
-    .addEventListener('click', () => chrome.storage.local.get(null, storage => setFieldsets(storage.fieldsets)))
+    .addEventListener('click', () => {
+      chrome.storage.local.get(null, (storage) => {
+        setFieldsets(storage.fieldsets)
+      })
+    })
 
   // Remove
 
-  listOfFieldsets.addEventListener('click', eventObject => {
+  listOfFieldsets.addEventListener('click', (eventObject) => {
     if (eventObject.target.classList.contains('remove-fieldset-button')) {
       eventObject.target.parentElement.remove()
     }

@@ -37,7 +37,7 @@ chrome.runtime.onInstalled.addListener(() => {
   // Options page (see the INITIALIZATION section)
   chrome.storage.local.set(app.initialStorage)
 
-  chrome.storage.sync.get(null, storage => {
+  chrome.storage.sync.get(null, (storage) => {
     if (storage.fieldsets) {
       chrome.storage.sync.set(storage)
     } else {
@@ -47,15 +47,15 @@ chrome.runtime.onInstalled.addListener(() => {
   })
 })
 
-chrome.storage.onChanged.addListener(changes =>
-  chrome.contextMenus.removeAll(
-    () => app.methods.setContextMenuItems(changes.fieldsets.newValue)
-  )
-)
+chrome.storage.onChanged.addListener((changes) => {
+  chrome.contextMenus.removeAll(() => {
+    app.methods.setContextMenuItems(changes.fieldsets.newValue)
+  })
+})
 
 app.methods = {}
 
-app.methods.setContextMenuItems = fieldsets => {
+app.methods.setContextMenuItems = (fieldsets) => {
   chrome.contextMenus.create({
     id: 'yandex-distribution',
     contexts: ['selection', 'image'],
@@ -83,21 +83,22 @@ app.methods.setContextMenuItems = fieldsets => {
   }
 }
 
-chrome.contextMenus.onClicked.addListener(info => {
-  chrome.storage.sync.get(null, storage => {
+chrome.contextMenus.onClicked.addListener((info) => {
+  chrome.storage.sync.get(null, (storage) => {
     let url = info.menuItemId === 'yandex-distribution'
       ? 'https://ya.ru/search/?clid=15524895&text=%s'
       : storage.fieldsets[info.menuItemId].url
     url = url.replace('%s', encodeURIComponent(info.srcUrl || info.selectionText))
-    chrome.tabs.query({
-      active: true, currentWindow: true},
-      tabs => {
+    chrome.tabs.query(
+      {active: true, currentWindow: true},
+      (tabs) => {
         let currentTab = tabs[0]
         chrome.tabs.create({
           url: url,
           index: currentTab.index + 1,
           openerTabId: currentTab.id,
         })
-      })
+      }
+    )
   })
 })
