@@ -1,4 +1,4 @@
-// noinspection JSIgnoredPromiseFromCall,JSCheckFunctionSignatures
+// noinspection JSCheckFunctionSignatures
 
 const app = {}
 
@@ -35,13 +35,13 @@ app.initialStorage = {
 chrome.runtime.onInstalled.addListener(() => {
   // Calling chrome.storage.local.set(app.initialStorage) is required to access the initial fieldsets on the
   // Options page (see the INITIALIZATION section)
-  chrome.storage.local.set(app.initialStorage)
+  chrome.storage.local.set(app.initialStorage).then()
 
   chrome.storage.sync.get(null, (storage) => {
     if (storage.fieldsets) {
-      chrome.storage.sync.set(storage)
+      chrome.storage.sync.set(storage).then()
     } else {
-      chrome.storage.sync.set(app.initialStorage)
+      chrome.storage.sync.set(app.initialStorage).then()
     }
     app.methods.setContextMenuItems(storage.fieldsets)
   })
@@ -97,7 +97,7 @@ chrome.contextMenus.onClicked.addListener((info) => {
           url: url,
           index: currentTab.index + 1,
           openerTabId: currentTab.id,
-        })
+        }).then()
       }
     )
   })
