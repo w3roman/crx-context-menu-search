@@ -8,7 +8,7 @@ app.initialStorage = {
     url: 'https://www.google.com/search?q="%s"',
   }, {
     name: 'Google Images',
-    url: 'https://www.google.com/search?q=%s&tbm=isch',
+    url: 'https://www.google.com/search?q=%s&udm=2',
   }, {
     name: 'Facebook',
     url: 'https://www.facebook.com/search?q=%s',
