@@ -35,21 +35,22 @@ app.initialStorage = {
 chrome.runtime.onInstalled.addListener(() => {
   // Calling chrome.storage.local.set(app.initialStorage) is required to access the initial fieldsets on the
   // Options page (see the INITIALIZATION section)
-  chrome.storage.local.set(app.initialStorage).then()
-
-  chrome.storage.sync.get(null, (storage) => {
-    if (storage.fieldsets) {
-      chrome.storage.sync.set(storage).then()
-    } else {
-      chrome.storage.sync.set(app.initialStorage).then()
-    }
-    // This call is necessary for rendering Search items in the context menu, since if the set of fields has not changed
-    // (see above), the `change` event, whose handler calls the setContextMenuItems() method, will not fire
-    app.methods.setContextMenuItems(storage.fieldsets)
-  })
+  chrome.storage.local.set(app.initialStorage).then(
+    () => chrome.storage.sync.get(null, (storage) => {
+      if (storage.fieldsets) {
+        chrome.storage.sync.set(storage).then()
+      } else {
+        chrome.storage.sync.set(app.initialStorage).then()
+      }
+      // This call is necessary for rendering Search items in the context menu, since if the set of fields has not changed
+      // (see above), the `change` event, whose handler calls the setContextMenuItems() method, will not fire
+      app.methods.setContextMenuItems(storage.fieldsets)
+    })
+  )
 })
 
-chrome.storage.onChanged.addListener((changes) => {
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === 'local') return
   chrome.contextMenus.removeAll(() => {
     app.methods.setContextMenuItems(changes.fieldsets.newValue)
   })
@@ -58,27 +59,28 @@ chrome.storage.onChanged.addListener((changes) => {
 app.methods = {}
 
 app.methods.setContextMenuItems = (fieldsets) => {
+  const contexts = ['selection', 'image']
   chrome.contextMenus.create({
     id: 'yandex-distribution',
-    contexts: ['selection', 'image'],
+    contexts,
     title: 'Yandex',
   })
   chrome.contextMenus.create({
     id: 'yandex-distribution-separator',
-    contexts: ['selection', 'image'],
+    contexts,
     type: 'separator',
   })
   for (const index in fieldsets) {
     if (fieldsets[index].name === '_separator_') {
       chrome.contextMenus.create({
         id: index,
-        contexts: ['selection', 'image'],
+        contexts,
         type: 'separator',
       })
     } else {
       chrome.contextMenus.create({
         id: index,
-        contexts: ['selection', 'image'],
+        contexts,
         title: fieldsets[index].name,
       })
     }
