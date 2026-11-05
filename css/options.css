@@ -1,4 +1,23 @@
-@import 'main.css';
+@charset "utf-8";
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+a {
+  border: 1px solid transparent;
+  color: #15c;
+  font-size: 1rem;
+  padding: .4rem;
+  text-decoration: none;
+}
+
+a:focus {
+  outline: 0;
+  border: 1px solid;
+}
 
 body {
   color: #333;
@@ -14,6 +33,10 @@ header {
 footer {
   margin-top: 2rem;
   text-align: center;
+}
+
+p {
+  margin: 0;
 }
 
 button {
