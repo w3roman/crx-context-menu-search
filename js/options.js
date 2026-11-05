@@ -150,12 +150,25 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!nameInput.value) {
           errorBag.textContent = 'The Search name must not be empty'
           nameInput.focus()
-          setTimeout(() => errorBag.textContent = '', 1500)
+          setTimeout(() => {
+            errorBag.textContent = ''
+          }, 1500)
           return
+        }
+        const urlInput = fieldsets[i].querySelector('[name="searchUrl"]')
+        if (urlInput) {
+          if (!urlInput.value) {
+            errorBag.textContent = 'The Search URL must not be empty'
+            urlInput.focus()
+            setTimeout(() => {
+              errorBag.textContent = ''
+            }, 1500)
+            return
+          }
         }
         data.fieldsets.push({
           name: nameInput.value,
-          url: fieldsets[i].querySelector('[name="searchUrl"]').value,
+          url: urlInput.value,
         })
       } else {
         data.fieldsets.push({name: '_separator_'})
