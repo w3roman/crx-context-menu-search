@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const listOfFieldsets = document.getElementById('list-of-fieldsets')
   const fieldsetTemplate = document.getElementById('fieldset-template')
   const separatorTemplate = document.getElementById('separator-template')
-  const addButton = document.getElementById('add-button')
+  const addSearchButton = document.getElementById('add-search-button')
   const addSeparatorButton = document.getElementById('add-separator-button')
   const sortAZButton = document.getElementById('sort-a-z-button')
   const saveButton = document.getElementById('save-button')
@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Add Search
 
-  addButton.addEventListener('click', () => {
+  addSearchButton.addEventListener('click', () => {
     listOfFieldsets.appendChild(fieldsetTemplate.content.cloneNode(true))
   })
 
