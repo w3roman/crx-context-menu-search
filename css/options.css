@@ -6,6 +6,12 @@
   box-sizing: border-box;
 }
 
+body {
+  color: #333;
+  width: 30rem;
+  margin: 2rem auto;
+}
+
 a {
   border: 1px solid transparent;
   color: #15c;
@@ -19,12 +25,6 @@ a:focus {
   border: 1px solid;
 }
 
-body {
-  color: #333;
-  width: 500px;
-  margin: 2rem auto;
-}
-
 header {
   margin-bottom: 2rem;
   text-align: center;
@@ -34,18 +34,6 @@ footer {
   margin-top: 2rem;
   text-align: center;
 }
-
-p {
-  margin: 0;
-}
-
-button {
-  cursor: pointer;
-  width: 30%;
-  padding: .1rem;
-}
-
-/* Fieldsets */
 
 ul {
   list-style: none;
@@ -60,15 +48,12 @@ li {
 }
 
 li span {
-  display: inline-block;
+  margin-top: -3px;
 }
 
-li span:first-child {
-  margin-top: -4px;
-}
-
-li span:last-child {
-  margin-top: -2px;
+.up-down-arrow {
+  cursor: move;
+  font-size: 1.5rem;
 }
 
 input,
@@ -84,12 +69,6 @@ button:focus {
   outline: 0;
 }
 
-.up-down-arrow {
-  cursor: move;
-  font-size: 1.5rem;
-  vertical-align: sub;
-}
-
 .search-name {
   width: 35%;
 }
@@ -100,27 +79,25 @@ button:focus {
 
 .separator {
   border-top: 1px solid #bfbfbf;
-  display: inline-block;
-  width: 463px;
-  vertical-align: middle;
+  width: 90%;
 }
 
 .remove-fieldset-button {
   color: #f00;
   cursor: pointer;
-  font-size: 17px;
+  font-size: 1rem;
 }
 
-/* Buttons */
+hr {
+  border: 0;
+  border-bottom: 1px solid #bfbfbf;
+  margin: 1.5rem auto;
+}
 
 .buttons-wrapper {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-.buttons-wrapper:not(:last-of-type) {
-  margin-bottom: 2rem;
 }
 
 .buttons-box {
@@ -129,25 +106,18 @@ button:focus {
   position: relative;
 }
 
+button {
+  cursor: pointer;
+  width: 30%;
+}
+
+p {
+  margin: 0;
+}
+
 #error-bag {
   color: #f00;
   position: absolute;
   top: -1.3rem;
   right: 0;
-}
-
-#save-button {
-  position: relative;
-}
-
-#saved-notification {
-  position: absolute;
-  top: -1px;
-  left: -43px;
-}
-
-hr {
-  border: 0;
-  border-bottom: 1px solid #bfbfbf;
-  margin: 1.5rem auto;
 }
