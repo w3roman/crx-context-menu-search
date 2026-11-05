@@ -1,43 +1,25 @@
-@charset "utf-8";
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
+@import 'main.css';
 
 body {
   color: #333;
   width: 500px;
-  margin: 1rem 1.5rem 1rem 1rem;
+  margin: 2rem auto;
 }
 
 header {
-  position: relative;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-header a {
-  color: #008000;
-  font-size: .8rem;
-  position: absolute;
-  top: 30%;
-  right: 0;
+footer {
+  margin-top: 2rem;
+  text-align: center;
 }
 
 button {
   cursor: pointer;
   width: 30%;
   padding: .1rem;
-}
-
-h1 {
-  margin: 0;
-  text-align: center;
-}
-
-a {
-  color: #0f518c;
-  text-decoration: none;
 }
 
 /* Fieldsets */

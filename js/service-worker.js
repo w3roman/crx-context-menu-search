@@ -106,3 +106,7 @@ chrome.contextMenus.onClicked.addListener((info) => {
     )
   })
 })
+
+chrome.action.onClicked.addListener(() => {
+  chrome.runtime.openOptionsPage().then()
+})

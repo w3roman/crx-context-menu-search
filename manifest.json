@@ -11,9 +11,10 @@
   "background": {
     "service_worker": "js/service-worker.js"
   },
-  "options_ui": {
-    "page": "html/options.html"
+  "action": {
+    "default_title": "Options"
   },
+  "options_page": "html/options.html",
   "icons": {
     "16": "img/icons/search-zoom/16x16.png",
     "48": "img/icons/search-zoom/48x48.png",
