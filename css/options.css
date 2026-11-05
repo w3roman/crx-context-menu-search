@@ -10,6 +10,7 @@ body {
   color: #333;
   width: 30rem;
   margin: 2rem auto;
+  overflow: scroll;
 }
 
 header {
