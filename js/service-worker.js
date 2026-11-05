@@ -10,6 +10,11 @@ app.initialStorage = {
     name: 'Google Images',
     url: 'https://www.google.com/search?q=%s&udm=2',
   }, {
+    name: 'Google Maps',
+    url: 'https://www.google.com/maps/search/%s',
+  }, {
+    name: '_separator_',
+  }, {
     name: 'Wikipedia',
     url: 'https://wikipedia.org/w/index.php?search=%s',
   }, {
@@ -24,11 +29,11 @@ app.initialStorage = {
   }, {
     name: '_separator_',
   }, {
-    name: 'Google Maps',
-    url: 'https://www.google.com/maps/search/%s',
+    name: 'Yandex',
+    url: 'https://yandex.com/search?clid=15525262&text=%s',
   }, {
     name: 'Yandex Maps',
-    url: 'https://yandex.com/maps?text=%s',
+    url: 'https://yandex.com/maps?clid=15525262&text=%s',
   }],
 }
 
@@ -60,16 +65,6 @@ app.methods = {}
 
 app.methods.setContextMenuItems = (fieldsets) => {
   const contexts = ['selection', 'image']
-  chrome.contextMenus.create({
-    id: 'yandex-distribution',
-    contexts,
-    title: 'Yandex',
-  })
-  chrome.contextMenus.create({
-    id: 'yandex-distribution-separator',
-    contexts,
-    type: 'separator',
-  })
   for (const index in fieldsets) {
     if (fieldsets[index].name === '_separator_') {
       chrome.contextMenus.create({
@@ -89,9 +84,7 @@ app.methods.setContextMenuItems = (fieldsets) => {
 
 chrome.contextMenus.onClicked.addListener((info) => {
   chrome.storage.sync.get(null, (storage) => {
-    let url = info.menuItemId === 'yandex-distribution'
-      ? 'https://ya.ru/search/?clid=15524895&text=%s'
-      : storage.fieldsets[info.menuItemId].url
+    let url = storage.fieldsets[info.menuItemId].url
     url = url.replace('%s', encodeURIComponent(info.srcUrl || info.selectionText))
     chrome.tabs.query(
       {active: true, currentWindow: true},
