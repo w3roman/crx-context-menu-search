@@ -4,11 +4,14 @@ const app = {}
 
 app.initialStorage = {
   fieldsets: [{
-    name: 'Google - Exact match',
+    name: 'Google Exact Match',
     url: 'https://www.google.com/search?q="%s"',
   }, {
     name: 'Google Images',
     url: 'https://www.google.com/search?q=%s&udm=2',
+  }, {
+    name: 'Wikipedia',
+    url: 'https://wikipedia.org/w/index.php?search=%s',
   }, {
     name: 'Facebook',
     url: 'https://www.facebook.com/search?q=%s',
@@ -18,9 +21,6 @@ app.initialStorage = {
   }, {
     name: 'TikTok',
     url: 'https://www.tiktok.com/search?q=%s',
-  }, {
-    name: 'Wikipedia',
-    url: 'https://wikipedia.org/w/index.php?search=%s',
   }, {
     name: '_separator_',
   }, {
