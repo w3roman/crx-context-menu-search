@@ -183,4 +183,11 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   })
 
+  // Link to "Load Defaults" button
+
+  document.getElementById('link-to-load-defaults-button').addEventListener('click', (e) => {
+    e.preventDefault()
+    document.getElementById('load-defaults-button').focus()
+  })
+
 })

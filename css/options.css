@@ -126,3 +126,8 @@ a:focus {
 p span {
   color: #f00;
 }
+
+#link-to-load-defaults-button {
+  font-size: .75rem;
+  padding: 0;
+}
