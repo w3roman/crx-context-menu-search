@@ -86,7 +86,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Import
 
-  // https://stackoverflow.com/a/36930012/4223982
   document.getElementById('import-button')
     .addEventListener('click', () => {
       const fileChooser = document.createElement('input')
@@ -108,7 +107,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Export
 
-  // https://stackoverflow.com/a/23167789/4223982
   document.getElementById('export-button')
     .addEventListener('click', () => {
       chrome.storage.sync.get(null, (storage) => {
@@ -119,7 +117,7 @@ window.addEventListener('DOMContentLoaded', () => {
           url: url,
           filename: 'crx-context-menu-search.json',
           saveAs: false,
-        }, () => {})
+        }).then()
       })
     })
 
