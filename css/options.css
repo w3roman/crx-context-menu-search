@@ -85,11 +85,11 @@ button:focus {
   vertical-align: sub;
 }
 
-[name="searchName"] {
+.search-name {
   width: 35%;
 }
 
-[name="searchUrl"] {
+.search-url {
   width: 55%;
 }
 

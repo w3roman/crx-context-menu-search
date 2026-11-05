@@ -30,15 +30,16 @@ window.addEventListener('DOMContentLoaded', () => {
         fieldset = separatorTemplate.content.cloneNode(true)
       } else {
         fieldset = fieldsetTemplate.content.cloneNode(true)
-        fieldset.querySelector('[name="searchName"]').value = fieldsets[index].name
-        fieldset.querySelector('[name="searchUrl"]').value = fieldsets[index].url
+        fieldset.querySelector('.search-name').value = fieldsets[index].name
+        fieldset.querySelector('.search-url').value = fieldsets[index].url
       }
       listOfFieldsets.appendChild(fieldset)
     }
   }
 
   Sortable.create(listOfFieldsets, {
-    filter: '.remove-fieldset-button',
+    // [name="searchName"], [name="searchUrl"] doesn't work
+    filter: '.search-name, .search-url, .remove-fieldset-button',
     preventOnFilter: false,
   })
 
@@ -66,7 +67,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const fieldsets = listOfFieldsets.querySelectorAll('li')
     const unorderedFieldsets = {}
     for (let i = 0; i < fieldsets.length; i++) {
-      let name = fieldsets[i].querySelector('[name="searchName"]')
+      const name = fieldsets[i].querySelector('.search-name')
       if (name) {
         unorderedFieldsets[name.value] = fieldsets[i]
       }
@@ -145,7 +146,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const data = { fieldsets: [] }
     const fieldsets = listOfFieldsets.querySelectorAll('li')
     for (let i = 0; i < fieldsets.length; i++) {
-      const nameInput = fieldsets[i].querySelector('[name="searchName"]')
+      const nameInput = fieldsets[i].querySelector('.search-name')
       if (nameInput) {
         if (!nameInput.value) {
           errorBag.textContent = 'The Search name must not be empty'
@@ -155,7 +156,7 @@ window.addEventListener('DOMContentLoaded', () => {
           }, 1500)
           return
         }
-        const urlInput = fieldsets[i].querySelector('[name="searchUrl"]')
+        const urlInput = fieldsets[i].querySelector('.search-url')
         if (urlInput) {
           if (!urlInput.value) {
             errorBag.textContent = 'The Search URL must not be empty'
