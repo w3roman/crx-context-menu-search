@@ -179,7 +179,6 @@ window.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         saveButton.textContent = 'Save'
         saveButton.style.color = 'initial'
-        saveButton.blur()
       }, 1000)
     })
   })
