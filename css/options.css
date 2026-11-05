@@ -12,19 +12,6 @@ body {
   margin: 2rem auto;
 }
 
-a {
-  border: 1px solid transparent;
-  color: #15c;
-  font-size: 1rem;
-  padding: .4rem;
-  text-decoration: none;
-}
-
-a:focus {
-  outline: 0;
-  border: 1px solid;
-}
-
 header {
   margin-bottom: 2rem;
   text-align: center;
@@ -52,8 +39,15 @@ li span {
 }
 
 .up-down-arrow {
+  color: #15c;
   cursor: move;
   font-size: 1.5rem;
+}
+
+.remove-fieldset-button {
+  color: #f00;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 input,
@@ -80,12 +74,6 @@ button:focus {
 .separator {
   border-top: 1px solid #bfbfbf;
   width: 90%;
-}
-
-.remove-fieldset-button {
-  color: #f00;
-  cursor: pointer;
-  font-size: 1rem;
 }
 
 hr {
@@ -120,4 +108,17 @@ p {
   position: absolute;
   top: -1.3rem;
   right: 0;
+}
+
+a {
+  border: 1px solid transparent;
+  color: #15c;
+  font-size: 1rem;
+  padding: .4rem;
+  text-decoration: none;
+}
+
+a:focus {
+  outline: 0;
+  border: 1px solid;
 }
