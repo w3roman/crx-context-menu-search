@@ -83,12 +83,12 @@ button:focus {
   vertical-align: sub;
 }
 
-.name {
-  width: 167px;
+[name="searchName"] {
+  width: 35%;
 }
 
-.url {
-  width: 292px;
+[name="searchUrl"] {
+  width: 55%;
 }
 
 .separator {

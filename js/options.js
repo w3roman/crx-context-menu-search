@@ -30,15 +30,15 @@ window.addEventListener('DOMContentLoaded', () => {
         fieldset = separatorTemplate.content.cloneNode(true)
       } else {
         fieldset = fieldsetTemplate.content.cloneNode(true)
-        fieldset.querySelector('.name').value = fieldsets[index].name
-        fieldset.querySelector('.url').value = fieldsets[index].url
+        fieldset.querySelector('[name="searchName"]').value = fieldsets[index].name
+        fieldset.querySelector('[name="searchUrl"]').value = fieldsets[index].url
       }
       listOfFieldsets.appendChild(fieldset)
     }
   }
 
   Sortable.create(listOfFieldsets, {
-    filter: '.name, .url, .remove-fieldset-button',
+    filter: '.remove-fieldset-button',
     preventOnFilter: false,
   })
 
@@ -66,7 +66,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const fieldsets = listOfFieldsets.querySelectorAll('li')
     const unorderedFieldsets = {}
     for (let i = 0; i < fieldsets.length; i++) {
-      let name = fieldsets[i].querySelector('.name')
+      let name = fieldsets[i].querySelector('[name="searchName"]')
       if (name) {
         unorderedFieldsets[name.value] = fieldsets[i]
       }
@@ -145,7 +145,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const data = { fieldsets: [] }
     const fieldsets = listOfFieldsets.querySelectorAll('li')
     for (let i = 0; i < fieldsets.length; i++) {
-      const nameInput = fieldsets[i].querySelector('.name')
+      const nameInput = fieldsets[i].querySelector('[name="searchName"]')
       if (nameInput) {
         if (!nameInput.value) {
           errorBag.textContent = 'The Search name must not be empty'
@@ -155,7 +155,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         data.fieldsets.push({
           name: nameInput.value,
-          url: fieldsets[i].querySelector('.url').value,
+          url: fieldsets[i].querySelector('[name="searchUrl"]').value,
         })
       } else {
         data.fieldsets.push({name: '_separator_'})
