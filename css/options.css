@@ -8,8 +8,17 @@
 
 body {
   color: #333;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-shrink: 1;
   margin: 1rem;
   overflow: scroll;
+}
+
+body > * {
+  width: 100%;
+  max-width: 61rem;
 }
 
 a {
@@ -41,7 +50,8 @@ header p {
 }
 
 .options-body > div {
-  width: 30rem;
+  width: 100%;
+  max-width: 30rem;
 }
 
 .settings-section,
@@ -176,7 +186,6 @@ h2 {
   border-radius: .5rem;
   display: none;
   min-height: 3rem;
-  margin: auto;
   padding: 1rem 2rem;
   text-align: center;
   position: relative;
