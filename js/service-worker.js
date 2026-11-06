@@ -33,7 +33,7 @@ app.initialStorage = {
     url: 'https://ya.ru/search/?clid=15525262&text=%s',
   }, {
     name: 'Yandex Maps',
-    url: 'https://yandex.com/maps?clid=15525262&text=%s',
+    url: 'https://ya.ru/maps/?clid=15525262&text=%s',
   }],
 }
 
