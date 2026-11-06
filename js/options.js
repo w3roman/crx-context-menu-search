@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const addSeparatorButton = document.getElementById('add-separator-button')
   const sortAZButton = document.getElementById('sort-a-z-button')
   const saveButton = document.getElementById('save-button')
-  const errorBag = document.getElementById('error-bag')
+  const messageBox = document.getElementById('message-box')
   const utmSourceCheckbox = document.getElementById('utm-source-checkbox')
 
   /*
@@ -149,20 +149,20 @@ window.addEventListener('DOMContentLoaded', () => {
       const nameInput = fieldsets[i].querySelector('.search-name')
       if (nameInput) {
         if (!nameInput.value) {
-          errorBag.textContent = 'The Search name must not be empty'
+          messageBox.textContent = 'The Search name must not be empty'
           nameInput.focus()
           setTimeout(() => {
-            errorBag.textContent = ''
+            messageBox.textContent = ''
           }, 1500)
           return
         }
         const urlInput = fieldsets[i].querySelector('.search-url')
         if (urlInput) {
           if (!urlInput.value) {
-            errorBag.textContent = 'The Search URL must not be empty'
+            messageBox.textContent = 'The Search URL must not be empty'
             urlInput.focus()
             setTimeout(() => {
-              errorBag.textContent = ''
+              messageBox.textContent = ''
             }, 1500)
             return
           }
@@ -177,12 +177,10 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     storage.utmSource = utmSourceCheckbox.checked
     chrome.storage.sync.set(storage, () => {
-      saveButton.textContent = 'Saved'
-      saveButton.style.color = '#f00'
+      messageBox.textContent = 'Saved'
       setTimeout(() => {
-        saveButton.textContent = 'Save'
-        saveButton.style.color = 'initial'
-      }, 1000)
+        messageBox.textContent = ''
+      }, 1500)
     })
   })
 
