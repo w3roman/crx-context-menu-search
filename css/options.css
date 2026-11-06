@@ -105,13 +105,13 @@ hr {
   margin: 1.5rem auto;
 }
 
-.buttons-wrapper {
+.controls-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.buttons-box {
+.controls-box {
   display: flex;
   gap: 1rem;
   justify-content: space-between;
