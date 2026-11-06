@@ -90,9 +90,14 @@ app.methods.setContextMenuItems = (fieldsets) => {
 }
 
 chrome.contextMenus.onClicked.addListener((info) => {
+  console.log(info)
   chrome.storage.sync.get(null, (storage) => {
     let url = storage.fieldsets[info.menuItemId].url
-    url = url.replace('%s', encodeURIComponent(info.srcUrl || info.selectionText))
+    // https://pdfobject.com/pdf/sample.pdf
+    let text = info.srcUrl && info.srcUrl.search(/^chrome-extension:\/\//) !== 0
+        ? info.srcUrl
+        : info.selectionText
+    url = url.replace('%s', encodeURIComponent(text))
     if (storage.utmSource) {
       url += '&utm_source=chromewebstore.google.com/detail/idpcgabojogahgmhdgnjkmdliaeeofka'
     }
