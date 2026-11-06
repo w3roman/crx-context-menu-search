@@ -39,10 +39,11 @@ app.initialStorage = {
     url: 'https://ya.ru/maps/?clid=15525262&text=%s',
   }],
   openInBackground: false,
-  utmSource: true
+  utmSource: true,
+  updateMessage: 'The extension has been updated'
 }
 
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener((details) => {
   // Calling chrome.storage.local.set(app.initialStorage) is required to access the initial fieldsets on the
   // Options page (see the INITIALIZATION section)
   chrome.storage.local.set(app.initialStorage).then(
@@ -55,6 +56,9 @@ chrome.runtime.onInstalled.addListener(() => {
       // This call is necessary for rendering Search items in the context menu, since if the set of fields has not changed
       // (see above), the `change` event, whose handler calls the setContextMenuItems() method, will not fire
       app.methods.setContextMenuItems(storage.fieldsets)
+      if (details.reason === 'install' || details.reason === 'update') {
+        chrome.runtime.openOptionsPage().then()
+      }
     })
   )
 })

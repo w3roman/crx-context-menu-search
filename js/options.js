@@ -1,5 +1,9 @@
+// noinspection JSCheckFunctionSignatures
+
 window.addEventListener('DOMContentLoaded', () => {
 
+  const topNotification = document.getElementById('top-notification')
+  const topNotificationCloseButton = document.getElementById('top-notification-close-button')
   const listOfFieldsets = document.getElementById('list-of-fieldsets')
   const fieldsetTemplate = document.getElementById('fieldset-template')
   const separatorTemplate = document.getElementById('separator-template')
@@ -21,6 +25,12 @@ window.addEventListener('DOMContentLoaded', () => {
     setFieldsets(storage.fieldsets)
     openInBackgroundCheckbox.checked = storage.openInBackground
     utmSourceCheckbox.checked = storage.utmSource
+    chrome.storage.local.get(null, (localStorage) => {
+      if (localStorage.updateMessage) {
+        topNotification.append(document.createTextNode(localStorage.updateMessage))
+        topNotification.style.display = 'block'
+      }
+    })
   })
 
   function setFieldsets(fieldsets) {
@@ -40,6 +50,15 @@ window.addEventListener('DOMContentLoaded', () => {
       listOfFieldsets.appendChild(fieldset)
     }
   }
+
+  topNotificationCloseButton.addEventListener('click', () => {
+    chrome.storage.local.get(null, (localStorage) => {
+      localStorage.updateMessage = ''
+      chrome.storage.local.set(localStorage).then(() => {
+        topNotification.style.display = 'none'
+      })
+    })
+  })
 
   Sortable.create(listOfFieldsets, {
     // [name="searchName"], [name="searchUrl"] doesn't work

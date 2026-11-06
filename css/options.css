@@ -170,3 +170,23 @@ h2 {
 .donate-section p a {
   padding: 0;
 }
+
+#top-notification {
+  background: #d4edda;
+  border-radius: .5rem;
+  display: none;
+  min-height: 3rem;
+  margin: auto;
+  padding: 1rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+#top-notification-close-button {
+  color: #f00;
+  cursor: pointer;
+  font-size: 1.2rem;
+  position: absolute;
+  top: -.1rem;
+  right: .3rem;
+}
