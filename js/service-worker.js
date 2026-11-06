@@ -35,6 +35,7 @@ app.initialStorage = {
     name: 'Yandex Maps',
     url: 'https://ya.ru/maps/?clid=15525262&text=%s',
   }],
+  utmSource: true
 }
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -56,9 +57,11 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === 'local') return
-  chrome.contextMenus.removeAll(() => {
-    app.methods.setContextMenuItems(changes.fieldsets.newValue)
-  })
+  if (changes.fieldsets) {
+    chrome.contextMenus.removeAll(() => {
+      app.methods.setContextMenuItems(changes.fieldsets.newValue)
+    })
+  }
 })
 
 app.methods = {}
@@ -86,6 +89,9 @@ chrome.contextMenus.onClicked.addListener((info) => {
   chrome.storage.sync.get(null, (storage) => {
     let url = storage.fieldsets[info.menuItemId].url
     url = url.replace('%s', encodeURIComponent(info.srcUrl || info.selectionText))
+    if (storage.utmSource) {
+      url += '&utm_source=chromewebstore.google.com/detail/idpcgabojogahgmhdgnjkmdliaeeofka'
+    }
     chrome.tabs.query(
       {active: true, currentWindow: true},
       (tabs) => {

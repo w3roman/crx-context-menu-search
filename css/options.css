@@ -8,7 +8,6 @@
 
 body {
   color: #333;
-  width: 30rem;
   margin: 2rem auto;
   overflow: scroll;
 }
@@ -22,8 +21,17 @@ footer {
   text-align: center;
 }
 
+.main-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 ul {
   list-style: none;
+  margin-top: 0;
   padding-left: 0;
 }
 
@@ -32,6 +40,10 @@ li {
   align-items: center;
   justify-content: space-between;
   margin: .5rem 0;
+}
+
+li:first-child {
+  margin-top: 0;
 }
 
 li span {
@@ -90,13 +102,14 @@ hr {
 
 .buttons-box {
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
   position: relative;
 }
 
 button {
   cursor: pointer;
-  width: 30%;
+  width: 45%;
 }
 
 p {
@@ -105,9 +118,23 @@ p {
 
 #error-bag {
   color: #f00;
+  width: 50%;
   position: absolute;
-  top: -1.3rem;
+  top: -15%;
   right: 0;
+}
+
+label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+
+label input {
+  cursor: pointer;
+  margin: 0;
 }
 
 a {

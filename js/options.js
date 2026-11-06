@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const sortAZButton = document.getElementById('sort-a-z-button')
   const saveButton = document.getElementById('save-button')
   const errorBag = document.getElementById('error-bag')
+  const utmSourceCheckbox = document.getElementById('utm-source-checkbox')
 
   /*
    * =============================================================================
@@ -17,6 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   chrome.storage.sync.get(null, (storage) => {
     setFieldsets(storage.fieldsets)
+    utmSourceCheckbox.checked = storage.utmSource
   })
 
   function setFieldsets(fieldsets) {
@@ -141,7 +143,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // Save
 
   saveButton.addEventListener('click', () => {
-    const data = { fieldsets: [] }
+    const storage = { fieldsets: [] }
     const fieldsets = listOfFieldsets.querySelectorAll('li')
     for (let i = 0; i < fieldsets.length; i++) {
       const nameInput = fieldsets[i].querySelector('.search-name')
@@ -165,15 +167,16 @@ window.addEventListener('DOMContentLoaded', () => {
             return
           }
         }
-        data.fieldsets.push({
+        storage.fieldsets.push({
           name: nameInput.value,
           url: urlInput.value,
         })
       } else {
-        data.fieldsets.push({name: '_separator_'})
+        storage.fieldsets.push({name: '_separator_'})
       }
     }
-    chrome.storage.sync.set(data, () => {
+    storage.utmSource = utmSourceCheckbox.checked
+    chrome.storage.sync.set(storage, () => {
       saveButton.textContent = 'Saved'
       saveButton.style.color = '#f00'
       setTimeout(() => {
