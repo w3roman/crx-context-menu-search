@@ -15,13 +15,15 @@
     <p>To discard changes, just close this window</p>
   </header>
   <div class="options-body">
-    <section>
-      <h2>Settings</h2>
-      <ul id="list-of-fieldsets"></ul>
-    </section>
-    <section>
-      <h2>Controls</h2>
-      <div class="controls-container">
+    <div>
+      <section class="settings-section">
+        <h2>Settings</h2>
+        <ul id="list-of-fieldsets"></ul>
+      </section>
+    </div>
+    <div>
+      <section class="controls-section">
+        <h2>Controls</h2>
         <div class="controls-box">
           <button id="add-search-button">Add Search</button>
           <button id="add-separator-button">Add Separator</button>
@@ -43,16 +45,14 @@
         <div class="controls-box">
           <div id="error-bag"></div>
         </div>
-      </div>
-    </section>
+      </section>
+      <section class="donate-section">
+        <h2><a href="https://grinvik.com/donate" target="_blank">💲 Donate 💲</a></h2>
+        <p>Besides donations, you can support the author by using Yandex services, which are shown by default for new users or when <a href="#" id="link-to-load-defaults-button">default</a> search settings are applied</p>
+        <p>Share your ideas and suggestions at roman.m.grinyov@gmail.com</p>
+      </section>
+    </div>
   </div>
-  <footer>
-    <p><a href="https://grinvik.com/donate" target="_blank">💲 Donate 💲</a></p>
-    <br>
-    <p><span>*</span> Besides donations, you can support the author by using Yandex services, which are shown by default for new users or when <a href="#" id="link-to-load-defaults-button">default</a> search settings are applied</p>
-    <br>
-    <p><span>*</span> Share your ideas and suggestions at roman.m.grinyov@gmail.com</p>
-  </footer>
   <template id="fieldset-template">
     <li>
       <span class="up-down-arrow">↕</span>

@@ -8,7 +8,6 @@
 
 body {
   color: #333;
-  margin: 2rem auto;
   overflow: scroll;
 }
 
@@ -17,26 +16,23 @@ header {
   text-align: center;
 }
 
-footer {
-  width: 30%;
-  margin: auto;
-  text-align: center;
+header p {
+  margin: 0;
 }
 
 .options-body {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: center;
-  margin-bottom: 1rem;
 }
 
-.options-body section {
-  width: 25vw;
+.options-body > div {
+  width: 30rem;
 }
 
 h2 {
-  margin: 0 0 1rem 0;
+  margin: 0;
   text-align: center;
 }
 
@@ -105,10 +101,21 @@ hr {
   margin: 1.5rem auto;
 }
 
-.controls-container {
+.settings-section,
+.controls-section,
+.donate-section {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.donate-section {
+  text-align: center;
+}
+
+.donate-section h2 {
+  font-weight: normal;
+  margin-top: .7rem;
 }
 
 .controls-box {
@@ -123,10 +130,6 @@ button,
 label {
   cursor: pointer;
   width: 45%;
-}
-
-p {
-  margin: 0;
 }
 
 #error-bag {
@@ -153,10 +156,6 @@ a {
 a:focus {
   outline: 0;
   border: 1px solid;
-}
-
-p span {
-  color: #f00;
 }
 
 #link-to-load-defaults-button {
