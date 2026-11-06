@@ -13,7 +13,7 @@ body {
 }
 
 header {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
@@ -27,6 +27,11 @@ footer {
   gap: 2rem;
   justify-content: center;
   margin-bottom: 1rem;
+}
+
+h2 {
+  margin: 0 0 1rem 0;
+  text-align: center;
 }
 
 ul {
