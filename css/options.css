@@ -23,7 +23,7 @@ footer {
   text-align: center;
 }
 
-.main-box {
+.options-body {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
@@ -31,7 +31,7 @@ footer {
   margin-bottom: 1rem;
 }
 
-.main-box section {
+.options-body section {
   width: 25vw;
 }
 
