@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const sortAZButton = document.getElementById('sort-a-z-button')
   const saveButton = document.getElementById('save-button')
   const messageBox = document.getElementById('message-box')
+  const openInBackgroundCheckbox = document.getElementById('open-in-background-checkbox')
   const utmSourceCheckbox = document.getElementById('utm-source-checkbox')
 
   /*
@@ -18,6 +19,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   chrome.storage.sync.get(null, (storage) => {
     setFieldsets(storage.fieldsets)
+    openInBackgroundCheckbox.checked = storage.openInBackground
     utmSourceCheckbox.checked = storage.utmSource
   })
 
@@ -175,6 +177,7 @@ window.addEventListener('DOMContentLoaded', () => {
         storage.fieldsets.push({name: '_separator_'})
       }
     }
+    storage.openInBackground = openInBackgroundCheckbox.checked
     storage.utmSource = utmSourceCheckbox.checked
     chrome.storage.sync.set(storage, () => {
       messageBox.textContent = 'Saved'

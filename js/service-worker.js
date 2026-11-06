@@ -38,6 +38,7 @@ app.initialStorage = {
     name: 'Yandex Maps',
     url: 'https://ya.ru/maps/?clid=15525262&text=%s',
   }],
+  openInBackground: false,
   utmSource: true
 }
 
@@ -100,6 +101,7 @@ chrome.contextMenus.onClicked.addListener((info) => {
       (tabs) => {
         let currentTab = tabs[0]
         chrome.tabs.create({
+          active: !storage.openInBackground,
           url: url,
           index: currentTab.index + 1,
           openerTabId: currentTab.id,
