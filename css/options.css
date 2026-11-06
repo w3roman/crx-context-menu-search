@@ -113,12 +113,14 @@ hr {
 
 .controls-box {
   display: flex;
+  align-items: center;
   gap: 1rem;
   justify-content: space-between;
   position: relative;
 }
 
-button {
+button,
+label {
   cursor: pointer;
   width: 45%;
 }
@@ -129,16 +131,9 @@ p {
 
 #error-bag {
   color: #f00;
-  width: 50%;
-  position: absolute;
-  top: -15%;
-  right: 0;
-}
-
-label {
-  cursor: pointer;
-  display: inline-block;
-  margin-top: 1rem;
+  height: 1rem;
+  width: 100%;
+  text-align: center;
 }
 
 label input {
