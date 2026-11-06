@@ -90,7 +90,6 @@ app.methods.setContextMenuItems = (fieldsets) => {
 }
 
 chrome.contextMenus.onClicked.addListener((info) => {
-  console.log(info)
   chrome.storage.sync.get(null, (storage) => {
     let url = storage.fieldsets[info.menuItemId].url
     // https://pdfobject.com/pdf/sample.pdf
