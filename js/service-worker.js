@@ -7,6 +7,9 @@ app.initialStorage = {
     name: 'Google Exact Match',
     url: 'https://www.google.com/search?q="%s"',
   }, {
+    name: 'Google AI Mode',
+    url: 'https://www.google.com/search?q=%s&udm=50',
+  }, {
     name: 'Google Images',
     url: 'https://www.google.com/search?q=%s&udm=2',
   }, {
