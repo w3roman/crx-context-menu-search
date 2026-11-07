@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const saveButton = document.getElementById('save-button')
   const messageBox = document.getElementById('message-box')
   const openInBackgroundCheckbox = document.getElementById('open-in-background-checkbox')
-  const utmSourceCheckbox = document.getElementById('utm-source-checkbox')
+  const addUtmSourceCheckbox = document.getElementById('add-utm-source-checkbox')
 
   /*
    * =============================================================================
@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', () => {
   chrome.storage.sync.get(null, (storage) => {
     setFieldsets(storage.fieldsets)
     openInBackgroundCheckbox.checked = storage.openInBackground
-    utmSourceCheckbox.checked = storage.utmSource
+    addUtmSourceCheckbox.checked = storage.addUtmSource
     chrome.storage.local.get(null, (localStorage) => {
       if (localStorage.updateMessage) {
         topNotification.append(document.createTextNode(localStorage.updateMessage))
@@ -150,6 +150,8 @@ window.addEventListener('DOMContentLoaded', () => {
     .addEventListener('click', () => {
       chrome.storage.local.get(null, (storage) => {
         setFieldsets(storage.fieldsets)
+        openInBackgroundCheckbox.checked = storage.openInBackground
+        addUtmSourceCheckbox.checked = storage.addUtmSource
       })
     })
 
@@ -197,7 +199,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
     storage.openInBackground = openInBackgroundCheckbox.checked
-    storage.utmSource = utmSourceCheckbox.checked
+    storage.addUtmSource = addUtmSourceCheckbox.checked
     chrome.storage.sync.set(storage, () => {
       messageBox.textContent = 'Saved'
       setTimeout(() => {

@@ -39,7 +39,7 @@ app.initialStorage = {
     url: 'https://ya.ru/maps/?clid=15525262&text=%s',
   }],
   openInBackground: false,
-  utmSource: true,
+  addUtmSource: true,
   updateMessage: 'The extension has been updated'
 }
 
@@ -101,7 +101,7 @@ chrome.contextMenus.onClicked.addListener((info) => {
         ? info.srcUrl
         : info.selectionText
     url = url.replace('%s', encodeURIComponent(text))
-    if (storage.utmSource) {
+    if (storage.addUtmSource) {
       url += '&utm_source=chromewebstore.google.com/detail/idpcgabojogahgmhdgnjkmdliaeeofka'
     }
     chrome.tabs.query(
