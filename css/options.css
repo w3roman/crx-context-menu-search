@@ -21,22 +21,6 @@ body > * {
   max-width: 61rem;
 }
 
-a {
-  border: 1px solid transparent;
-  color: #15c;
-  padding: .2rem;
-  text-decoration: none;
-}
-
-p a {
-  padding: 0;
-}
-
-a:focus {
-  outline: 0;
-  border: 1px solid;
-}
-
 header {
   margin-bottom: 1rem;
   text-align: center;
@@ -130,12 +114,6 @@ h2 {
   padding: .2rem;
 }
 
-.settings-section input:focus,
-.controls-section button:focus {
-  border: 1px solid #f00;
-  outline: 0;
-}
-
 .controls-box {
   display: flex;
   align-items: center;
@@ -205,4 +183,23 @@ h2 {
   position: absolute;
   top: -.1rem;
   right: .3rem;
+}
+
+a {
+  color: #15c;
+  text-decoration: none;
+}
+
+a:focus {
+  outline: 1px solid;
+}
+
+button:focus,
+input:focus {
+  border: 1px solid #f00;
+  outline: 0;
+}
+
+input[type="checkbox"]:focus {
+  outline: 1px solid #f00;
 }
