@@ -10,6 +10,9 @@ window.addEventListener('DOMContentLoaded', () => {
   const addSearchButton = document.getElementById('add-search-button')
   const addSeparatorButton = document.getElementById('add-separator-button')
   const sortAZButton = document.getElementById('sort-a-z-button')
+  const importButton = document.getElementById('import-button')
+  const exportButton = document.getElementById('export-button')
+  const loadDefaultsButton = document.getElementById('load-defaults-button')
   const saveButton = document.getElementById('save-button')
   const messageBox = document.getElementById('message-box')
   const openInBackgroundCheckbox = document.getElementById('open-in-background-checkbox')
@@ -109,51 +112,48 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Import
 
-  document.getElementById('import-button')
-    .addEventListener('click', () => {
-      const fileChooser = document.createElement('input')
-      fileChooser.type = 'file'
-      fileChooser.addEventListener('change', () => {
-        const file = fileChooser.files[0]
-        const reader = new FileReader()
-        reader.onload = () => {
-          const storage = JSON.parse('' + reader.result)
-          setFieldsets(storage.fieldsets)
-        }
-        reader.readAsText(file)
-        form.reset()
-      })
-      const form = document.createElement('form')
-      form.appendChild(fileChooser)
-      fileChooser.click()
+  importButton.addEventListener('click', () => {
+    const fileChooser = document.createElement('input')
+    fileChooser.type = 'file'
+    fileChooser.addEventListener('change', () => {
+      const file = fileChooser.files[0]
+      const reader = new FileReader()
+      reader.onload = () => {
+        const storage = JSON.parse('' + reader.result)
+        setFieldsets(storage.fieldsets)
+      }
+      reader.readAsText(file)
+      form.reset()
     })
+    const form = document.createElement('form')
+    form.appendChild(fileChooser)
+    fileChooser.click()
+  })
 
   // Export
 
-  document.getElementById('export-button')
-    .addEventListener('click', () => {
-      chrome.storage.sync.get(null, (storage) => {
-        const jsonString = JSON.stringify(storage, null, 2)
-        const blob = new Blob([jsonString], { type: 'application/json' })
-        const url = URL.createObjectURL(blob)
-        chrome.downloads.download({
-          url: url,
-          filename: 'crx-context-menu-search.json',
-          saveAs: false,
-        }).then()
-      })
+  exportButton.addEventListener('click', () => {
+    chrome.storage.sync.get(null, (storage) => {
+      const jsonString = JSON.stringify(storage, null, 2)
+      const blob = new Blob([jsonString], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      chrome.downloads.download({
+        url: url,
+        filename: 'crx-context-menu-search.json',
+        saveAs: false,
+      }).then()
     })
+  })
 
   // Load Defaults
 
-  document.getElementById('load-defaults-button')
-    .addEventListener('click', () => {
-      chrome.storage.local.get(null, (storage) => {
-        setFieldsets(storage.fieldsets)
-        openInBackgroundCheckbox.checked = storage.openInBackground
-        addUtmSourceCheckbox.checked = storage.addUtmSource
-      })
+  loadDefaultsButton.addEventListener('click', () => {
+    chrome.storage.local.get(null, (storage) => {
+      setFieldsets(storage.fieldsets)
+      openInBackgroundCheckbox.checked = storage.openInBackground
+      addUtmSourceCheckbox.checked = storage.addUtmSource
     })
+  })
 
   // Remove
 
@@ -212,7 +212,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('link-to-load-defaults-button').addEventListener('click', (e) => {
     e.preventDefault()
-    document.getElementById('load-defaults-button').focus()
+    loadDefaultsButton.focus()
   })
 
 })
