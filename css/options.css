@@ -105,15 +105,11 @@ h2 {
 }
 
 .settings-section .search-name {
-  width: 25%;
+  width: 35%;
 }
 
 .settings-section .search-url {
   width: 55%;
-}
-
-.settings-section .search-replace-button {
-  width: 5%;
 }
 
 .settings-section .remove-fieldset-button {

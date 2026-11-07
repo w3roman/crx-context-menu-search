@@ -6,47 +6,37 @@ app.initialStorage = {
   fieldsets: [{
     name: 'Google Exact Match',
     url: 'https://www.google.com/search?q="%s"',
-    searchReplace: []
   }, {
     name: 'Google AI Mode',
     url: 'https://www.google.com/search?q=%s&udm=50',
-    searchReplace: []
   }, {
     name: 'Google Images',
     url: 'https://www.google.com/search?q=%s&udm=2',
-    searchReplace: []
   }, {
     name: 'Google Maps',
     url: 'https://www.google.com/maps/search/%s',
-    searchReplace: []
   }, {
     name: '_separator_',
   }, {
     name: 'Wikipedia',
     url: 'https://wikipedia.org/w/index.php?search=%s',
-    searchReplace: []
   }, {
     name: 'Facebook',
     url: 'https://www.facebook.com/search?q=%s',
-    searchReplace: []
   }, {
     name: 'YouTube',
     url: 'https://www.youtube.com/results?search_query=%s',
-    searchReplace: []
   }, {
     name: 'TikTok',
     url: 'https://www.tiktok.com/search?q=%s',
-    searchReplace: []
   }, {
     name: '_separator_',
   }, {
     name: 'Yandex',
     url: 'https://ya.ru/search/?clid=15525262&text=%s',
-    searchReplace: []
   }, {
     name: 'Yandex Maps',
     url: 'https://ya.ru/maps/?clid=15525262&text=%s',
-    searchReplace: []
   }],
   openInBackground: false,
   addUtmSource: true,
