@@ -118,6 +118,8 @@ window.addEventListener('DOMContentLoaded', () => {
       reader.onload = () => {
         const storage = JSON.parse('' + reader.result)
         setFieldsets(storage.fieldsets)
+        addUtmSourceCheckbox.checked = storage.addUtmSource
+        openInBackgroundCheckbox.checked = storage.openInBackground
       }
       reader.readAsText(file)
       form.reset()
