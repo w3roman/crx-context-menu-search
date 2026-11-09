@@ -14,7 +14,7 @@ app.initialStorage = {
     url: 'https://www.google.com/search?q=%s&udm=2',
   }, {
     name: 'Google Maps',
-    url: 'https://www.google.com/maps/search/%s',
+    url: 'https://www.google.com/maps?q=%s',
   }, {
     name: '_separator_',
   }, {
