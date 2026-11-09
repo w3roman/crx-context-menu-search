@@ -3,6 +3,7 @@
 const app = {}
 
 app.initialStorage = {
+  addUtmSource: true,
   fieldsets: [{
     name: 'Google Exact Match',
     url: 'https://www.google.com/search?q="%s"',
@@ -38,9 +39,7 @@ app.initialStorage = {
     name: 'Yandex Maps',
     url: 'https://ya.ru/maps/?clid=15525262&text=%s',
   }],
-  openInBackground: false,
-  addUtmSource: true,
-  updateMessage: 'The extension has been updated'
+  openInBackground: false
 }
 
 chrome.runtime.onInstalled.addListener((details) => {
@@ -51,14 +50,14 @@ chrome.runtime.onInstalled.addListener((details) => {
       chrome.storage.sync.set(storage.fieldsets ? storage : app.initialStorage).then()
       // This call is necessary for rendering Search items in the context menu, since if the set of fields has not changed
       // (see above), the `change` event, whose handler calls the setContextMenuItems() method, will not fire
-      app.methods.setContextMenuItems(storage.fieldsets)
+      app.methods.setContextMenuItems(storage.fieldsets || app.initialStorage.fieldsets)
       if (details.reason === 'install') {
-        storage.updateMessage = ''
-        chrome.storage.local.set(storage).then(() => {
-          chrome.runtime.openOptionsPage().then()
-        })
-      } else if (details.reason === 'update' && app.initialStorage.updateMessage) {
         chrome.runtime.openOptionsPage().then()
+      }
+      else if (details.reason === 'update') {
+        chrome.storage.local.set({updateMessage: 'The extension has been updated'}).then(
+          () => chrome.runtime.openOptionsPage().then()
+        )
       }
     })
   )
