@@ -103,7 +103,8 @@ chrome.contextMenus.onClicked.addListener((info) => {
         : info.selectionText
     url = url.replace('%s', encodeURIComponent(text))
     if (storage.addUtmSource) {
-      url += '&utm_source=chromewebstore.google.com/detail/idpcgabojogahgmhdgnjkmdliaeeofka'
+      url += url.includes('?') ? '&' : '?'
+      url += 'utm_source=chromewebstore.google.com/detail/idpcgabojogahgmhdgnjkmdliaeeofka'
     }
     chrome.tabs.query(
       {active: true, currentWindow: true},
