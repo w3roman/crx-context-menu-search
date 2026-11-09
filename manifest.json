@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Context Menu Search",
-  "version": "3.2.7",
-  "description": "Search for selected text or image URL using the context menu",
+  "version": "3.3.0",
+  "description": "Search for selected text or an image by its URL via the context menu.",
   "permissions": [
     "contextMenus",
     "downloads",
