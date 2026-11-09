@@ -54,11 +54,11 @@ chrome.runtime.onInstalled.addListener((details) => {
       if (details.reason === 'install') {
         chrome.runtime.openOptionsPage().then()
       }
-      else if (details.reason === 'update') {
-        chrome.storage.local.set({updateMessage: 'The extension has been updated'}).then(
-          () => chrome.runtime.openOptionsPage().then()
-        )
-      }
+      // else if (details.reason === 'update') {
+      //   chrome.storage.local.set({updateMessage: 'The extension has been updated'}).then(
+      //     () => chrome.runtime.openOptionsPage().then()
+      //   )
+      // }
     })
   )
 })
