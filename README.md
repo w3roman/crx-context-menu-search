@@ -5,9 +5,9 @@
 - [Sources](#sources)
     - [Icons](#icons)
 
-![Context Menu Search - Example](img/screenshots/1280x800/example.png)
+![Context Menu Search - Example](img/screenshots/1280x800/example.jpg)
 
-![Context Menu Search - Options](img/screenshots/1280x800/options.png)
+![Context Menu Search - Options](img/screenshots/1280x800/options.jpg)
 
 ## Installation for developers (for Linux users)
 
