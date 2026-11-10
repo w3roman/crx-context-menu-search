@@ -21,6 +21,17 @@ body > * {
   max-width: 61rem;
 }
 
+a {
+  color: #15c;
+  text-decoration: none;
+}
+
+input {
+  border: 1px solid #bfbfbf;
+  border-radius: .3rem;
+  padding: .2rem;
+}
+
 header {
   margin-bottom: 1rem;
   text-align: center;
@@ -89,11 +100,15 @@ h2 {
 }
 
 .settings-section .search-name {
-  width: 35%;
+  width: 25%;
 }
 
 .settings-section .search-url {
   width: 55%;
+}
+
+.settings-section .search-replace-button {
+  width: 5%;
 }
 
 .settings-section .remove-fieldset-button {
@@ -105,13 +120,6 @@ h2 {
 .separator {
   border-top: 1px solid #bfbfbf;
   width: 90%;
-}
-
-.settings-section input,
-.controls-section button {
-  border: 1px solid #bfbfbf;
-  border-radius: .3rem;
-  padding: .2rem;
 }
 
 .controls-box {
@@ -183,23 +191,4 @@ h2 {
   position: absolute;
   top: -.1rem;
   right: .3rem;
-}
-
-a {
-  color: #15c;
-  text-decoration: none;
-}
-
-a:focus {
-  outline: 1px solid;
-}
-
-button:focus,
-input:focus {
-  border: 1px solid #f00;
-  outline: 0;
-}
-
-input[type="checkbox"]:focus {
-  outline: 1px solid #f00;
 }
