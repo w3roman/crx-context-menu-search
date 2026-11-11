@@ -109,7 +109,7 @@ window.addEventListener('DOMContentLoaded', () => {
       // Add Rule
       modalTemplate.getElementById('transformation-add-rule-button').addEventListener('click', addRule)
 
-      let notFirstRow
+      let noRuleExists
       function addRule(el) {
         const rowTemplate = transformationRowTemplate.content.cloneNode(true)
         rowTemplate.querySelector('.remove-transformation-row-button').addEventListener('click', (e) => {
@@ -121,9 +121,9 @@ window.addEventListener('DOMContentLoaded', () => {
           rowTemplate.querySelector('.replace-field').value = el.replace
         }
         const lowerUpperCaseBox = document.getElementById('transformation-lower-upper-case-box')
-        if (!notFirstRow || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformation-row')) {
+        if (!noRuleExists || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformation-row')) {
           lowerUpperCaseBox.after(rowTemplate)
-          notFirstRow = true
+          noRuleExists = true
         } else {
           document.querySelector(':nth-last-child(1 of .transformation-row)').after(rowTemplate)
         }
