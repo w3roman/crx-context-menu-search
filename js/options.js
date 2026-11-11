@@ -52,6 +52,9 @@ window.addEventListener('DOMContentLoaded', () => {
         fieldset.querySelector('li').setAttribute('data-id', index)
         fieldset.querySelector('.search-name').value = fieldsets[index].name
         fieldset.querySelector('.search-url').value = fieldsets[index].url
+        if (fieldsets[index].transformations) {
+          fieldset.querySelector('li').setAttribute('data-transformations', JSON.stringify(fieldsets[index].transformations))
+        }
       }
       listOfFieldsets.appendChild(fieldset)
     }
@@ -74,15 +77,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
       const modalTemplate = transformationsModalTemplate.content.cloneNode(true)
 
+      const parentLi = e.target.closest('li')
+      const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
+
       // Search ID
-      const searchId = e.target.closest('li').getAttribute('data-id')
+      const searchId = parentLi.getAttribute('data-id')
       modalTemplate.getElementById('transformations-modal').setAttribute('data-id', searchId)
 
       // Search Name
       const searchNameBox = modalTemplate.querySelector('h4')
       searchNameBox.textContent = searchNameBox.textContent.replace(
         'name',
-        e.target.closest('li').querySelector('.search-name').value
+        parentLi.querySelector('.search-name').value
       )
 
       const toLowerCaseCheckbox = modalTemplate.querySelector('[name="toLowerCase"]')
@@ -99,35 +105,39 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Rows
-      chrome.storage.sync.get(null, (storage) => {
-        toLowerCaseCheckbox.checked = storage.fieldsets[searchId].transformations?.toLowerCase
-        toUpperCaseCheckbox.checked = storage.fieldsets[searchId].transformations?.toUpperCase
-        storage.fieldsets[searchId].transformations?.searchAndReplace.forEach(addRule)
-      })
-
-      // Add Rule
-      modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
-
-      let noRuleExists
+      let noRuleExists = true
       function addRule(el) {
         const rowTemplate = transformationsRowTemplate.content.cloneNode(true)
         rowTemplate.querySelector('.remove-transformations-row-button').addEventListener('click', (e) => {
           e.target.closest('.transformations-row').remove()
         })
+        let currentModal
         if (!(el instanceof PointerEvent)) {
+          currentModal = modalTemplate
           rowTemplate.querySelector('.regexp-field').value = el.search
           rowTemplate.querySelector('.flags-field').value = el.flags
           rowTemplate.querySelector('.replace-field').value = el.replace
-        }
-        const lowerUpperCaseBox = document.getElementById('transformations-lower-upper-case-box')
-        if (!noRuleExists || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformations-row')) {
-          lowerUpperCaseBox.after(rowTemplate)
-          noRuleExists = true
         } else {
-          document.querySelector(':nth-last-child(1 of .transformations-row)').after(rowTemplate)
+          currentModal = document
+        }
+        const lowerUpperCaseBox = currentModal.querySelector('#transformations-lower-upper-case-box')
+        if (noRuleExists || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformations-row')) {
+          lowerUpperCaseBox.after(rowTemplate)
+          noRuleExists = false
+        } else {
+          currentModal.querySelector(':nth-last-child(1 of .transformations-row)').after(rowTemplate)
         }
       }
+
+      // Rows
+      if (transformations) {
+        toLowerCaseCheckbox.checked = transformations.toLowerCase
+        toUpperCaseCheckbox.checked = transformations.toUpperCase
+        transformations.searchAndReplace.forEach(addRule)
+      }
+
+      // Add Rule
+      modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
 
       // Save
       modalTemplate.getElementById('transformations-save-button').addEventListener('click', (e) => {
@@ -171,6 +181,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 messageBox.textContent = ''
               }, 1500)
             })
+            parentLi.setAttribute('data-transformations', JSON.stringify(storage.fieldsets[searchId].transformations))
           })
         }
       })
