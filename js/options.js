@@ -120,8 +120,9 @@ window.addEventListener('DOMContentLoaded', () => {
           rowTemplate.querySelector('.flags-field').value = el.flags
           rowTemplate.querySelector('.replace-field').value = el.replace
         }
-        if (!notFirstRow) {
-          document.getElementById('transformation-lower-upper-case-box').after(rowTemplate)
+        const lowerUpperCaseBox = document.getElementById('transformation-lower-upper-case-box')
+        if (!notFirstRow || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformation-row')) {
+          lowerUpperCaseBox.after(rowTemplate)
           notFirstRow = true
         } else {
           document.querySelector(':nth-last-child(1 of .transformation-row)').after(rowTemplate)
