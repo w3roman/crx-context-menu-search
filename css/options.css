@@ -183,6 +183,7 @@ header p {
 }
 
 #transformation-message-box {
+  color: #f00;
   min-height: 1rem;
 }
 
