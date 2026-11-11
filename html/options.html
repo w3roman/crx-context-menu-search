@@ -66,9 +66,41 @@
       <span class="up-down-arrow">↕</span>
       <input name="searchName" placeholder="Name" class="search-name">
       <input name="searchUrl" placeholder="URL with %s in place of query" class="search-url">
-      <button class="search-replace-button">.*</button>
+      <button class="transformation-button">.*</button>
       <span class="remove-fieldset-button">×</span>
     </li>
+  </template>
+  <template id="transformation-modal-template">
+    <div id="transformation-modal">
+      <div id="transformation-container">
+        <h3>Transform selection before search</h3>
+        <h4>For "name" Search</h4>
+        <div id="transformation-lower-upper-case-box">
+          <label>
+            <input type="checkbox" name="toLowerCase"> <code>toLowerCase()</code>
+          </label>
+          <label>
+            <input type="checkbox" name="toUpperCase"> <code>toUpperCase()</code>
+          </label>
+        </div>
+        <div id="transformation-message-box"></div>
+        <div id="transformation-controls">
+          <button id="transformation-add-rule-button">Add Rule</button>
+          <button id="transformation-save-button">Save</button>
+        </div>
+        <div id="transformation-close-button">×</div>
+      </div>
+    </div>
+  </template>
+  <template id="transformation-row-template">
+    <div class="transformation-row">
+      <div>
+        <input type="text" name="RegExp" placeholder="RegExp" class="regexp-field">
+        <input type="text" name="Flags" placeholder="Flags" class="flags-field">
+        <input type="text" name="Replace" placeholder="Replace" class="replace-field">
+      </div>
+      <span class="remove-transformation-row-button">×</span>
+    </div>
   </template>
   <template id="separator-template">
     <li>
