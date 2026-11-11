@@ -321,9 +321,9 @@ window.addEventListener('DOMContentLoaded', () => {
             transformations = {searchAndReplace: [], toLowerCase: false, toUpperCase: false}
           } else {
             transformations = {
-              toLowerCase: storage.fieldsets[searchId].transformations?.toLowerCase || false,
-              toUpperCase: storage.fieldsets[searchId].transformations?.toUpperCase || false,
-              searchAndReplace: storage.fieldsets[searchId].transformations?.searchAndReplace || [],
+              toLowerCase: storage.fieldsets[searchId]?.transformations?.toLowerCase || false,
+              toUpperCase: storage.fieldsets[searchId]?.transformations?.toUpperCase || false,
+              searchAndReplace: storage.fieldsets[searchId]?.transformations?.searchAndReplace || [],
             }
           }
           newStorage.fieldsets.push({name: nameInput.value, transformations, url: urlInput.value})
