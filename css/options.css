@@ -134,7 +134,7 @@ header p {
   width: 55%;
 }
 
-#transformation-modal {
+#transformations-modal {
   background: rgb(100 100 100 / 0.5);
   display: flex;
   align-items: center;
@@ -145,14 +145,14 @@ header p {
   height: 100%;
 }
 
-#transformation-container {
+#transformations-container {
   background: #fff;
   width: 50%;
   padding: .5rem;
   position: absolute;
 }
 
-#transformation-container > * {
+#transformations-container > * {
   display: flex;
   flex-wrap: wrap;
   gap: .5rem;
@@ -160,34 +160,34 @@ header p {
   margin: .7rem 0;
 }
 
-#transformation-lower-upper-case-box label {
+#transformations-lower-upper-case-box label {
   display: flex;
   align-items: center;
   gap: .2rem;
 }
 
-.transformation-row > * {
+.transformations-row > * {
   display: flex;
   flex-wrap: wrap;
   gap: .5rem;
   justify-content: center;
 }
 
-.transformation-row .regexp-field,
-.transformation-row .replace-field {
+.transformations-row .regexp-field,
+.transformations-row .replace-field {
   width: 9rem;
 }
 
-.transformation-row .flags-field {
+.transformations-row .flags-field {
   width: 3rem;
 }
 
-#transformation-message-box {
+#transformations-message-box {
   color: #f00;
   min-height: 1rem;
 }
 
-#transformation-controls {
+#transformations-controls {
   gap: 1rem;
 }
 
@@ -253,14 +253,14 @@ header p {
 }
 
 .remove-fieldset-button,
-.remove-transformation-row-button {
+.remove-transformations-row-button {
   color: #f00;
   cursor: pointer;
   font-size: 1rem;
 }
 
 #top-notification-close-button,
-#transformation-close-button {
+#transformations-close-button {
   color: #f00;
   cursor: pointer;
   font-size: 1.2rem;
@@ -269,6 +269,6 @@ header p {
   right: .3rem;
 }
 
-#transformation-close-button {
+#transformations-close-button {
   top: -.9rem;
 }

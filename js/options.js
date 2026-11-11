@@ -8,8 +8,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const fieldsetTemplate = document.getElementById('fieldset-template')
   const separatorTemplate = document.getElementById('separator-template')
   const addSearchButton = document.getElementById('add-search-button')
-  const transformationModalTemplate = document.getElementById('transformation-modal-template')
-  const transformationRowTemplate = document.getElementById('transformation-row-template')
+  const transformationsModalTemplate = document.getElementById('transformations-modal-template')
+  const transformationsRowTemplate = document.getElementById('transformations-row-template')
   const addSeparatorButton = document.getElementById('add-separator-button')
   const sortAZButton = document.getElementById('sort-a-z-button')
   const importButton = document.getElementById('import-button')
@@ -70,13 +70,13 @@ window.addEventListener('DOMContentLoaded', () => {
   })
 
   listOfFieldsets.addEventListener('click', (e) => {
-    if (e.target.classList.contains('transformation-button')) {
+    if (e.target.classList.contains('transformations-button')) {
 
-      const modalTemplate = transformationModalTemplate.content.cloneNode(true)
+      const modalTemplate = transformationsModalTemplate.content.cloneNode(true)
 
       // Search ID
       const searchId = e.target.closest('li').getAttribute('data-id')
-      modalTemplate.getElementById('transformation-modal').setAttribute('data-id', searchId)
+      modalTemplate.getElementById('transformations-modal').setAttribute('data-id', searchId)
 
       // Search Name
       const searchNameBox = modalTemplate.querySelector('h4')
@@ -107,37 +107,37 @@ window.addEventListener('DOMContentLoaded', () => {
       })
 
       // Add Rule
-      modalTemplate.getElementById('transformation-add-rule-button').addEventListener('click', addRule)
+      modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
 
       let noRuleExists
       function addRule(el) {
-        const rowTemplate = transformationRowTemplate.content.cloneNode(true)
-        rowTemplate.querySelector('.remove-transformation-row-button').addEventListener('click', (e) => {
-          e.target.closest('.transformation-row').remove()
+        const rowTemplate = transformationsRowTemplate.content.cloneNode(true)
+        rowTemplate.querySelector('.remove-transformations-row-button').addEventListener('click', (e) => {
+          e.target.closest('.transformations-row').remove()
         })
         if (!(el instanceof PointerEvent)) {
           rowTemplate.querySelector('.regexp-field').value = el.search
           rowTemplate.querySelector('.flags-field').value = el.flags
           rowTemplate.querySelector('.replace-field').value = el.replace
         }
-        const lowerUpperCaseBox = document.getElementById('transformation-lower-upper-case-box')
-        if (!noRuleExists || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformation-row')) {
+        const lowerUpperCaseBox = document.getElementById('transformations-lower-upper-case-box')
+        if (!noRuleExists || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformations-row')) {
           lowerUpperCaseBox.after(rowTemplate)
           noRuleExists = true
         } else {
-          document.querySelector(':nth-last-child(1 of .transformation-row)').after(rowTemplate)
+          document.querySelector(':nth-last-child(1 of .transformations-row)').after(rowTemplate)
         }
       }
 
       // Save
-      modalTemplate.getElementById('transformation-save-button').addEventListener('click', (e) => {
-        const modal = e.target.closest('#transformation-modal')
+      modalTemplate.getElementById('transformations-save-button').addEventListener('click', (e) => {
+        const modal = e.target.closest('#transformations-modal')
         const toLowerCase = modal.querySelector('[name="toLowerCase"]').checked
         const toUpperCase = modal.querySelector('[name="toUpperCase"]').checked
-        const messageBox = modal.querySelector('#transformation-message-box')
+        const messageBox = modal.querySelector('#transformations-message-box')
         const searchAndReplace = []
         let hasError = false
-        Array.from(modal.querySelectorAll('.transformation-row')).every((row) => {
+        Array.from(modal.querySelectorAll('.transformations-row')).every((row) => {
           const flags = row.querySelector('.flags-field')
           const search = row.querySelector('.regexp-field')
           const replace = row.querySelector('.replace-field')
@@ -176,8 +176,8 @@ window.addEventListener('DOMContentLoaded', () => {
       })
 
       // Close
-      modalTemplate.getElementById('transformation-close-button').addEventListener('click', () => {
-        document.getElementById('transformation-modal').remove()
+      modalTemplate.getElementById('transformations-close-button').addEventListener('click', () => {
+        document.getElementById('transformations-modal').remove()
       })
 
       // Append
@@ -196,7 +196,7 @@ window.addEventListener('DOMContentLoaded', () => {
   addSearchButton.addEventListener('click', () => {
     const template = fieldsetTemplate.content.cloneNode(true)
     template.querySelector('li').setAttribute('data-id', listOfFieldsets.querySelectorAll('[data-id]').length + 2)
-    template.querySelector('.transformation-button').setAttribute('disabled', true)
+    template.querySelector('.transformations-button').setAttribute('disabled', true)
     listOfFieldsets.appendChild(template)
   })
 
@@ -341,7 +341,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           messageBox.textContent = ''
         }, 1500)
-        listOfFieldsets.querySelectorAll('.transformation-button').forEach((el) => {
+        listOfFieldsets.querySelectorAll('.transformations-button').forEach((el) => {
           el.removeAttribute('disabled')
         })
         listOfFieldsets.removeAttribute('data-load-defaults')
