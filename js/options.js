@@ -158,6 +158,7 @@ window.addEventListener('DOMContentLoaded', () => {
             return false
           } else {
             searchAndReplace.push({flags: flags.value, search: search.value, replace: replace.value})
+            return true
           }
         })
         if (!hasError) {
