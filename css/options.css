@@ -144,6 +144,7 @@ header p {
 
 #transformations-container {
   background: #fff;
+  border-radius: .3rem;
   width: 30rem;
   padding: .5rem;
   position: absolute;
