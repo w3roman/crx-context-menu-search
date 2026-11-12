@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Context Menu Search",
   "version": "3.3.0",
-  "description": "Search for selected text or an image by its URL via the context menu.",
+  "description": "Use the context menu to search for selected text or an image by its URL using various search engines.",
   "permissions": [
     "contextMenus",
     "downloads",
