@@ -98,8 +98,8 @@ chrome.runtime.onInstalled.addListener((details) => {
   chrome.storage.local.set(app.initialStorage).then(
     () => chrome.storage.sync.get(null, (storage) => {
       chrome.storage.sync.set(storage.fieldsets ? storage : app.initialStorage).then(() => {})
-      // This call is necessary for rendering Search items in the context menu, since if the set of fields has not changed
-      // (see below), the `change` event, whose handler calls the setContextMenuItems() method, will not fire
+      // This call is necessary for rendering Search items in the context menu, since if the set of fields has not
+      // changed (see below), the `change` event, whose handler calls the setContextMenuItems() method, will not fire
       app.methods.setContextMenuItems(storage.fieldsets || app.initialStorage.fieldsets)
       if (details.reason === 'install') {
         chrome.runtime.openOptionsPage().then()
