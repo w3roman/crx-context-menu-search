@@ -157,9 +157,9 @@ chrome.contextMenus.onClicked.addListener((info) => {
       text = text.toUpperCase()
     }
     if (fieldset.transformations?.rules) {
-      fieldset.transformations.rules.forEach((el) => {
-        const regexp = new RegExp(el.regexp, el.flags)
-        text = text.replace(regexp, el.replace)
+      fieldset.transformations.rules.forEach((e) => {
+        const regexp = new RegExp(e.regexp, e.flags)
+        text = text.replace(regexp, e.replace)
       })
     }
     url = url.replace('%s', encodeURIComponent(text))
