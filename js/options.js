@@ -108,6 +108,8 @@ window.addEventListener('DOMContentLoaded', () => {
       }
 
       // Rules
+      // The definition of the var `noRuleExists` must be here to avoid
+      // the "Cannot access 'noRuleExists' before initialization" error
       let noRuleExists = true
       const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
       if (transformations) {
@@ -116,27 +118,27 @@ window.addEventListener('DOMContentLoaded', () => {
         transformations.searchAndReplace.forEach(addRule)
       }
       modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
-      function addRule(el) {
+      function addRule(e) {
         const ruleTemplate = transformationRuleTemplate.content.cloneNode(true)
-        ruleTemplate.querySelector('.remove-transformation-rule-button').addEventListener('click', (e) => {
-          e.target.closest('.transformation-rule').remove()
-        })
-        let currentModal
-        if (!(el instanceof PointerEvent)) {
-          currentModal = modalTemplate
-          ruleTemplate.querySelector('.regexp-field').value = el.search
-          ruleTemplate.querySelector('.flags-field').value = el.flags
-          ruleTemplate.querySelector('.replace-field').value = el.replace
+        let currentDocument
+        if (e instanceof PointerEvent) {
+          currentDocument = document
         } else {
-          currentModal = document
+          currentDocument = modalTemplate
+          ruleTemplate.querySelector('.regexp-field').value = e.search
+          ruleTemplate.querySelector('.flags-field').value = e.flags
+          ruleTemplate.querySelector('.replace-field').value = e.replace
         }
-        const casingBox = currentModal.querySelector('#transformations-casing-box')
+        const casingBox = currentDocument.querySelector('#transformations-casing-box')
         if (noRuleExists || !casingBox.nextElementSibling.classList.contains('transformation-rule')) {
           casingBox.after(ruleTemplate)
           noRuleExists = false
         } else {
-          currentModal.querySelector(':nth-last-child(1 of .transformation-rule)').after(ruleTemplate)
+          currentDocument.querySelector(':nth-last-child(1 of .transformation-rule)').after(ruleTemplate)
         }
+        ruleTemplate.querySelector('.remove-transformation-rule-button').addEventListener('click', (e) => {
+          e.target.closest('.transformation-rule').remove()
+        })
       }
 
       // Save
