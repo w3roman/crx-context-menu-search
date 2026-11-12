@@ -129,7 +129,7 @@ window.addEventListener('DOMContentLoaded', () => {
           currentDocument = document
         } else {
           currentDocument = modalTemplate
-          ruleTemplate.querySelector('[name="regexp"]').value = e.search
+          ruleTemplate.querySelector('[name="regexp"]').value = e.regexp
           ruleTemplate.querySelector('[name="flags"]').value = e.flags
           ruleTemplate.querySelector('[name="replace"]').value = e.replace
         }
@@ -151,27 +151,27 @@ window.addEventListener('DOMContentLoaded', () => {
         const rules = []
         let hasError = false
         Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
-          const flags = rule.querySelector('[name="flags"]')
-          const search = rule.querySelector('[name="regexp"]')
-          const replace = rule.querySelector('[name="replace"]')
-          if (!search.value) {
+          const flagsField = rule.querySelector('[name="flags"]')
+          const regexpField = rule.querySelector('[name="regexp"]')
+          const replaceField = rule.querySelector('[name="replace"]')
+          if (!regexpField.value) {
             messageBox.textContent = 'The "RegExp" field must not be empty'
-            search.focus()
+            regexpField.focus()
             setTimeout(() => {
               messageBox.textContent = ''
             }, 1500)
             hasError = true
             return false
-          } else if (!replace.value) {
+          } else if (!replaceField.value) {
             messageBox.textContent = 'The "Replace" field must not be empty'
-            replace.focus()
+            replaceField.focus()
             setTimeout(() => {
               messageBox.textContent = ''
             }, 1500)
             hasError = true
             return false
           } else {
-            rules.push({flags: flags.value, search: search.value, replace: replace.value})
+            rules.push({flags: flagsField.value, regexp: regexpField.value, replace: replaceField.value})
             return true
           }
         })
