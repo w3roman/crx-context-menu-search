@@ -250,7 +250,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const file = fileChooser.files[0]
       const reader = new FileReader()
       reader.onload = () => {
-        const storage = JSON.parse('' + reader.result)
+        const storage = JSON.parse(reader.result)
         setFieldsets(storage.fieldsets)
         addUtmSourceCheckbox.checked = storage.addUtmSource
         openInBackgroundCheckbox.checked = storage.openInBackground
