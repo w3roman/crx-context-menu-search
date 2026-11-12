@@ -37,11 +37,12 @@ window.addEventListener('DOMContentLoaded', () => {
         fieldset = separatorTemplate.content.cloneNode(true)
       } else {
         fieldset = fieldsetTemplate.content.cloneNode(true)
-        fieldset.querySelector('li').setAttribute('data-id', index)
+        let li = fieldset.querySelector('li')
+        li.setAttribute('data-id', index)
         fieldset.querySelector('[name="searchName"]').value = fieldsets[index].name
         fieldset.querySelector('[name="searchUrl"]').value = fieldsets[index].url
         if (fieldsets[index].transformations) {
-          fieldset.querySelector('li').setAttribute('data-transformations', JSON.stringify(fieldsets[index].transformations))
+          li.setAttribute('data-transformations', JSON.stringify(fieldsets[index].transformations))
         }
       }
       listOfFieldsets.appendChild(fieldset)
