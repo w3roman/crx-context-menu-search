@@ -82,25 +82,23 @@ window.addEventListener('DOMContentLoaded', () => {
 
       const modalTemplate = transformationsModalTemplate.content.cloneNode(true)
       const parentLi = e.target.closest('li')
+
+      // Search ID
       const searchId = parentLi.getAttribute('data-id')
       modalTemplate.getElementById('transformations-modal').setAttribute('data-id', searchId)
-      const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
 
-      // Search name box
+      // Search name
       const searchNameBox = modalTemplate.querySelector('#transformations-search-name-box')
       searchNameBox.textContent = searchNameBox.textContent.replace(
         'name',
         parentLi.querySelector('[name="searchName"]').value
       )
 
-      // Casing box
-
+      // Casing
       const toLowerCaseCheckbox = modalTemplate.querySelector('[name="toLowerCase"]')
       const toUpperCaseCheckbox = modalTemplate.querySelector('[name="toUpperCase"]')
-
       toLowerCaseCheckbox.addEventListener('click', caseCheckboxHandler)
       toUpperCaseCheckbox.addEventListener('click', caseCheckboxHandler)
-
       function caseCheckboxHandler(e) {
         if (e.target.getAttribute('name') === 'toLowerCase' && e.target.checked) {
           toUpperCaseCheckbox.checked = false
@@ -109,7 +107,15 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       }
 
+      // Rules
       let noRuleExists = true
+      const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
+      if (transformations) {
+        toLowerCaseCheckbox.checked = transformations.toLowerCase
+        toUpperCaseCheckbox.checked = transformations.toUpperCase
+        transformations.searchAndReplace.forEach(addRule)
+      }
+      modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
       function addRule(el) {
         const ruleTemplate = transformationRuleTemplate.content.cloneNode(true)
         ruleTemplate.querySelector('.remove-transformation-rule-button').addEventListener('click', (e) => {
@@ -132,16 +138,6 @@ window.addEventListener('DOMContentLoaded', () => {
           currentModal.querySelector(':nth-last-child(1 of .transformation-rule)').after(ruleTemplate)
         }
       }
-
-      // Rules
-      if (transformations) {
-        toLowerCaseCheckbox.checked = transformations.toLowerCase
-        toUpperCaseCheckbox.checked = transformations.toUpperCase
-        transformations.searchAndReplace.forEach(addRule)
-      }
-
-      // Add Rule
-      modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
 
       // Save
       modalTemplate.getElementById('transformations-save-button').addEventListener('click', (e) => {
