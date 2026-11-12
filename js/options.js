@@ -305,8 +305,8 @@ window.addEventListener('DOMContentLoaded', () => {
       const newStorage = { fieldsets: [] }
       const fieldsets = listOfFieldsets.querySelectorAll('li')
 
-      for (let i = 0; i < fieldsets.length; i++) {
-        const nameInput = fieldsets[i].querySelector('[name="searchName"]')
+      Array.from(fieldsets).forEach((fieldset) => {
+        const nameInput = fieldset.querySelector('[name="searchName"]')
         if (nameInput) {
           if (!nameInput.value) {
             messageBox.textContent = 'The Search name must not be empty'
@@ -316,7 +316,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }, 1500)
             return
           }
-          const urlInput = fieldsets[i].querySelector('[name="searchUrl"]')
+          const urlInput = fieldset.querySelector('[name="searchUrl"]')
           if (urlInput) {
             if (!urlInput.value) {
               messageBox.textContent = 'The Search URL must not be empty'
@@ -327,12 +327,12 @@ window.addEventListener('DOMContentLoaded', () => {
               return
             }
           }
-          const searchId = fieldsets[i].getAttribute('data-id')
+          const searchId = fieldset.getAttribute('data-id')
           let transformations
           if (listOfFieldsets.getAttribute('data-load-defaults')) {
             transformations = {rules: [], toLowerCase: false, toUpperCase: false}
           } else if (listOfFieldsets.getAttribute('data-imported')) {
-            transformations = JSON.parse(fieldsets[i].getAttribute('data-transformations'))
+            transformations = JSON.parse(fieldset.getAttribute('data-transformations'))
           } else {
             transformations = {
               rules: storage.fieldsets[searchId]?.transformations?.rules || [],
@@ -344,7 +344,7 @@ window.addEventListener('DOMContentLoaded', () => {
         } else {
           newStorage.fieldsets.push({name: '_separator_'})
         }
-      }
+      })
 
       newStorage.openInBackground = openInBackgroundCheckbox.checked
       newStorage.addUtmSource = addUtmSourceCheckbox.checked
@@ -353,8 +353,8 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           messageBox.textContent = ''
         }, 1500)
-        listOfFieldsets.querySelectorAll('.transformations-button').forEach((el) => {
-          el.removeAttribute('disabled')
+        listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
+          e.removeAttribute('disabled')
         })
         listOfFieldsets.removeAttribute('data-load-defaults')
         listOfFieldsets.removeAttribute('data-imported')
