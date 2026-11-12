@@ -54,6 +54,8 @@ window.addEventListener('DOMContentLoaded', () => {
     setFieldsets(storage.fieldsets)
     openInBackgroundCheckbox.checked = storage.openInBackground
     addUtmSourceCheckbox.checked = storage.addUtmSource
+
+    // Sortable
     Sortable.create(listOfFieldsets, {
       // [name="searchName"], [name="searchUrl"] doesn't work
       filter: 'input, button, .remove-fieldset-button',
