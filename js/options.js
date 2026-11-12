@@ -120,6 +120,10 @@ window.addEventListener('DOMContentLoaded', () => {
       modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
       function addRule(e) {
         const ruleTemplate = transformationRuleTemplate.content.cloneNode(true)
+        // It should be placed before `.after(ruleTemplate)`
+        ruleTemplate.querySelector('.remove-transformation-rule-button').addEventListener('click', (e) => {
+          e.target.closest('.transformation-rule').remove()
+        })
         let currentDocument
         if (e instanceof PointerEvent) {
           currentDocument = document
@@ -136,9 +140,6 @@ window.addEventListener('DOMContentLoaded', () => {
         } else {
           currentDocument.querySelector(':nth-last-child(1 of .transformation-rule)').after(ruleTemplate)
         }
-        ruleTemplate.querySelector('.remove-transformation-rule-button').addEventListener('click', (e) => {
-          e.target.closest('.transformation-rule').remove()
-        })
       }
 
       // Save
