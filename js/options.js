@@ -302,7 +302,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   saveButton.addEventListener('click', () => {
     chrome.storage.sync.get(null, (storage) => {
-      const newStorage = { fieldsets: [] }
+      const newStorage = {fieldsets: []}
       const fieldsets = listOfFieldsets.querySelectorAll('li')
 
       Array.from(fieldsets).forEach((fieldset) => {
