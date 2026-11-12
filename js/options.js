@@ -42,6 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
         fieldset.querySelector('[name="searchName"]').value = fieldsets[index].name
         fieldset.querySelector('[name="searchUrl"]').value = fieldsets[index].url
         if (fieldsets[index].transformations) {
+          // We tie the transformations to the <li>, since on deletion and subsequent saving the indices get overwritten
           li.setAttribute('data-transformations', JSON.stringify(fieldsets[index].transformations))
         }
       }
@@ -82,6 +83,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const modalTemplate = transformationsModalTemplate.content.cloneNode(true)
 
       const parentLi = e.target.closest('li')
+      // We tie the transformations to the <li>, since on deletion and subsequent saving the indices get overwritten
       const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
 
       // Search ID
