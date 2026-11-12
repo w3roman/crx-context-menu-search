@@ -158,7 +158,7 @@ chrome.contextMenus.onClicked.addListener((info) => {
     }
     if (fieldset.transformations?.rules) {
       fieldset.transformations.rules.forEach((el) => {
-        const regexp = new RegExp(el.search, el.flags)
+        const regexp = new RegExp(el.regexp, el.flags)
         text = text.replace(regexp, el.replace)
       })
     }
