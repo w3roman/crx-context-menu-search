@@ -50,26 +50,27 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   chrome.storage.sync.get(null, (storage) => {
+    // Options
     setFieldsets(storage.fieldsets)
     openInBackgroundCheckbox.checked = storage.openInBackground
     addUtmSourceCheckbox.checked = storage.addUtmSource
+    Sortable.create(listOfFieldsets, {
+      // [name="searchName"], [name="searchUrl"] doesn't work
+      filter: 'input, button, .remove-fieldset-button',
+      preventOnFilter: false,
+    })
+
+    // Top notification
     chrome.storage.local.get(null, (localStorage) => {
       if (localStorage.updateMessage) {
         topNotification.append(document.createTextNode(localStorage.updateMessage))
         topNotification.style.display = 'block'
+        topNotificationCloseButton.addEventListener('click', () => {
+          chrome.storage.local.remove('updateMessage').then(() => {
+            topNotification.style.display = 'none'
+          })
+        })
       }
-    })
-  })
-
-  Sortable.create(listOfFieldsets, {
-    // [name="searchName"], [name="searchUrl"] doesn't work
-    filter: 'input, button, .remove-fieldset-button',
-    preventOnFilter: false,
-  })
-
-  topNotificationCloseButton.addEventListener('click', () => {
-    chrome.storage.local.remove('updateMessage').then(() => {
-      topNotification.style.display = 'none'
     })
   })
 
