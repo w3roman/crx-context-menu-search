@@ -268,7 +268,7 @@ window.addEventListener('DOMContentLoaded', () => {
   exportButton.addEventListener('click', () => {
     chrome.storage.sync.get(null, (storage) => {
       const jsonString = JSON.stringify(storage, null, 2)
-      const blob = new Blob([jsonString], { type: 'application/json' })
+      const blob = new Blob([jsonString], {type: 'application/json'})
       const url = URL.createObjectURL(blob)
       chrome.downloads.download({
         url: url,
