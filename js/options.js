@@ -86,12 +86,14 @@ window.addEventListener('DOMContentLoaded', () => {
       modalTemplate.getElementById('transformations-modal').setAttribute('data-id', searchId)
       const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
 
-      // Search Name
-      const searchNameBox = modalTemplate.querySelector('h4')
+      // Search name box
+      const searchNameBox = modalTemplate.querySelector('#transformations-search-name-box')
       searchNameBox.textContent = searchNameBox.textContent.replace(
         'name',
         parentLi.querySelector('[name="searchName"]').value
       )
+
+      // Casing box
 
       const toLowerCaseCheckbox = modalTemplate.querySelector('[name="toLowerCase"]')
       const toUpperCaseCheckbox = modalTemplate.querySelector('[name="toUpperCase"]')
@@ -188,8 +190,8 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       })
 
-      // Close
-      modalTemplate.getElementById('transformations-close-button').addEventListener('click', () => {
+      // Close modal button
+      modalTemplate.getElementById('transformations-close-modal-button').addEventListener('click', () => {
         document.getElementById('transformations-modal').remove()
       })
 
