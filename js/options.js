@@ -122,9 +122,9 @@ window.addEventListener('DOMContentLoaded', () => {
         } else {
           currentModal = document
         }
-        const lowerUpperCaseBox = currentModal.querySelector('#transformations-lower-upper-case-box')
-        if (noRuleExists || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformation-rule')) {
-          lowerUpperCaseBox.after(ruleTemplate)
+        const casingBox = currentModal.querySelector('#transformations-casing-box')
+        if (noRuleExists || !casingBox.nextElementSibling.classList.contains('transformation-rule')) {
+          casingBox.after(ruleTemplate)
           noRuleExists = false
         } else {
           currentModal.querySelector(':nth-last-child(1 of .transformation-rule)').after(ruleTemplate)
