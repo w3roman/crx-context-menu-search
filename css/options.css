@@ -37,11 +37,6 @@ button[disabled] {
   cursor: not-allowed;
 }
 
-code {
-  color: #d01818;
-  letter-spacing: 1px;
-}
-
 input[type="checkbox"],
 input[type="radio"] {
   margin: 0 .5rem 0 0;
@@ -51,6 +46,18 @@ input {
   border: 1px solid #bfbfbf;
   border-radius: .3rem;
   padding: .2rem;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: .2rem;
+  justify-content: center;
+}
+
+code {
+  color: #d01818;
+  letter-spacing: 1px;
 }
 
 h2,
@@ -160,12 +167,6 @@ header p {
   margin: .7rem 0;
 }
 
-#transformations-lower-upper-case-box label {
-  display: flex;
-  align-items: center;
-  gap: .2rem;
-}
-
 .transformation-rule > * {
   display: flex;
   flex-wrap: wrap;
@@ -206,13 +207,6 @@ header p {
 .controls-box button,
 .controls-box label {
   width: 45%;
-}
-
-.controls-box label {
-  display: flex;
-  align-items: center;
-  gap: .2rem;
-  justify-content: center;
 }
 
 #save-button {
