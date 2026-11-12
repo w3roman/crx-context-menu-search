@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const addSearchButton = document.getElementById('add-search-button')
   const addSeparatorButton = document.getElementById('add-separator-button')
   const transformationsModalTemplate = document.getElementById('transformations-modal-template')
-  const transformationsRuleTemplate = document.getElementById('transformations-rule-template')
+  const transformationRuleTemplate = document.getElementById('transformation-rule-template')
   const loadDefaultsButton = document.getElementById('load-defaults-button')
   const sortAZButton = document.getElementById('sort-a-z-button')
   const importButton = document.getElementById('import-button')
@@ -109,9 +109,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
       let noRuleExists = true
       function addRule(el) {
-        const ruleTemplate = transformationsRuleTemplate.content.cloneNode(true)
-        ruleTemplate.querySelector('.remove-transformations-rule-button').addEventListener('click', (e) => {
-          e.target.closest('.transformations-rule').remove()
+        const ruleTemplate = transformationRuleTemplate.content.cloneNode(true)
+        ruleTemplate.querySelector('.remove-transformation-rule-button').addEventListener('click', (e) => {
+          e.target.closest('.transformation-rule').remove()
         })
         let currentModal
         if (!(el instanceof PointerEvent)) {
@@ -123,11 +123,11 @@ window.addEventListener('DOMContentLoaded', () => {
           currentModal = document
         }
         const lowerUpperCaseBox = currentModal.querySelector('#transformations-lower-upper-case-box')
-        if (noRuleExists || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformations-rule')) {
+        if (noRuleExists || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformation-rule')) {
           lowerUpperCaseBox.after(ruleTemplate)
           noRuleExists = false
         } else {
-          currentModal.querySelector(':nth-last-child(1 of .transformations-rule)').after(ruleTemplate)
+          currentModal.querySelector(':nth-last-child(1 of .transformation-rule)').after(ruleTemplate)
         }
       }
 
@@ -149,7 +149,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const messageBox = modal.querySelector('#transformations-message-box')
         const searchAndReplace = []
         let hasError = false
-        Array.from(modal.querySelectorAll('.transformations-rule')).every((rule) => {
+        Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
           const flags = rule.querySelector('.flags-field')
           const search = rule.querySelector('.regexp-field')
           const replace = rule.querySelector('.replace-field')

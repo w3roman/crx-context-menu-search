@@ -166,19 +166,19 @@ header p {
   gap: .2rem;
 }
 
-.transformations-rule > * {
+.transformation-rule > * {
   display: flex;
   flex-wrap: wrap;
   gap: .5rem;
   justify-content: center;
 }
 
-.transformations-rule .regexp-field,
-.transformations-rule .replace-field {
+.transformation-rule .regexp-field,
+.transformation-rule .replace-field {
   width: 9rem;
 }
 
-.transformations-rule .flags-field {
+.transformation-rule .flags-field {
   width: 3rem;
 }
 
@@ -253,7 +253,7 @@ header p {
 }
 
 .remove-fieldset-button,
-.remove-transformations-rule-button {
+.remove-transformation-rule-button {
   color: #f00;
   cursor: pointer;
   font-size: 1rem;
