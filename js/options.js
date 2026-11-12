@@ -115,7 +115,7 @@ window.addEventListener('DOMContentLoaded', () => {
       if (transformations) {
         toLowerCaseCheckbox.checked = transformations.toLowerCase
         toUpperCaseCheckbox.checked = transformations.toUpperCase
-        transformations.searchAndReplace.forEach(addRule)
+        transformations.rules.forEach(addRule)
       }
       modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
       function addRule(e) {
@@ -148,7 +148,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const toLowerCase = modal.querySelector('[name="toLowerCase"]').checked
         const toUpperCase = modal.querySelector('[name="toUpperCase"]').checked
         const messageBox = modal.querySelector('#transformations-message-box')
-        const searchAndReplace = []
+        const rules = []
         let hasError = false
         Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
           const flags = rule.querySelector('[name="flags"]')
@@ -171,13 +171,13 @@ window.addEventListener('DOMContentLoaded', () => {
             hasError = true
             return false
           } else {
-            searchAndReplace.push({flags: flags.value, search: search.value, replace: replace.value})
+            rules.push({flags: flags.value, search: search.value, replace: replace.value})
             return true
           }
         })
         if (!hasError) {
           chrome.storage.sync.get(null, (storage) => {
-            storage.fieldsets[searchId].transformations = {searchAndReplace, toLowerCase, toUpperCase}
+            storage.fieldsets[searchId].transformations = {rules, toLowerCase, toUpperCase}
             chrome.storage.sync.set(storage, () => {
               messageBox.textContent = 'Saved'
               setTimeout(() => {
@@ -334,12 +334,12 @@ window.addEventListener('DOMContentLoaded', () => {
           const searchId = fieldsets[i].getAttribute('data-id')
           let transformations
           if (loadDefaults) {
-            transformations = {searchAndReplace: [], toLowerCase: false, toUpperCase: false}
+            transformations = {rules: [], toLowerCase: false, toUpperCase: false}
           } else {
             transformations = {
+              rules: storage.fieldsets[searchId]?.transformations?.rules || [],
               toLowerCase: storage.fieldsets[searchId]?.transformations?.toLowerCase || false,
               toUpperCase: storage.fieldsets[searchId]?.transformations?.toUpperCase || false,
-              searchAndReplace: storage.fieldsets[searchId]?.transformations?.searchAndReplace || [],
             }
           }
           newStorage.fieldsets.push({name: nameInput.value, transformations, url: urlInput.value})
