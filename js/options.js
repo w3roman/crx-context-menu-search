@@ -26,18 +26,6 @@ window.addEventListener('DOMContentLoaded', () => {
    * =============================================================================
    */
 
-  chrome.storage.sync.get(null, (storage) => {
-    setFieldsets(storage.fieldsets)
-    openInBackgroundCheckbox.checked = storage.openInBackground
-    addUtmSourceCheckbox.checked = storage.addUtmSource
-    chrome.storage.local.get(null, (localStorage) => {
-      if (localStorage.updateMessage) {
-        topNotification.append(document.createTextNode(localStorage.updateMessage))
-        topNotification.style.display = 'block'
-      }
-    })
-  })
-
   function setFieldsets(fieldsets) {
     if (!fieldsets) return
     // Remove old fieldsets
@@ -59,6 +47,18 @@ window.addEventListener('DOMContentLoaded', () => {
       listOfFieldsets.appendChild(fieldset)
     }
   }
+
+  chrome.storage.sync.get(null, (storage) => {
+    setFieldsets(storage.fieldsets)
+    openInBackgroundCheckbox.checked = storage.openInBackground
+    addUtmSourceCheckbox.checked = storage.addUtmSource
+    chrome.storage.local.get(null, (localStorage) => {
+      if (localStorage.updateMessage) {
+        topNotification.append(document.createTextNode(localStorage.updateMessage))
+        topNotification.style.display = 'block'
+      }
+    })
+  })
 
   topNotificationCloseButton.addEventListener('click', () => {
     chrome.storage.local.remove('updateMessage').then(() => {
