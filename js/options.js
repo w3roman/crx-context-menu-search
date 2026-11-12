@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const addSearchButton = document.getElementById('add-search-button')
   const addSeparatorButton = document.getElementById('add-separator-button')
   const transformationsModalTemplate = document.getElementById('transformations-modal-template')
-  const transformationsRowTemplate = document.getElementById('transformations-row-template')
+  const transformationsRuleTemplate = document.getElementById('transformations-rule-template')
   const loadDefaultsButton = document.getElementById('load-defaults-button')
   const sortAZButton = document.getElementById('sort-a-z-button')
   const importButton = document.getElementById('import-button')
@@ -109,29 +109,29 @@ window.addEventListener('DOMContentLoaded', () => {
 
       let noRuleExists = true
       function addRule(el) {
-        const rowTemplate = transformationsRowTemplate.content.cloneNode(true)
-        rowTemplate.querySelector('.remove-transformations-row-button').addEventListener('click', (e) => {
-          e.target.closest('.transformations-row').remove()
+        const ruleTemplate = transformationsRuleTemplate.content.cloneNode(true)
+        ruleTemplate.querySelector('.remove-transformations-rule-button').addEventListener('click', (e) => {
+          e.target.closest('.transformations-rule').remove()
         })
         let currentModal
         if (!(el instanceof PointerEvent)) {
           currentModal = modalTemplate
-          rowTemplate.querySelector('.regexp-field').value = el.search
-          rowTemplate.querySelector('.flags-field').value = el.flags
-          rowTemplate.querySelector('.replace-field').value = el.replace
+          ruleTemplate.querySelector('.regexp-field').value = el.search
+          ruleTemplate.querySelector('.flags-field').value = el.flags
+          ruleTemplate.querySelector('.replace-field').value = el.replace
         } else {
           currentModal = document
         }
         const lowerUpperCaseBox = currentModal.querySelector('#transformations-lower-upper-case-box')
-        if (noRuleExists || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformations-row')) {
-          lowerUpperCaseBox.after(rowTemplate)
+        if (noRuleExists || !lowerUpperCaseBox.nextElementSibling.classList.contains('transformations-rule')) {
+          lowerUpperCaseBox.after(ruleTemplate)
           noRuleExists = false
         } else {
-          currentModal.querySelector(':nth-last-child(1 of .transformations-row)').after(rowTemplate)
+          currentModal.querySelector(':nth-last-child(1 of .transformations-rule)').after(ruleTemplate)
         }
       }
 
-      // Rows
+      // Rules
       if (transformations) {
         toLowerCaseCheckbox.checked = transformations.toLowerCase
         toUpperCaseCheckbox.checked = transformations.toUpperCase
@@ -149,10 +149,10 @@ window.addEventListener('DOMContentLoaded', () => {
         const messageBox = modal.querySelector('#transformations-message-box')
         const searchAndReplace = []
         let hasError = false
-        Array.from(modal.querySelectorAll('.transformations-row')).every((row) => {
-          const flags = row.querySelector('.flags-field')
-          const search = row.querySelector('.regexp-field')
-          const replace = row.querySelector('.replace-field')
+        Array.from(modal.querySelectorAll('.transformations-rule')).every((rule) => {
+          const flags = rule.querySelector('.flags-field')
+          const search = rule.querySelector('.regexp-field')
+          const replace = rule.querySelector('.replace-field')
           if (!search.value) {
             messageBox.textContent = 'The "RegExp" field must not be empty'
             search.focus()
