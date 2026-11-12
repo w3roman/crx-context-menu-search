@@ -335,9 +335,9 @@ window.addEventListener('DOMContentLoaded', () => {
             transformations = JSON.parse(fieldset.getAttribute('data-transformations'))
           } else {
             transformations = {
-              rules: storage.fieldsets[searchId]?.transformations?.rules || [],
-              toLowerCase: storage.fieldsets[searchId]?.transformations?.toLowerCase || false,
-              toUpperCase: storage.fieldsets[searchId]?.transformations?.toUpperCase || false,
+              rules: storage.fieldsets[searchId].transformations?.rules || [],
+              toLowerCase: storage.fieldsets[searchId].transformations?.toLowerCase || false,
+              toUpperCase: storage.fieldsets[searchId].transformations?.toUpperCase || false,
             }
           }
           newStorage.fieldsets.push({name: nameInput.value, transformations, url: urlInput.value})
