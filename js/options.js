@@ -84,7 +84,6 @@ window.addEventListener('DOMContentLoaded', () => {
       const parentLi = e.target.closest('li')
       const searchId = parentLi.getAttribute('data-id')
       modalTemplate.getElementById('transformations-modal').setAttribute('data-id', searchId)
-      // We tie the transformations to the <li>, since on deletion and subsequent saving the indices get overwritten
       const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
 
       // Search Name
