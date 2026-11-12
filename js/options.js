@@ -38,8 +38,8 @@ window.addEventListener('DOMContentLoaded', () => {
       } else {
         fieldset = fieldsetTemplate.content.cloneNode(true)
         fieldset.querySelector('li').setAttribute('data-id', index)
-        fieldset.querySelector('.search-name').value = fieldsets[index].name
-        fieldset.querySelector('.search-url').value = fieldsets[index].url
+        fieldset.querySelector('[name="searchName"]').value = fieldsets[index].name
+        fieldset.querySelector('[name="searchUrl"]').value = fieldsets[index].url
         if (fieldsets[index].transformations) {
           fieldset.querySelector('li').setAttribute('data-transformations', JSON.stringify(fieldsets[index].transformations))
         }
@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   Sortable.create(listOfFieldsets, {
     // [name="searchName"], [name="searchUrl"] doesn't work
-    filter: '.search-name, .search-url, .remove-fieldset-button',
+    filter: 'input, button, .remove-fieldset-button',
     preventOnFilter: false,
   })
 
@@ -88,7 +88,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const searchNameBox = modalTemplate.querySelector('h4')
       searchNameBox.textContent = searchNameBox.textContent.replace(
         'name',
-        parentLi.querySelector('.search-name').value
+        parentLi.querySelector('[name="searchName"]').value
       )
 
       const toLowerCaseCheckbox = modalTemplate.querySelector('[name="toLowerCase"]')
@@ -223,7 +223,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const fieldsets = listOfFieldsets.querySelectorAll('li')
     const unorderedFieldsets = {}
     for (let i = 0; i < fieldsets.length; i++) {
-      const name = fieldsets[i].querySelector('.search-name')
+      const name = fieldsets[i].querySelector('[name="searchName"]')
       if (name) {
         unorderedFieldsets[name.value] = fieldsets[i]
       }
@@ -307,7 +307,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const fieldsets = listOfFieldsets.querySelectorAll('li')
 
       for (let i = 0; i < fieldsets.length; i++) {
-        const nameInput = fieldsets[i].querySelector('.search-name')
+        const nameInput = fieldsets[i].querySelector('[name="searchName"]')
         if (nameInput) {
           if (!nameInput.value) {
             messageBox.textContent = 'The Search name must not be empty'
@@ -317,7 +317,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }, 1500)
             return
           }
-          const urlInput = fieldsets[i].querySelector('.search-url')
+          const urlInput = fieldsets[i].querySelector('[name="searchUrl"]')
           if (urlInput) {
             if (!urlInput.value) {
               messageBox.textContent = 'The Search URL must not be empty'

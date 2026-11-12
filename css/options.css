@@ -126,11 +126,11 @@ header p {
   font-size: 1.5rem;
 }
 
-#list-of-fieldsets .search-name {
+#list-of-fieldsets [name="searchName"] {
   width: 25%;
 }
 
-#list-of-fieldsets .search-url {
+#list-of-fieldsets [name="searchUrl"] {
   width: 55%;
 }
 
