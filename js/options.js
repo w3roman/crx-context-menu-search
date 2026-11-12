@@ -8,17 +8,17 @@ window.addEventListener('DOMContentLoaded', () => {
   const fieldsetTemplate = document.getElementById('fieldset-template')
   const separatorTemplate = document.getElementById('separator-template')
   const addSearchButton = document.getElementById('add-search-button')
+  const addSeparatorButton = document.getElementById('add-separator-button')
   const transformationsModalTemplate = document.getElementById('transformations-modal-template')
   const transformationsRowTemplate = document.getElementById('transformations-row-template')
-  const addSeparatorButton = document.getElementById('add-separator-button')
+  const loadDefaultsButton = document.getElementById('load-defaults-button')
   const sortAZButton = document.getElementById('sort-a-z-button')
   const importButton = document.getElementById('import-button')
   const exportButton = document.getElementById('export-button')
-  const loadDefaultsButton = document.getElementById('load-defaults-button')
-  const saveButton = document.getElementById('save-button')
-  const messageBox = document.getElementById('message-box')
   const openInBackgroundCheckbox = document.getElementById('open-in-background-checkbox')
   const addUtmSourceCheckbox = document.getElementById('add-utm-source-checkbox')
+  const saveButton = document.getElementById('save-button')
+  const messageBox = document.getElementById('message-box')
 
   /*
    * =============================================================================
