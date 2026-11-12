@@ -169,12 +169,12 @@ header p {
   justify-content: center;
 }
 
-.transformation-rule .regexp-field,
-.transformation-rule .replace-field {
+.transformation-rule [name="regexp"],
+.transformation-rule [name="replace"] {
   width: 9rem;
 }
 
-.transformation-rule .flags-field {
+.transformation-rule [name="flags"] {
   width: 3rem;
 }
 

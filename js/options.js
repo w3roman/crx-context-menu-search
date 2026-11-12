@@ -129,9 +129,9 @@ window.addEventListener('DOMContentLoaded', () => {
           currentDocument = document
         } else {
           currentDocument = modalTemplate
-          ruleTemplate.querySelector('.regexp-field').value = e.search
-          ruleTemplate.querySelector('.flags-field').value = e.flags
-          ruleTemplate.querySelector('.replace-field').value = e.replace
+          ruleTemplate.querySelector('[name="regexp"]').value = e.search
+          ruleTemplate.querySelector('[name="flags"]').value = e.flags
+          ruleTemplate.querySelector('[name="replace"]').value = e.replace
         }
         const casingBox = currentDocument.querySelector('#transformations-casing-box')
         if (noRuleExists || !casingBox.nextElementSibling.classList.contains('transformation-rule')) {
@@ -151,9 +151,9 @@ window.addEventListener('DOMContentLoaded', () => {
         const searchAndReplace = []
         let hasError = false
         Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
-          const flags = rule.querySelector('.flags-field')
-          const search = rule.querySelector('.regexp-field')
-          const replace = rule.querySelector('.replace-field')
+          const flags = rule.querySelector('[name="flags"]')
+          const search = rule.querySelector('[name="regexp"]')
+          const replace = rule.querySelector('[name="replace"]')
           if (!search.value) {
             messageBox.textContent = 'The "RegExp" field must not be empty'
             search.focus()
