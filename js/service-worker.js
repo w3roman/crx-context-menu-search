@@ -92,6 +92,27 @@ app.initialStorage = {
   openInBackground: false
 }
 
+app.methods = {}
+
+app.methods.setContextMenuItems = (fieldsets) => {
+  const contexts = ['selection', 'image']
+  for (const index in fieldsets) {
+    if (fieldsets[index].name === '_separator_') {
+      chrome.contextMenus.create({
+        id: index,
+        contexts,
+        type: 'separator',
+      })
+    } else {
+      chrome.contextMenus.create({
+        id: index,
+        contexts,
+        title: fieldsets[index].name,
+      })
+    }
+  }
+}
+
 chrome.runtime.onInstalled.addListener((details) => {
   // Calling chrome.storage.local.set(app.initialStorage) is required to access the initial fieldsets on the
   // Options page (see the INITIALIZATION section)
@@ -121,27 +142,6 @@ chrome.storage.onChanged.addListener((changes, area) => {
     })
   }
 })
-
-app.methods = {}
-
-app.methods.setContextMenuItems = (fieldsets) => {
-  const contexts = ['selection', 'image']
-  for (const index in fieldsets) {
-    if (fieldsets[index].name === '_separator_') {
-      chrome.contextMenus.create({
-        id: index,
-        contexts,
-        type: 'separator',
-      })
-    } else {
-      chrome.contextMenus.create({
-        id: index,
-        contexts,
-        title: fieldsets[index].name,
-      })
-    }
-  }
-}
 
 chrome.contextMenus.onClicked.addListener((info) => {
   chrome.storage.sync.get(null, (storage) => {
