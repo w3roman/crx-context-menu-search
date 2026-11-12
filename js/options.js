@@ -60,16 +60,16 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  topNotificationCloseButton.addEventListener('click', () => {
-    chrome.storage.local.remove('updateMessage').then(() => {
-      topNotification.style.display = 'none'
-    })
-  })
-
   Sortable.create(listOfFieldsets, {
     // [name="searchName"], [name="searchUrl"] doesn't work
     filter: '.search-name, .search-url, .remove-fieldset-button',
     preventOnFilter: false,
+  })
+
+  topNotificationCloseButton.addEventListener('click', () => {
+    chrome.storage.local.remove('updateMessage').then(() => {
+      topNotification.style.display = 'none'
+    })
   })
 
   listOfFieldsets.addEventListener('click', (e) => {
