@@ -81,14 +81,11 @@ window.addEventListener('DOMContentLoaded', () => {
     if (e.target.classList.contains('transformations-button')) {
 
       const modalTemplate = transformationsModalTemplate.content.cloneNode(true)
-
       const parentLi = e.target.closest('li')
-      // We tie the transformations to the <li>, since on deletion and subsequent saving the indices get overwritten
-      const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
-
-      // Search ID
       const searchId = parentLi.getAttribute('data-id')
       modalTemplate.getElementById('transformations-modal').setAttribute('data-id', searchId)
+      // We tie the transformations to the <li>, since on deletion and subsequent saving the indices get overwritten
+      const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
 
       // Search Name
       const searchNameBox = modalTemplate.querySelector('h4')
