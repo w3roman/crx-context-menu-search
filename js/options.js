@@ -142,7 +142,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Save
+      // Save button
       modalTemplate.getElementById('transformations-save-button').addEventListener('click', (e) => {
         const modal = e.target.closest('#transformations-modal')
         const toLowerCase = modal.querySelector('[name="toLowerCase"]').checked
