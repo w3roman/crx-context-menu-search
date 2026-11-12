@@ -225,21 +225,19 @@ window.addEventListener('DOMContentLoaded', () => {
   sortAZButton.addEventListener('click', () => {
     const fieldsets = listOfFieldsets.querySelectorAll('li')
     const unorderedFieldsets = {}
-    for (let i = 0; i < fieldsets.length; i++) {
-      const name = fieldsets[i].querySelector('[name="searchName"]')
-      if (name) {
-        unorderedFieldsets[name.value] = fieldsets[i]
+    Array.from(fieldsets).forEach((fieldset) => {
+      const nameField = fieldset.querySelector('[name="searchName"]')
+      if (nameField) {
+        unorderedFieldsets[nameField.value] = fieldset
       }
-    }
+    })
     const orderedFieldsets = {}
-    Object.keys(unorderedFieldsets)
-      .sort()
-      .forEach((key) => {
-        orderedFieldsets[key] = unorderedFieldsets[key]
-      })
+    Object.keys(unorderedFieldsets).sort().forEach((searchName) => {
+      orderedFieldsets[searchName] = unorderedFieldsets[searchName]
+    })
     listOfFieldsets.innerHTML = ''
-    for (let name in orderedFieldsets) {
-      listOfFieldsets.appendChild(orderedFieldsets[name])
+    for (let searchName in orderedFieldsets) {
+      listOfFieldsets.appendChild(orderedFieldsets[searchName])
     }
   })
 
