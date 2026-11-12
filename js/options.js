@@ -254,6 +254,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setFieldsets(storage.fieldsets)
         addUtmSourceCheckbox.checked = storage.addUtmSource
         openInBackgroundCheckbox.checked = storage.openInBackground
+        listOfFieldsets.setAttribute('data-imported', true)
       }
       reader.readAsText(file)
       form.reset()
@@ -301,9 +302,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   saveButton.addEventListener('click', () => {
     chrome.storage.sync.get(null, (storage) => {
-
-      const loadDefaults = listOfFieldsets.getAttribute('data-load-defaults')
-
       const newStorage = { fieldsets: [] }
       const fieldsets = listOfFieldsets.querySelectorAll('li')
 
@@ -331,8 +329,10 @@ window.addEventListener('DOMContentLoaded', () => {
           }
           const searchId = fieldsets[i].getAttribute('data-id')
           let transformations
-          if (loadDefaults) {
+          if (listOfFieldsets.getAttribute('data-load-defaults')) {
             transformations = {rules: [], toLowerCase: false, toUpperCase: false}
+          } else if (listOfFieldsets.getAttribute('data-imported')) {
+            transformations = JSON.parse(fieldsets[i].getAttribute('data-transformations'))
           } else {
             transformations = {
               rules: storage.fieldsets[searchId]?.transformations?.rules || [],
@@ -357,6 +357,7 @@ window.addEventListener('DOMContentLoaded', () => {
           el.removeAttribute('disabled')
         })
         listOfFieldsets.removeAttribute('data-load-defaults')
+        listOfFieldsets.removeAttribute('data-imported')
       })
     })
   })
