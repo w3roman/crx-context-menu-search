@@ -161,7 +161,11 @@ header p {
   flex-wrap: wrap;
   gap: .5rem;
   justify-content: center;
-  margin: .7rem 0;
+  margin: .5rem 0;
+}
+
+#transformations-casing-box {
+  margin-top: 1.5rem;
 }
 
 .transformation-rule > * {
@@ -261,5 +265,5 @@ header p {
 }
 
 #transformations-close-modal-button {
-  top: -.9rem;
+  top: -.6rem;
 }
