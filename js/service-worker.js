@@ -172,7 +172,7 @@ chrome.contextMenus.onClicked.addListener((info) => {
       url += 'utm_source=chromewebstore.google.com/detail/idpcgabojogahgmhdgnjkmdliaeeofka'
     }
     chrome.tabs.query(
-      {active: true, currentWindow: true},
+      { active: true, currentWindow: true },
       (tabs) => {
         let currentTab = tabs[0]
         chrome.tabs.create({
@@ -180,12 +180,12 @@ chrome.contextMenus.onClicked.addListener((info) => {
           url: url,
           index: currentTab.index + 1,
           openerTabId: currentTab.id,
-        }).then()
+        }, () => {})
       }
     )
   })
 })
 
 chrome.action.onClicked.addListener(() => {
-  chrome.runtime.openOptionsPage().then()
+  chrome.runtime.openOptionsPage(() => {})
 })
