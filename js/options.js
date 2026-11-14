@@ -320,67 +320,57 @@ window.addEventListener('DOMContentLoaded', () => {
   // Save
 
   saveButton.addEventListener('click', () => {
-    chrome.storage.sync.get(null, (storage) => {
-      const newStorage = { fieldsets: [] }
-      const fieldsets = listOfFieldsets.querySelectorAll('li')
+    const newStorage = { fieldsets: [] }
+    const fieldsets = listOfFieldsets.querySelectorAll('li')
 
-      let hasError = false
-      Array.from(fieldsets).every((fieldset) => {
-        const nameInput = fieldset.querySelector('[name="searchName"]')
-        if (nameInput) {
-          if (!nameInput.value) {
-            messageBox.textContent = 'The Search name must not be empty'
-            nameInput.focus()
-            setTimeout(() => {
-              messageBox.textContent = ''
-            }, 1500)
-            hasError = true
-            return false
-          }
-          const urlInput = fieldset.querySelector('[name="searchUrl"]')
-          if (!urlInput.value) {
-            messageBox.textContent = 'The Search URL must not be empty'
-            urlInput.focus()
-            setTimeout(() => {
-              messageBox.textContent = ''
-            }, 1500)
-            hasError = true
-            return false
-          }
-          const searchId = fieldset.getAttribute('data-id')
-          let transformations
-          if (listOfFieldsets.getAttribute('data-load-defaults') || listOfFieldsets.getAttribute('data-imported')) {
-            transformations = JSON.parse(fieldset.getAttribute('data-transformations'))
-          } else {
-            // ?.transformations is required when adding a new Search
-            transformations = {
-              rules: storage.fieldsets[searchId]?.transformations?.rules || [],
-              toLowerCase: storage.fieldsets[searchId]?.transformations?.toLowerCase || false,
-              toUpperCase: storage.fieldsets[searchId]?.transformations?.toUpperCase || false,
-            }
-          }
-          newStorage.fieldsets.push({ name: nameInput.value, transformations, url: urlInput.value })
-        } else {
-          newStorage.fieldsets.push({ name: '_separator_' })
+    let hasError = false
+    Array.from(fieldsets).every((fieldset) => {
+      const nameInput = fieldset.querySelector('[name="searchName"]')
+      if (nameInput) {
+        if (!nameInput.value) {
+          messageBox.textContent = 'The Search name must not be empty'
+          nameInput.focus()
+          setTimeout(() => {
+            messageBox.textContent = ''
+          }, 1500)
+          hasError = true
+          return false
         }
-        return true
-      })
-
-      if (hasError) return
-
-      newStorage.openInBackground = openInBackgroundCheckbox.checked
-      newStorage.addUtmSource = addUtmSourceCheckbox.checked
-      chrome.storage.sync.set(newStorage, () => {
-        messageBox.textContent = 'Saved'
-        setTimeout(() => {
-          messageBox.textContent = ''
-        }, 1500)
-        listOfFieldsets.querySelectorAll('.transformations-button[disabled]').forEach((e) => {
-          e.removeAttribute('disabled')
+        const urlInput = fieldset.querySelector('[name="searchUrl"]')
+        if (!urlInput.value) {
+          messageBox.textContent = 'The Search URL must not be empty'
+          urlInput.focus()
+          setTimeout(() => {
+            messageBox.textContent = ''
+          }, 1500)
+          hasError = true
+          return false
+        }
+        newStorage.fieldsets.push({
+          name: nameInput.value,
+          transformations: JSON.parse(fieldset.getAttribute('data-transformations')),
+          url: urlInput.value,
         })
-        listOfFieldsets.removeAttribute('data-load-defaults')
-        listOfFieldsets.removeAttribute('data-imported')
+      } else {
+        newStorage.fieldsets.push({ name: '_separator_' })
+      }
+      return true
+    })
+
+    if (hasError) return
+
+    newStorage.openInBackground = openInBackgroundCheckbox.checked
+    newStorage.addUtmSource = addUtmSourceCheckbox.checked
+    chrome.storage.sync.set(newStorage, () => {
+      messageBox.textContent = 'Saved'
+      setTimeout(() => {
+        messageBox.textContent = ''
+      }, 1500)
+      listOfFieldsets.querySelectorAll('.transformations-button[disabled]').forEach((e) => {
+        e.removeAttribute('disabled')
       })
+      listOfFieldsets.removeAttribute('data-load-defaults')
+      listOfFieldsets.removeAttribute('data-imported')
     })
   })
 
