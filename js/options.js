@@ -264,10 +264,6 @@ window.addEventListener('DOMContentLoaded', () => {
       // Parent Li
       const parentLi = e.target.closest('li')
 
-      // Search ID
-      const searchId = parentLi.getAttribute('data-id')
-      modalTemplate.getElementById('transformations-modal').setAttribute('data-id', searchId)
-
       // Search Name
       const searchNameBox = modalTemplate.querySelector('#transformations-search-name-box')
       searchNameBox.textContent = searchNameBox.textContent.replace(
@@ -356,6 +352,7 @@ window.addEventListener('DOMContentLoaded', () => {
         })
         if (!hasError) {
           chrome.storage.sync.get(null, (storage) => {
+            const searchId = parentLi.getAttribute('data-id')
             storage.fieldsets[searchId].transformations = {
               rules,
               toLowerCase: modal.querySelector('[name="toLowerCase"]').checked,
