@@ -27,27 +27,25 @@ window.addEventListener('DOMContentLoaded', () => {
    */
 
   function setFieldsets(fieldsets) {
-    if (!fieldsets) return
-    // Remove old fieldsets
     listOfFieldsets.innerHTML = ''
-    // Add new fieldsets
-    for (let index in fieldsets) {
-      let fieldset
-      if (fieldsets[index].name === '_separator_') {
-        fieldset = separatorTemplate.content.cloneNode(true)
+    fieldsets.forEach((fieldset, index) => {
+      let newFieldset
+      if (fieldset.name === '_separator_') {
+        newFieldset = separatorTemplate.content.cloneNode(true)
       } else {
-        fieldset = fieldsetTemplate.content.cloneNode(true)
-        let li = fieldset.querySelector('li')
+        newFieldset = fieldsetTemplate.content.cloneNode(true)
+        let li = newFieldset.querySelector('li')
+        newFieldset.querySelector('[name="searchName"]').value = fieldset.name
+        newFieldset.querySelector('[name="searchUrl"]').value = fieldset.url
         li.setAttribute('data-id', index)
-        fieldset.querySelector('[name="searchName"]').value = fieldsets[index].name
-        fieldset.querySelector('[name="searchUrl"]').value = fieldsets[index].url
-        if (fieldsets[index].transformations) {
-          // We tie the transformations to the <li>, since on deletion and subsequent saving the indices get overwritten
-          li.setAttribute('data-transformations', JSON.stringify(fieldsets[index].transformations))
-        }
+        // We attach the transformations to <li>, since when Search is deleted, the indexes get overwritten
+        li.setAttribute(
+          'data-transformations',
+          JSON.stringify(fieldset.transformations || defaultTransformations)
+        )
       }
-      listOfFieldsets.appendChild(fieldset)
-    }
+      listOfFieldsets.appendChild(newFieldset)
+    })
   }
 
   chrome.storage.sync.get(null, (storage) => {
