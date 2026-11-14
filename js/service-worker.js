@@ -114,6 +114,7 @@ const app = {
   },
 }
 
+// noinspection JSUnusedLocalSymbols
 chrome.runtime.onInstalled.addListener((details) => {
   // Calling chrome.storage.local.set(app.initialStorage) is required to access the initial fieldsets on the
   // Options page (see the INITIALIZATION section in the options.js file)
