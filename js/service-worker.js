@@ -1,6 +1,9 @@
 // noinspection JSCheckFunctionSignatures
 
-const app = {}
+const app = {
+  initialStorage: {},
+  methods: {},
+}
 
 /*
 
@@ -93,8 +96,6 @@ app.initialStorage = {
   }],
   openInBackground: false
 }
-
-app.methods = {}
 
 app.methods.setContextMenuItems = (fieldsets) => {
   const contexts = ['selection', 'image']
