@@ -94,7 +94,7 @@ const app = {
   },
   methods: {
     setContextMenuItems: (fieldsets) => {
-      const contexts = ['selection', 'image']
+      const contexts = ['image', 'selection']
       for (const index in fieldsets) {
         if (fieldsets[index].name === '_separator_') {
           chrome.contextMenus.create({
@@ -116,7 +116,7 @@ const app = {
 
 chrome.runtime.onInstalled.addListener((details) => {
   // Calling chrome.storage.local.set(app.initialStorage) is required to access the initial fieldsets on the
-  // Options page (see the INITIALIZATION section)
+  // Options page (see the INITIALIZATION section in the options.js file)
   chrome.storage.local.set(app.initialStorage).then(
     () => chrome.storage.sync.get(null, (storage) => {
       chrome.storage.sync.set(storage.fieldsets ? storage : app.initialStorage).then(() => {})
