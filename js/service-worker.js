@@ -117,18 +117,20 @@ const app = {
 chrome.runtime.onInstalled.addListener((details) => {
   // Calling chrome.storage.local.set(app.initialStorage) is required to access the initial fieldsets on the
   // Options page (see the INITIALIZATION section in the options.js file)
-  chrome.storage.local.set(app.initialStorage).then(
+  chrome.storage.local.set(
+    app.initialStorage,
     () => chrome.storage.sync.get(null, (storage) => {
       if (storage.fieldsets) {
         app.methods.setContextMenuItems(storage.fieldsets)
       } else { // details.reason === 'install'
         chrome.storage.sync.set(app.initialStorage, () => {
-          chrome.runtime.openOptionsPage().then()
+          chrome.runtime.openOptionsPage(() => {})
         })
       }
       // if (details.reason === 'update') {
-      //   chrome.storage.local.set({updateMessage: 'The extension has been updated'}).then(
-      //     () => chrome.runtime.openOptionsPage().then()
+      //   chrome.storage.local.set(
+      //     {updateMessage: 'The extension has been updated'},
+      //     () => chrome.runtime.openOptionsPage()
       //   )
       // }
     })

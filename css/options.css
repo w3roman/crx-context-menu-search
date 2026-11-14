@@ -246,6 +246,7 @@ header p {
   border-radius: .5rem;
   display: none;
   min-height: 3rem;
+  min-width: 30rem;
   padding: 1rem 2rem;
   text-align: center;
   position: relative;
