@@ -335,7 +335,7 @@ window.addEventListener('DOMContentLoaded', () => {
           const searchId = fieldset.getAttribute('data-id')
           let transformations
           if (listOfFieldsets.getAttribute('data-load-defaults')) {
-            transformations = { rules: [], toLowerCase: false, toUpperCase: false }
+            transformations = defaultTransformations
           } else if (listOfFieldsets.getAttribute('data-imported')) {
             transformations = JSON.parse(fieldset.getAttribute('data-transformations'))
           } else {
