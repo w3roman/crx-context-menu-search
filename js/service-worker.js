@@ -121,13 +121,12 @@ chrome.runtime.onInstalled.addListener((details) => {
     () => chrome.storage.sync.get(null, (storage) => {
       if (storage.fieldsets) {
         app.methods.setContextMenuItems(storage.fieldsets)
-      } else {
-        chrome.storage.sync.set(app.initialStorage, () => {})
+      } else { // details.reason === 'install'
+        chrome.storage.sync.set(app.initialStorage, () => {
+          chrome.runtime.openOptionsPage().then()
+        })
       }
-      if (details.reason === 'install') {
-        chrome.runtime.openOptionsPage().then()
-      }
-      // else if (details.reason === 'update') {
+      // if (details.reason === 'update') {
       //   chrome.storage.local.set({updateMessage: 'The extension has been updated'}).then(
       //     () => chrome.runtime.openOptionsPage().then()
       //   )
