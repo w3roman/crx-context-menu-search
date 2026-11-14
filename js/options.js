@@ -78,14 +78,17 @@ window.addEventListener('DOMContentLoaded', () => {
   listOfFieldsets.addEventListener('click', (e) => {
     if (e.target.classList.contains('transformations-button')) {
 
+      // Modal Template
       const modalTemplate = transformationsModalTemplate.content.cloneNode(true)
+
+      // Parent Li
       const parentLi = e.target.closest('li')
 
       // Search ID
       const searchId = parentLi.getAttribute('data-id')
       modalTemplate.getElementById('transformations-modal').setAttribute('data-id', searchId)
 
-      // Search name
+      // Search Name
       const searchNameBox = modalTemplate.querySelector('#transformations-search-name-box')
       searchNameBox.textContent = searchNameBox.textContent.replace(
         'name',
@@ -106,16 +109,14 @@ window.addEventListener('DOMContentLoaded', () => {
       }
 
       // Rules
-      // The definition of the var `noRuleExists` must be here to avoid
-      // the "Cannot access 'noRuleExists' before initialization" error
-      let noRuleExists = true
+
       const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
-      if (transformations) {
-        toLowerCaseCheckbox.checked = transformations.toLowerCase
-        toUpperCaseCheckbox.checked = transformations.toUpperCase
-        transformations.rules.forEach(addRule)
-      }
+      toLowerCaseCheckbox.checked = transformations.toLowerCase
+      toUpperCaseCheckbox.checked = transformations.toUpperCase
+      transformations.rules.forEach(addRule)
+
       modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
+
       function addRule(e) {
         const ruleTemplate = transformationRuleTemplate.content.cloneNode(true)
         // It should be placed before `.after(ruleTemplate)`
@@ -132,9 +133,8 @@ window.addEventListener('DOMContentLoaded', () => {
           ruleTemplate.querySelector('[name="replace"]').value = e.replace
         }
         const casingBox = currentDocument.querySelector('#transformations-casing-box')
-        if (noRuleExists || !casingBox.nextElementSibling.classList.contains('transformation-rule')) {
+        if (!casingBox.nextElementSibling.classList.contains('transformation-rule')) {
           casingBox.after(ruleTemplate)
-          noRuleExists = false
         } else {
           currentDocument.querySelector(':nth-last-child(1 of .transformation-rule)').after(ruleTemplate)
         }
