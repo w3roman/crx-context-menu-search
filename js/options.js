@@ -260,7 +260,7 @@ window.addEventListener('DOMContentLoaded', () => {
         listOfFieldsets.setAttribute('data-imported', true)
         // To save the import, the user must click the Save button in the Controls block. However, they may open
         // Transformations, change something there, click the Save button in the Transformations modal, and then close
-        // the Options without clicking the Save button in the Controls block. In this case, the imported
+        // or reload the Options without clicking the Save button in the Controls block. In this case, the imported
         // Transformations may get attached to a different Search that has, if it has one at all, the same ordinal index
         // as the imported Search.
         listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
@@ -298,6 +298,14 @@ window.addEventListener('DOMContentLoaded', () => {
       openInBackgroundCheckbox.checked = storage.openInBackground
       addUtmSourceCheckbox.checked = storage.addUtmSource
       listOfFieldsets.setAttribute('data-load-defaults', true)
+      // To save the defaults, the user must click the Save button in the Controls block. However, they may open
+      // Transformations, change something there, click the Save button in the Transformations modal, and then close or
+      // reload the Options without clicking the Save button in the Controls block. In this case, the imported
+      // Transformations may get attached to a different Search that has, if it has one at all, the same ordinal index
+      // as the imported Search.
+      listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
+        e.setAttribute('disabled', true)
+      })
     })
   })
 
@@ -341,9 +349,7 @@ window.addEventListener('DOMContentLoaded', () => {
           }
           const searchId = fieldset.getAttribute('data-id')
           let transformations
-          if (listOfFieldsets.getAttribute('data-load-defaults')) {
-            transformations = defaultTransformations
-          } else if (listOfFieldsets.getAttribute('data-imported')) {
+          if (listOfFieldsets.getAttribute('data-load-defaults') || listOfFieldsets.getAttribute('data-imported')) {
             transformations = JSON.parse(fieldset.getAttribute('data-transformations'))
           } else {
             // ?.transformations is required when adding a new Search
