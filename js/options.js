@@ -226,7 +226,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         newStorage.fieldsets.push({
           name: nameInput.value,
-          transformations: JSON.parse(fieldset.getAttribute('data-transformations')),
+          transformations: JSON.parse(fieldset.getAttribute('data-transformations')), // For Import and Load Defaults
           url: urlInput.value,
         })
       } else {
