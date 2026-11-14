@@ -60,145 +60,18 @@ window.addEventListener('DOMContentLoaded', () => {
       filter: 'input, button, .remove-fieldset-button',
       preventOnFilter: false,
     })
-
-    // Top notification
-    chrome.storage.local.get(null, (localStorage) => {
-      if (localStorage.updateMessage) {
-        topNotification.append(document.createTextNode(localStorage.updateMessage))
-        topNotification.style.display = 'block'
-        topNotificationCloseButton.addEventListener('click', () => {
-          chrome.storage.local.remove('updateMessage', () => {
-            topNotification.style.display = 'none'
-          })
-        })
-      }
-    })
   })
 
-  listOfFieldsets.addEventListener('click', (e) => {
-    if (e.target.classList.contains('transformations-button')) {
-
-      // Modal Template
-      const modalTemplate = transformationsModalTemplate.content.cloneNode(true)
-
-      // Parent Li
-      const parentLi = e.target.closest('li')
-
-      // Search ID
-      const searchId = parentLi.getAttribute('data-id')
-      modalTemplate.getElementById('transformations-modal').setAttribute('data-id', searchId)
-
-      // Search Name
-      const searchNameBox = modalTemplate.querySelector('#transformations-search-name-box')
-      searchNameBox.textContent = searchNameBox.textContent.replace(
-        'name',
-        parentLi.querySelector('[name="searchName"]').value
-      )
-
-      // Casing
-      const toLowerCaseCheckbox = modalTemplate.querySelector('[name="toLowerCase"]')
-      const toUpperCaseCheckbox = modalTemplate.querySelector('[name="toUpperCase"]')
-      toLowerCaseCheckbox.addEventListener('click', caseCheckboxHandler)
-      toUpperCaseCheckbox.addEventListener('click', caseCheckboxHandler)
-      function caseCheckboxHandler(e) {
-        if (e.target.getAttribute('name') === 'toLowerCase' && e.target.checked) {
-          toUpperCaseCheckbox.checked = false
-        } else {
-          toLowerCaseCheckbox.checked = false
-        }
-      }
-
-      // Rules
-
-      const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
-      toLowerCaseCheckbox.checked = transformations.toLowerCase
-      toUpperCaseCheckbox.checked = transformations.toUpperCase
-      transformations.rules.forEach(addRule)
-
-      modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
-
-      function addRule(e) {
-        const ruleTemplate = transformationRuleTemplate.content.cloneNode(true)
-        // It should be placed before `.after(ruleTemplate)`
-        ruleTemplate.querySelector('.remove-transformation-rule-button').addEventListener('click', (e) => {
-          e.target.closest('.transformation-rule').remove()
+  // Top notification
+  chrome.storage.local.get(null, (localStorage) => {
+    if (localStorage.updateMessage) {
+      topNotification.append(document.createTextNode(localStorage.updateMessage))
+      topNotification.style.display = 'block'
+      topNotificationCloseButton.addEventListener('click', () => {
+        chrome.storage.local.remove('updateMessage', () => {
+          topNotification.style.display = 'none'
         })
-        let currentDocument
-        if (e instanceof PointerEvent) {
-          currentDocument = document
-        } else {
-          currentDocument = modalTemplate
-          ruleTemplate.querySelector('[name="regexp"]').value = e.regexp
-          ruleTemplate.querySelector('[name="flags"]').value = e.flags
-          ruleTemplate.querySelector('[name="replace"]').value = e.replace
-        }
-        const casingBox = currentDocument.querySelector('#transformations-casing-box')
-        if (!casingBox.nextElementSibling.classList.contains('transformation-rule')) {
-          casingBox.after(ruleTemplate)
-        } else {
-          currentDocument.querySelector(':nth-last-child(1 of .transformation-rule)').after(ruleTemplate)
-        }
-      }
-
-      // Save button
-      modalTemplate.getElementById('transformations-save-button').addEventListener('click', (e) => {
-        const modal = e.target.closest('#transformations-modal')
-        const messageBox = modal.querySelector('#transformations-message-box')
-        let hasError = false
-        const rules = []
-        Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
-          const regexpField = rule.querySelector('[name="regexp"]')
-          const replaceField = rule.querySelector('[name="replace"]')
-          if (!regexpField.value) {
-            messageBox.textContent = 'The "RegExp" field must not be empty'
-            setTimeout(() => {
-              messageBox.textContent = ''
-            }, 1500)
-            regexpField.focus()
-            hasError = true
-            return false
-          } else if (!replaceField.value) {
-            messageBox.textContent = 'The "Replace" field must not be empty'
-            setTimeout(() => {
-              messageBox.textContent = ''
-            }, 1500)
-            replaceField.focus()
-            hasError = true
-            return false
-          } else {
-            rules.push({
-              flags: rule.querySelector('[name="flags"]').value,
-              regexp: regexpField.value,
-              replace: replaceField.value
-            })
-            return true
-          }
-        })
-        if (!hasError) {
-          chrome.storage.sync.get(null, (storage) => {
-            storage.fieldsets[searchId].transformations = {
-              rules,
-              toLowerCase: modal.querySelector('[name="toLowerCase"]').checked,
-              toUpperCase: modal.querySelector('[name="toUpperCase"]').checked,
-            }
-            chrome.storage.sync.set(storage, () => {
-              messageBox.textContent = 'Saved'
-              setTimeout(() => {
-                messageBox.textContent = ''
-              }, 1500)
-              parentLi.setAttribute('data-transformations', JSON.stringify(storage.fieldsets[searchId].transformations))
-            })
-          })
-        }
       })
-
-      // Close modal button
-      modalTemplate.getElementById('transformations-close-modal-button').addEventListener('click', () => {
-        document.getElementById('transformations-modal').remove()
-      })
-
-      // Append
-      document.body.appendChild(modalTemplate)
     }
   })
 
@@ -379,6 +252,135 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('link-to-load-defaults-button').addEventListener('click', (e) => {
     e.preventDefault()
     loadDefaultsButton.focus()
+  })
+
+  // Transformations
+
+  listOfFieldsets.addEventListener('click', (e) => {
+    if (e.target.classList.contains('transformations-button')) {
+
+      // Modal Template
+      const modalTemplate = transformationsModalTemplate.content.cloneNode(true)
+
+      // Parent Li
+      const parentLi = e.target.closest('li')
+
+      // Search ID
+      const searchId = parentLi.getAttribute('data-id')
+      modalTemplate.getElementById('transformations-modal').setAttribute('data-id', searchId)
+
+      // Search Name
+      const searchNameBox = modalTemplate.querySelector('#transformations-search-name-box')
+      searchNameBox.textContent = searchNameBox.textContent.replace(
+        'name',
+        parentLi.querySelector('[name="searchName"]').value
+      )
+
+      // Casing
+      const toLowerCaseCheckbox = modalTemplate.querySelector('[name="toLowerCase"]')
+      const toUpperCaseCheckbox = modalTemplate.querySelector('[name="toUpperCase"]')
+      toLowerCaseCheckbox.addEventListener('click', caseCheckboxHandler)
+      toUpperCaseCheckbox.addEventListener('click', caseCheckboxHandler)
+      function caseCheckboxHandler(e) {
+        if (e.target.getAttribute('name') === 'toLowerCase' && e.target.checked) {
+          toUpperCaseCheckbox.checked = false
+        } else {
+          toLowerCaseCheckbox.checked = false
+        }
+      }
+
+      // Rules
+
+      const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
+      toLowerCaseCheckbox.checked = transformations.toLowerCase
+      toUpperCaseCheckbox.checked = transformations.toUpperCase
+      transformations.rules.forEach(addRule)
+
+      modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
+
+      function addRule(e) {
+        const ruleTemplate = transformationRuleTemplate.content.cloneNode(true)
+        // It should be placed before `.after(ruleTemplate)`
+        ruleTemplate.querySelector('.remove-transformation-rule-button').addEventListener('click', (e) => {
+          e.target.closest('.transformation-rule').remove()
+        })
+        let currentDocument
+        if (e instanceof PointerEvent) {
+          currentDocument = document
+        } else {
+          currentDocument = modalTemplate
+          ruleTemplate.querySelector('[name="regexp"]').value = e.regexp
+          ruleTemplate.querySelector('[name="flags"]').value = e.flags
+          ruleTemplate.querySelector('[name="replace"]').value = e.replace
+        }
+        const casingBox = currentDocument.querySelector('#transformations-casing-box')
+        if (!casingBox.nextElementSibling.classList.contains('transformation-rule')) {
+          casingBox.after(ruleTemplate)
+        } else {
+          currentDocument.querySelector(':nth-last-child(1 of .transformation-rule)').after(ruleTemplate)
+        }
+      }
+
+      // Save button
+      modalTemplate.getElementById('transformations-save-button').addEventListener('click', (e) => {
+        const modal = e.target.closest('#transformations-modal')
+        const messageBox = modal.querySelector('#transformations-message-box')
+        let hasError = false
+        const rules = []
+        Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
+          const regexpField = rule.querySelector('[name="regexp"]')
+          const replaceField = rule.querySelector('[name="replace"]')
+          if (!regexpField.value) {
+            messageBox.textContent = 'The "RegExp" field must not be empty'
+            setTimeout(() => {
+              messageBox.textContent = ''
+            }, 1500)
+            regexpField.focus()
+            hasError = true
+            return false
+          } else if (!replaceField.value) {
+            messageBox.textContent = 'The "Replace" field must not be empty'
+            setTimeout(() => {
+              messageBox.textContent = ''
+            }, 1500)
+            replaceField.focus()
+            hasError = true
+            return false
+          } else {
+            rules.push({
+              flags: rule.querySelector('[name="flags"]').value,
+              regexp: regexpField.value,
+              replace: replaceField.value
+            })
+            return true
+          }
+        })
+        if (!hasError) {
+          chrome.storage.sync.get(null, (storage) => {
+            storage.fieldsets[searchId].transformations = {
+              rules,
+              toLowerCase: modal.querySelector('[name="toLowerCase"]').checked,
+              toUpperCase: modal.querySelector('[name="toUpperCase"]').checked,
+            }
+            chrome.storage.sync.set(storage, () => {
+              messageBox.textContent = 'Saved'
+              setTimeout(() => {
+                messageBox.textContent = ''
+              }, 1500)
+              parentLi.setAttribute('data-transformations', JSON.stringify(storage.fieldsets[searchId].transformations))
+            })
+          })
+        }
+      })
+
+      // Close modal button
+      modalTemplate.getElementById('transformations-close-modal-button').addEventListener('click', () => {
+        document.getElementById('transformations-modal').remove()
+      })
+
+      // Append
+      document.body.appendChild(modalTemplate)
+    }
   })
 
 })
