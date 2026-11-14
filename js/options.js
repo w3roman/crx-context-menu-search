@@ -330,7 +330,7 @@ window.addEventListener('DOMContentLoaded', () => {
           const searchId = fieldset.getAttribute('data-id')
           let transformations
           if (listOfFieldsets.getAttribute('data-load-defaults')) {
-            transformations = {rules: [], toLowerCase: false, toUpperCase: false}
+            transformations = { rules: [], toLowerCase: false, toUpperCase: false }
           } else if (listOfFieldsets.getAttribute('data-imported')) {
             transformations = JSON.parse(fieldset.getAttribute('data-transformations'))
           } else {
@@ -340,9 +340,9 @@ window.addEventListener('DOMContentLoaded', () => {
               toUpperCase: storage.fieldsets[searchId].transformations?.toUpperCase || false,
             }
           }
-          newStorage.fieldsets.push({name: nameInput.value, transformations, url: urlInput.value})
+          newStorage.fieldsets.push({ name: nameInput.value, transformations, url: urlInput.value })
         } else {
-          newStorage.fieldsets.push({name: '_separator_'})
+          newStorage.fieldsets.push({ name: '_separator_' })
         }
       })
 
