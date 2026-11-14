@@ -147,7 +147,6 @@ window.addEventListener('DOMContentLoaded', () => {
         let hasError = false
         const rules = []
         Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
-          const flagsField = rule.querySelector('[name="flags"]')
           const regexpField = rule.querySelector('[name="regexp"]')
           const replaceField = rule.querySelector('[name="replace"]')
           if (!regexpField.value) {
@@ -167,7 +166,11 @@ window.addEventListener('DOMContentLoaded', () => {
             hasError = true
             return false
           } else {
-            rules.push({ flags: flagsField.value, regexp: regexpField.value, replace: replaceField.value })
+            rules.push({
+              flags: rule.querySelector('[name="flags"]').value,
+              regexp: regexpField.value,
+              replace: replaceField.value
+            })
             return true
           }
         })
@@ -252,8 +255,8 @@ window.addEventListener('DOMContentLoaded', () => {
       reader.onload = () => {
         const storage = JSON.parse(reader.result)
         setFieldsets(storage.fieldsets)
-        addUtmSourceCheckbox.checked = storage.addUtmSource
         openInBackgroundCheckbox.checked = storage.openInBackground
+        addUtmSourceCheckbox.checked = storage.addUtmSource
         listOfFieldsets.setAttribute('data-imported', true)
         // To save the import, the user must click the Save button in the Controls block. However, they may open
         // Transformations, change something there, click the Save button in the Transformations modal, and then close

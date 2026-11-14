@@ -41,7 +41,6 @@
 const defaultTransformations = { rules: [], toLowerCase: false, toUpperCase: false }
 
 const defaultOptions = {
-  addUtmSource: true,
   fieldsets: [{
     name: 'Google Exact Match',
     transformations: defaultTransformations,
@@ -87,5 +86,6 @@ const defaultOptions = {
     transformations: defaultTransformations,
     url: 'https://ya.ru/maps/?clid=15525262&text=%s',
   }],
-  openInBackground: false
+  openInBackground: false,
+  addUtmSource: true,
 }
