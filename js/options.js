@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', () => {
         topNotification.append(document.createTextNode(localStorage.updateMessage))
         topNotification.style.display = 'block'
         topNotificationCloseButton.addEventListener('click', () => {
-          chrome.storage.local.remove('updateMessage').then(() => {
+          chrome.storage.local.remove('updateMessage', () => {
             topNotification.style.display = 'none'
           })
         })
@@ -269,13 +269,13 @@ window.addEventListener('DOMContentLoaded', () => {
   exportButton.addEventListener('click', () => {
     chrome.storage.sync.get(null, (storage) => {
       const jsonString = JSON.stringify(storage, null, 2)
-      const blob = new Blob([jsonString], {type: 'application/json'})
+      const blob = new Blob([jsonString], { type: 'application/json' })
       const url = URL.createObjectURL(blob)
       chrome.downloads.download({
         url: url,
         filename: 'crx-context-menu-search.json',
         saveAs: false,
-      }).then()
+      }, () => {})
     })
   })
 
@@ -302,7 +302,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   saveButton.addEventListener('click', () => {
     chrome.storage.sync.get(null, (storage) => {
-      const newStorage = {fieldsets: []}
+      const newStorage = { fieldsets: [] }
       const fieldsets = listOfFieldsets.querySelectorAll('li')
 
       Array.from(fieldsets).forEach((fieldset) => {
