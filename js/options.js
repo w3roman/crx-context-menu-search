@@ -171,13 +171,13 @@ window.addEventListener('DOMContentLoaded', () => {
             hasError = true
             return false
           } else {
-            rules.push({flags: flagsField.value, regexp: regexpField.value, replace: replaceField.value})
+            rules.push({ flags: flagsField.value, regexp: regexpField.value, replace: replaceField.value })
             return true
           }
         })
         if (!hasError) {
           chrome.storage.sync.get(null, (storage) => {
-            storage.fieldsets[searchId].transformations = {rules, toLowerCase, toUpperCase}
+            storage.fieldsets[searchId].transformations = { rules, toLowerCase, toUpperCase }
             chrome.storage.sync.set(storage, () => {
               messageBox.textContent = 'Saved'
               setTimeout(() => {
