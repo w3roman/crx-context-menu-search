@@ -48,6 +48,11 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  function setDisabledAndTitle(e) {
+    e.setAttribute('disabled', true)
+    e.setAttribute('title', 'First, save the settings')
+  }
+
   chrome.storage.sync.get(null, (storage) => {
     // Options
     setFieldsets(storage.fieldsets)
@@ -86,7 +91,7 @@ window.addEventListener('DOMContentLoaded', () => {
   addSearchButton.addEventListener('click', () => {
     const template = fieldsetTemplate.content.cloneNode(true)
     template.querySelector('li').setAttribute('data-id', listOfFieldsets.querySelectorAll('[data-id]').length + 2)
-    template.querySelector('.transformations-button').setAttribute('disabled', true)
+    setDisabledAndTitle(template.querySelector('.transformations-button'))
     listOfFieldsets.appendChild(template)
   })
 
@@ -137,7 +142,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // Transformations may get attached to a different Search that has, if it has one at all, the same ordinal index
         // as the imported Search.
         listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
-          e.setAttribute('disabled', true)
+          setDisabledAndTitle(e)
         })
       }
       reader.readAsText(file)
@@ -177,7 +182,7 @@ window.addEventListener('DOMContentLoaded', () => {
       // Transformations may get attached to a different Search that has, if it has one at all, the same ordinal index
       // as the imported Search.
       listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
-        e.setAttribute('disabled', true)
+        setDisabledAndTitle(e)
       })
     })
   })
@@ -241,6 +246,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }, 1500)
       listOfFieldsets.querySelectorAll('.transformations-button[disabled]').forEach((e) => {
         e.removeAttribute('disabled')
+        e.removeAttribute('title')
       })
       listOfFieldsets.removeAttribute('data-load-defaults')
       listOfFieldsets.removeAttribute('data-imported')
