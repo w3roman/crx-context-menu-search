@@ -42,89 +42,86 @@ importScripts('config.js')
 
 */
 
-const app = {
-  initialStorage: {
-    addUtmSource: true,
-    fieldsets: [{
-      name: 'Google Exact Match',
-      defaultTransformations,
-      url: 'https://www.google.com/search?q="%s"',
-    }, {
-      name: 'Google AI Mode',
-      defaultTransformations,
-      url: 'https://www.google.com/search?q=%s&udm=50',
-    }, {
-      name: 'Google Images',
-      defaultTransformations,
-      url: 'https://www.google.com/search?q=%s&udm=2',
-    }, {
-      name: 'Google Maps',
-      defaultTransformations,
-      url: 'https://www.google.com/maps?q=%s',
-    }, {
-      name: '_separator_',
-    }, {
-      name: 'Wikipedia',
-      defaultTransformations,
-      url: 'https://wikipedia.org/w/index.php?search=%s',
-    }, {
-      name: 'Facebook',
-      defaultTransformations,
-      url: 'https://www.facebook.com/search?q=%s',
-    }, {
-      name: 'YouTube',
-      defaultTransformations,
-      url: 'https://www.youtube.com/results?search_query=%s',
-    }, {
-      name: 'TikTok',
-      defaultTransformations,
-      url: 'https://www.tiktok.com/search?q=%s',
-    }, {
-      name: '_separator_',
-    }, {
-      name: 'Yandex',
-      defaultTransformations,
-      url: 'https://ya.ru/search/?clid=15525262&text=%s',
-    }, {
-      name: 'Yandex Maps',
-      defaultTransformations,
-      url: 'https://ya.ru/maps/?clid=15525262&text=%s',
-    }],
-    openInBackground: false
-  },
-  methods: {
-    setContextMenuItems: (fieldsets) => {
-      const contexts = ['image', 'selection']
-      for (const index in fieldsets) {
-        if (fieldsets[index].name === '_separator_') {
-          chrome.contextMenus.create({
-            id: index,
-            contexts,
-            type: 'separator',
-          })
-        } else {
-          chrome.contextMenus.create({
-            id: index,
-            contexts,
-            title: fieldsets[index].name,
-          })
-        }
-      }
-    },
-  },
+const initialStorage = {
+  addUtmSource: true,
+  fieldsets: [{
+    name: 'Google Exact Match',
+    defaultTransformations,
+    url: 'https://www.google.com/search?q="%s"',
+  }, {
+    name: 'Google AI Mode',
+    defaultTransformations,
+    url: 'https://www.google.com/search?q=%s&udm=50',
+  }, {
+    name: 'Google Images',
+    defaultTransformations,
+    url: 'https://www.google.com/search?q=%s&udm=2',
+  }, {
+    name: 'Google Maps',
+    defaultTransformations,
+    url: 'https://www.google.com/maps?q=%s',
+  }, {
+    name: '_separator_',
+  }, {
+    name: 'Wikipedia',
+    defaultTransformations,
+    url: 'https://wikipedia.org/w/index.php?search=%s',
+  }, {
+    name: 'Facebook',
+    defaultTransformations,
+    url: 'https://www.facebook.com/search?q=%s',
+  }, {
+    name: 'YouTube',
+    defaultTransformations,
+    url: 'https://www.youtube.com/results?search_query=%s',
+  }, {
+    name: 'TikTok',
+    defaultTransformations,
+    url: 'https://www.tiktok.com/search?q=%s',
+  }, {
+    name: '_separator_',
+  }, {
+    name: 'Yandex',
+    defaultTransformations,
+    url: 'https://ya.ru/search/?clid=15525262&text=%s',
+  }, {
+    name: 'Yandex Maps',
+    defaultTransformations,
+    url: 'https://ya.ru/maps/?clid=15525262&text=%s',
+  }],
+  openInBackground: false
+}
+
+function setContextMenuItems(fieldsets) {
+  const contexts = ['image', 'selection']
+  for (const index in fieldsets) {
+    if (fieldsets[index].name === '_separator_') {
+      chrome.contextMenus.create({
+        id: index,
+        contexts,
+        type: 'separator',
+      })
+    } else {
+      chrome.contextMenus.create({
+        id: index,
+        contexts,
+        title: fieldsets[index].name,
+      })
+    }
+  }
 }
 
 // noinspection JSUnusedLocalSymbols
 chrome.runtime.onInstalled.addListener((details) => {
-  // Calling chrome.storage.local.set(app.initialStorage) is required to access the initial fieldsets on the
+  // Calling chrome.storage.local.set(initialStorage) is required to access the initial fieldsets on the
   // Options page (see the INITIALIZATION section in the options.js file)
   chrome.storage.local.set(
-    app.initialStorage,
+    initialStorage,
     () => chrome.storage.sync.get(null, (storage) => {
       if (storage.fieldsets) {
-        app.methods.setContextMenuItems(storage.fieldsets)
+        setContextMenuItems(storage.fieldsets)
       } else { // details.reason === 'install'
-        chrome.storage.sync.set(app.initialStorage, () => {
+        chrome.storage.sync.set(initialStorage, () => {
           chrome.runtime.openOptionsPage(() => {})
         })
       }
@@ -142,7 +139,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
   if (area === 'local') return
   if (changes.fieldsets) {
     chrome.contextMenus.removeAll(() => {
-      app.methods.setContextMenuItems(changes.fieldsets.newValue)
+      setContextMenuItems(changes.fieldsets.newValue)
     })
   }
 })
