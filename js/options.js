@@ -305,7 +305,8 @@ window.addEventListener('DOMContentLoaded', () => {
       const newStorage = { fieldsets: [] }
       const fieldsets = listOfFieldsets.querySelectorAll('li')
 
-      Array.from(fieldsets).forEach((fieldset) => {
+      let hasError = false
+      Array.from(fieldsets).every((fieldset) => {
         const nameInput = fieldset.querySelector('[name="searchName"]')
         if (nameInput) {
           if (!nameInput.value) {
@@ -314,18 +315,18 @@ window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
               messageBox.textContent = ''
             }, 1500)
-            return
+            hasError = true
+            return false
           }
           const urlInput = fieldset.querySelector('[name="searchUrl"]')
-          if (urlInput) {
-            if (!urlInput.value) {
-              messageBox.textContent = 'The Search URL must not be empty'
-              urlInput.focus()
-              setTimeout(() => {
-                messageBox.textContent = ''
-              }, 1500)
-              return
-            }
+          if (!urlInput.value) {
+            messageBox.textContent = 'The Search URL must not be empty'
+            urlInput.focus()
+            setTimeout(() => {
+              messageBox.textContent = ''
+            }, 1500)
+            hasError = true
+            return false
           }
           const searchId = fieldset.getAttribute('data-id')
           let transformations
@@ -334,17 +335,21 @@ window.addEventListener('DOMContentLoaded', () => {
           } else if (listOfFieldsets.getAttribute('data-imported')) {
             transformations = JSON.parse(fieldset.getAttribute('data-transformations'))
           } else {
+            // ?.transformations is required when adding a new Search
             transformations = {
-              rules: storage.fieldsets[searchId].transformations?.rules || [],
-              toLowerCase: storage.fieldsets[searchId].transformations?.toLowerCase || false,
-              toUpperCase: storage.fieldsets[searchId].transformations?.toUpperCase || false,
+              rules: storage.fieldsets[searchId]?.transformations?.rules || [],
+              toLowerCase: storage.fieldsets[searchId]?.transformations?.toLowerCase || false,
+              toUpperCase: storage.fieldsets[searchId]?.transformations?.toUpperCase || false,
             }
           }
           newStorage.fieldsets.push({ name: nameInput.value, transformations, url: urlInput.value })
         } else {
           newStorage.fieldsets.push({ name: '_separator_' })
         }
+        return true
       })
+
+      if (hasError) return
 
       newStorage.openInBackground = openInBackgroundCheckbox.checked
       newStorage.addUtmSource = addUtmSourceCheckbox.checked
@@ -353,7 +358,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           messageBox.textContent = ''
         }, 1500)
-        listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
+        listOfFieldsets.querySelectorAll('.transformations-button[disabled]').forEach((e) => {
           e.removeAttribute('disabled')
         })
         listOfFieldsets.removeAttribute('data-load-defaults')
