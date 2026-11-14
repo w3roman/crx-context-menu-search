@@ -1,10 +1,5 @@
 // noinspection JSCheckFunctionSignatures
 
-const app = {
-  initialStorage: {},
-  methods: {},
-}
-
 /*
 
 [{
@@ -47,73 +42,76 @@ const app = {
 
 const transformations = { rules: [], toLowerCase: false, toUpperCase: false }
 
-app.initialStorage = {
-  addUtmSource: true,
-  fieldsets: [{
-    name: 'Google Exact Match',
-    transformations,
-    url: 'https://www.google.com/search?q="%s"',
-  }, {
-    name: 'Google AI Mode',
-    transformations,
-    url: 'https://www.google.com/search?q=%s&udm=50',
-  }, {
-    name: 'Google Images',
-    transformations,
-    url: 'https://www.google.com/search?q=%s&udm=2',
-  }, {
-    name: 'Google Maps',
-    transformations,
-    url: 'https://www.google.com/maps?q=%s',
-  }, {
-    name: '_separator_',
-  }, {
-    name: 'Wikipedia',
-    transformations,
-    url: 'https://wikipedia.org/w/index.php?search=%s',
-  }, {
-    name: 'Facebook',
-    transformations,
-    url: 'https://www.facebook.com/search?q=%s',
-  }, {
-    name: 'YouTube',
-    transformations,
-    url: 'https://www.youtube.com/results?search_query=%s',
-  }, {
-    name: 'TikTok',
-    transformations,
-    url: 'https://www.tiktok.com/search?q=%s',
-  }, {
-    name: '_separator_',
-  }, {
-    name: 'Yandex',
-    transformations,
-    url: 'https://ya.ru/search/?clid=15525262&text=%s',
-  }, {
-    name: 'Yandex Maps',
-    transformations,
-    url: 'https://ya.ru/maps/?clid=15525262&text=%s',
-  }],
-  openInBackground: false
-}
-
-app.methods.setContextMenuItems = (fieldsets) => {
-  const contexts = ['selection', 'image']
-  for (const index in fieldsets) {
-    if (fieldsets[index].name === '_separator_') {
-      chrome.contextMenus.create({
-        id: index,
-        contexts,
-        type: 'separator',
-      })
-    } else {
-      chrome.contextMenus.create({
-        id: index,
-        contexts,
-        title: fieldsets[index].name,
-      })
-    }
-  }
+const app = {
+  initialStorage: {
+    addUtmSource: true,
+    fieldsets: [{
+      name: 'Google Exact Match',
+      transformations,
+      url: 'https://www.google.com/search?q="%s"',
+    }, {
+      name: 'Google AI Mode',
+      transformations,
+      url: 'https://www.google.com/search?q=%s&udm=50',
+    }, {
+      name: 'Google Images',
+      transformations,
+      url: 'https://www.google.com/search?q=%s&udm=2',
+    }, {
+      name: 'Google Maps',
+      transformations,
+      url: 'https://www.google.com/maps?q=%s',
+    }, {
+      name: '_separator_',
+    }, {
+      name: 'Wikipedia',
+      transformations,
+      url: 'https://wikipedia.org/w/index.php?search=%s',
+    }, {
+      name: 'Facebook',
+      transformations,
+      url: 'https://www.facebook.com/search?q=%s',
+    }, {
+      name: 'YouTube',
+      transformations,
+      url: 'https://www.youtube.com/results?search_query=%s',
+    }, {
+      name: 'TikTok',
+      transformations,
+      url: 'https://www.tiktok.com/search?q=%s',
+    }, {
+      name: '_separator_',
+    }, {
+      name: 'Yandex',
+      transformations,
+      url: 'https://ya.ru/search/?clid=15525262&text=%s',
+    }, {
+      name: 'Yandex Maps',
+      transformations,
+      url: 'https://ya.ru/maps/?clid=15525262&text=%s',
+    }],
+    openInBackground: false
+  },
+  methods: {
+    setContextMenuItems: (fieldsets) => {
+      const contexts = ['selection', 'image']
+      for (const index in fieldsets) {
+        if (fieldsets[index].name === '_separator_') {
+          chrome.contextMenus.create({
+            id: index,
+            contexts,
+            type: 'separator',
+          })
+        } else {
+          chrome.contextMenus.create({
+            id: index,
+            contexts,
+            title: fieldsets[index].name,
+          })
+        }
+      }
+    },
+  },
 }
 
 chrome.runtime.onInstalled.addListener((details) => {
