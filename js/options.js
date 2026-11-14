@@ -154,18 +154,18 @@ window.addEventListener('DOMContentLoaded', () => {
           const replaceField = rule.querySelector('[name="replace"]')
           if (!regexpField.value) {
             messageBox.textContent = 'The "RegExp" field must not be empty'
-            regexpField.focus()
             setTimeout(() => {
               messageBox.textContent = ''
             }, 1500)
+            regexpField.focus()
             hasError = true
             return false
           } else if (!replaceField.value) {
             messageBox.textContent = 'The "Replace" field must not be empty'
-            replaceField.focus()
             setTimeout(() => {
               messageBox.textContent = ''
             }, 1500)
+            replaceField.focus()
             hasError = true
             return false
           } else {
