@@ -138,7 +138,6 @@ chrome.runtime.onInstalled.addListener((details) => {
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === 'local') return
   if (changes.fieldsets) {
-    console.log(changes.fieldsets.newValue)
     chrome.contextMenus.removeAll(() => {
       app.methods.setContextMenuItems(changes.fieldsets.newValue)
     })
