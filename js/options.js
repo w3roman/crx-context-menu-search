@@ -143,11 +143,9 @@ window.addEventListener('DOMContentLoaded', () => {
       // Save button
       modalTemplate.getElementById('transformations-save-button').addEventListener('click', (e) => {
         const modal = e.target.closest('#transformations-modal')
-        const toLowerCase = modal.querySelector('[name="toLowerCase"]').checked
-        const toUpperCase = modal.querySelector('[name="toUpperCase"]').checked
         const messageBox = modal.querySelector('#transformations-message-box')
-        const rules = []
         let hasError = false
+        const rules = []
         Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
           const flagsField = rule.querySelector('[name="flags"]')
           const regexpField = rule.querySelector('[name="regexp"]')
@@ -175,14 +173,18 @@ window.addEventListener('DOMContentLoaded', () => {
         })
         if (!hasError) {
           chrome.storage.sync.get(null, (storage) => {
-            storage.fieldsets[searchId].transformations = { rules, toLowerCase, toUpperCase }
+            storage.fieldsets[searchId].transformations = {
+              rules,
+              toLowerCase: modal.querySelector('[name="toLowerCase"]').checked,
+              toUpperCase: modal.querySelector('[name="toUpperCase"]').checked,
+            }
             chrome.storage.sync.set(storage, () => {
               messageBox.textContent = 'Saved'
               setTimeout(() => {
                 messageBox.textContent = ''
               }, 1500)
+              parentLi.setAttribute('data-transformations', JSON.stringify(storage.fieldsets[searchId].transformations))
             })
-            parentLi.setAttribute('data-transformations', JSON.stringify(storage.fieldsets[searchId].transformations))
           })
         }
       })
