@@ -344,33 +344,33 @@ window.addEventListener('DOMContentLoaded', () => {
         let hasError = false
         const rules = []
         Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
-          const regexpField = rule.querySelector('[name="regexp"]')
-          const replaceField = rule.querySelector('[name="replace"]')
-          if (!regexpField.value) {
+          const regexpInput = rule.querySelector('[name="regexp"]')
+          const replaceInput = rule.querySelector('[name="replace"]')
+          if (!regexpInput.value) {
             messageBox.classList.add('color-error')
             messageBox.textContent = 'The "RegExp" field must not be empty'
             setTimeout(() => {
               messageBox.textContent = ''
               messageBox.classList.remove('color-error')
             }, 1500)
-            regexpField.focus()
+            regexpInput.focus()
             hasError = true
             return false
-          } else if (!replaceField.value) {
+          } else if (!replaceInput.value) {
             messageBox.classList.add('color-error')
             messageBox.textContent = 'The "Replace" field must not be empty'
             setTimeout(() => {
               messageBox.textContent = ''
               messageBox.classList.remove('color-error')
             }, 1500)
-            replaceField.focus()
+            replaceInput.focus()
             hasError = true
             return false
           } else {
             rules.push({
               flags: rule.querySelector('[name="flags"]').value,
-              regexp: regexpField.value,
-              replace: replaceField.value
+              regexp: regexpInput.value,
+              replace: replaceInput.value
             })
             return true
           }
