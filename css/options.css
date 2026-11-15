@@ -16,6 +16,14 @@ body {
   overflow: scroll;
 }
 
+.color-error {
+  color: red;
+}
+
+.color-success {
+  color: green;
+}
+
 a {
   color: #15c;
   text-decoration: none;
@@ -193,7 +201,6 @@ header p {
 }
 
 #transformations-message-box {
-  color: #f00;
   min-height: 1rem;
 }
 
@@ -224,7 +231,6 @@ header p {
 }
 
 #message-box {
-  color: #f00;
   height: 1rem;
   width: 100%;
   text-align: center;

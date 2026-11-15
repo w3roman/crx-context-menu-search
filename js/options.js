@@ -210,20 +210,24 @@ window.addEventListener('DOMContentLoaded', () => {
       const nameInput = fieldset.querySelector('[name="searchName"]')
       if (nameInput) {
         if (!nameInput.value) {
+          messageBox.classList.add('color-error')
           messageBox.textContent = 'The Search name must not be empty'
           nameInput.focus()
           setTimeout(() => {
             messageBox.textContent = ''
+            messageBox.classList.remove('color-error')
           }, 1500)
           hasError = true
           return false
         }
         const urlInput = fieldset.querySelector('[name="searchUrl"]')
         if (!urlInput.value) {
+          messageBox.classList.add('color-error')
           messageBox.textContent = 'The Search URL must not be empty'
           urlInput.focus()
           setTimeout(() => {
             messageBox.textContent = ''
+            messageBox.classList.remove('color-error')
           }, 1500)
           hasError = true
           return false
@@ -244,9 +248,11 @@ window.addEventListener('DOMContentLoaded', () => {
     newStorage.openInBackground = openInBackgroundCheckbox.checked
     newStorage.addUtmSource = addUtmSourceCheckbox.checked
     chrome.storage.sync.set(newStorage, () => {
+      messageBox.classList.add('color-success')
       messageBox.textContent = 'Saved'
       setTimeout(() => {
         messageBox.textContent = ''
+        messageBox.classList.remove('color-success')
       }, 1500)
       listOfFieldsets.querySelectorAll('.transformations-button[disabled]').forEach((e) => {
         e.removeAttribute('disabled')
@@ -339,17 +345,21 @@ window.addEventListener('DOMContentLoaded', () => {
           const regexpField = rule.querySelector('[name="regexp"]')
           const replaceField = rule.querySelector('[name="replace"]')
           if (!regexpField.value) {
+            messageBox.classList.add('color-error')
             messageBox.textContent = 'The "RegExp" field must not be empty'
             setTimeout(() => {
               messageBox.textContent = ''
+              messageBox.classList.remove('color-error')
             }, 1500)
             regexpField.focus()
             hasError = true
             return false
           } else if (!replaceField.value) {
+            messageBox.classList.add('color-error')
             messageBox.textContent = 'The "Replace" field must not be empty'
             setTimeout(() => {
               messageBox.textContent = ''
+              messageBox.classList.remove('color-error')
             }, 1500)
             replaceField.focus()
             hasError = true
@@ -372,9 +382,11 @@ window.addEventListener('DOMContentLoaded', () => {
               toUpperCase: modal.querySelector('[name="toUpperCase"]').checked,
             }
             chrome.storage.sync.set(storage, () => {
+              messageBox.classList.add('color-success')
               messageBox.textContent = 'Saved'
               setTimeout(() => {
                 messageBox.textContent = ''
+                messageBox.classList.remove('color-success')
               }, 1500)
               parentLi.setAttribute('data-transformations', JSON.stringify(storage.fieldsets[searchId].transformations))
             })
