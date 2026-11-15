@@ -17,8 +17,7 @@ function setContextMenuItems(fieldsets) {
 
 // noinspection JSUnusedLocalSymbols
 chrome.runtime.onInstalled.addListener((details) => {
-  // Calling chrome.storage.local.set(defaultOptions) is required to access the initial fieldsets on the Options page
-  // (see the INITIALIZATION section in the options.js file)
+  // `chrome.storage.local.set(defaultOptions)` is required for the Options page
   chrome.storage.local.set(
     defaultOptions,
     () => chrome.storage.sync.get(null, (storage) => {
