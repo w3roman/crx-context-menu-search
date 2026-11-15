@@ -67,11 +67,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Sortable
 
-    Sortable.create(listOfFieldsets, {
-      // [name="searchName"], [name="searchUrl"] doesn't work
-      filter: 'button, input, .fieldset-remove-button',
-      preventOnFilter: false,
-    })
+    Sortable.create(listOfFieldsets, { handle: '.up-down-arrow' })
 
     // Fieldsets Changes
 
