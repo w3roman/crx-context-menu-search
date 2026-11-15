@@ -112,9 +112,9 @@ window.addEventListener('DOMContentLoaded', () => {
       setFieldsets(storage.fieldsets)
       openInBackgroundCheckbox.checked = storage.openInBackground
       addUtmSourceCheckbox.checked = storage.addUtmSource
-      // To save the defaults, the user must click the Save button in the Controls block. However, they may open
+      // To save the Defaults, the user must click the Save button in the Controls block. However, they may open
       // Transformations, change something there, click the Save button in the Transformations modal, and then close or
-      // reload the Options without clicking the Save button in the Controls block. In this case, the imported
+      // reload the Options page without clicking the Save button in the Controls block. In this case, the imported
       // Transformations may get attached to a different Search that has, if it has one at all, the same ordinal index
       // as the imported Search.
       listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
