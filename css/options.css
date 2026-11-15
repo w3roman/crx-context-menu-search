@@ -57,43 +57,6 @@ body {
 
 /*
  * ------------------------------------------------------------------------------
- * [data-title]
- * ------------------------------------------------------------------------------
-*/
-
-[data-title] {
-  position: relative;
-}
-
-[data-title]:after {
-  background: var(--primary-color);
-  border-radius: .3rem;
-  color: #fff;
-  content: attr(data-title);
-  font-size: .8rem;
-  position: absolute;
-  padding: .3rem .4rem;
-  visibility: hidden;
-}
-
-[data-title]:hover:after {
-  visibility: visible;
-}
-
-.settings-section .transformations-button[data-title]:after {
-  top: -21%;
-  transform: translateX(-121%);
-  white-space: nowrap;
-}
-
-.donate-section a[data-title]:after {
-  width: 15rem;
-  left: 50%;
-  transform: translateX(-50%) translateY(-110%);
-}
-
-/*
- * ------------------------------------------------------------------------------
  * Common Styles
  * ------------------------------------------------------------------------------
 */
@@ -394,4 +357,41 @@ header p {
 
 .share-section p {
   margin-bottom: 0;
+}
+
+/*
+ * ------------------------------------------------------------------------------
+ * [data-title]
+ * ------------------------------------------------------------------------------
+*/
+
+[data-title] {
+  position: relative;
+}
+
+[data-title]:after {
+  background: var(--primary-color);
+  border-radius: .3rem;
+  color: #fff;
+  content: attr(data-title);
+  font-size: .8rem;
+  position: absolute;
+  padding: .3rem .4rem;
+  visibility: hidden;
+}
+
+[data-title]:hover:after {
+  visibility: visible;
+}
+
+.settings-section .transformations-button[data-title]:after {
+  top: -21%;
+  transform: translateX(-121%);
+  white-space: nowrap;
+}
+
+.donate-section a[data-title]:after {
+  width: 15rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-110%);
 }
