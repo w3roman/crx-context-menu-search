@@ -207,7 +207,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const fieldsets = listOfFieldsets.querySelectorAll('li')
 
-    let hasError = false
+    let thereIsAnError = false
 
     Array.from(fieldsets).every((fieldset) => {
       const nameInput = fieldset.querySelector('[name="searchName"]')
@@ -220,7 +220,7 @@ window.addEventListener('DOMContentLoaded', () => {
             messageBox.textContent = ''
             messageBox.classList.remove('color-error')
           }, 1500)
-          hasError = true
+          thereIsAnError = true
           return false
         }
         const urlInput = fieldset.querySelector('[name="searchUrl"]')
@@ -232,7 +232,7 @@ window.addEventListener('DOMContentLoaded', () => {
             messageBox.textContent = ''
             messageBox.classList.remove('color-error')
           }, 1500)
-          hasError = true
+          thereIsAnError = true
           return false
         }
         newStorage.fieldsets.push({
@@ -246,7 +246,7 @@ window.addEventListener('DOMContentLoaded', () => {
       return true
     })
 
-    if (hasError) return
+    if (thereIsAnError) return
 
     newStorage.openInBackground = openInBackgroundCheckbox.checked
     newStorage.addUtmSource = addUtmSourceCheckbox.checked
@@ -341,7 +341,7 @@ window.addEventListener('DOMContentLoaded', () => {
       modalTemplate.getElementById('transformations-save-button').addEventListener('click', (e) => {
         const modal = e.target.closest('#transformations-modal')
         const messageBox = modal.querySelector('#transformations-message-box')
-        let hasError = false
+        let thereIsAnError = false
         const rules = []
         Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
           const regexpInput = rule.querySelector('[name="regexp"]')
@@ -354,7 +354,7 @@ window.addEventListener('DOMContentLoaded', () => {
               messageBox.classList.remove('color-error')
             }, 1500)
             regexpInput.focus()
-            hasError = true
+            thereIsAnError = true
             return false
           } else if (!replaceInput.value) {
             messageBox.classList.add('color-error')
@@ -364,7 +364,7 @@ window.addEventListener('DOMContentLoaded', () => {
               messageBox.classList.remove('color-error')
             }, 1500)
             replaceInput.focus()
-            hasError = true
+            thereIsAnError = true
             return false
           } else {
             rules.push({
@@ -375,7 +375,7 @@ window.addEventListener('DOMContentLoaded', () => {
             return true
           }
         })
-        if (!hasError) {
+        if (!thereIsAnError) {
           chrome.storage.sync.get(null, (storage) => {
             const searchId = parentLi.getAttribute('data-id')
             storage.fieldsets[searchId].transformations = {
