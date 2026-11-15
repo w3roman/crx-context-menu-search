@@ -108,10 +108,10 @@ window.addEventListener('DOMContentLoaded', () => {
   sortAZButton.addEventListener('click', () => {
     const fieldsets = listOfFieldsets.querySelectorAll('li')
     const unorderedFieldsets = {}
-    Array.from(fieldsets).forEach((fieldset) => {
-      const nameField = fieldset.querySelector('[name="searchName"]')
-      if (nameField) {
-        unorderedFieldsets[nameField.value] = fieldset
+    fieldsets.forEach((fieldset) => {
+      const nameInput = fieldset.querySelector('[name="searchName"]')
+      if (nameInput) {
+        unorderedFieldsets[nameInput.value] = fieldset
       }
     })
     const orderedFieldsets = {}
