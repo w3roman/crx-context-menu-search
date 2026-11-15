@@ -22,7 +22,7 @@ body {
 
 [id$="-close-button"]:after,
 [class$="-remove-button"]:after {
-  color: #f00;
+  color: red;
   content: '×';
   cursor: pointer;
   font-size: 1.2rem;
