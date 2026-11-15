@@ -278,7 +278,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // Link to "Load Defaults" button
   document.getElementById('link-to-load-defaults-button').addEventListener('click', (e) => {
     e.preventDefault()
-    loadDefaultsButton.focus({focusVisible: true})
+    loadDefaultsButton.focus({ focusVisible: true })
   })
 
   // Transformations
