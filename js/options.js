@@ -271,10 +271,11 @@ window.addEventListener('DOMContentLoaded', () => {
   })
 
   // Link to "Load Defaults" button
-  document.getElementById('link-to-load-defaults-button').addEventListener('click', (e) => {
-    e.preventDefault()
-    loadDefaultsButton.focus({ focusVisible: true })
-  })
+  document.getElementById('link-to-load-defaults-button')
+    .addEventListener('click', (e) => {
+      e.preventDefault()
+      loadDefaultsButton.focus({ focusVisible: true })
+    })
 
   // Transformations
 
@@ -311,14 +312,16 @@ window.addEventListener('DOMContentLoaded', () => {
       toUpperCaseCheckbox.checked = transformations.toUpperCase
       transformations.rules.forEach(addRule)
 
-      modalTemplate.getElementById('transformations-add-rule-button').addEventListener('click', addRule)
+      modalTemplate.getElementById('transformations-add-rule-button')
+        .addEventListener('click', addRule)
 
       function addRule(e) {
         const ruleTemplate = transformationRuleTemplate.content.cloneNode(true)
         // It should be placed before `.after(ruleTemplate)`
-        ruleTemplate.querySelector('.remove-transformation-rule-button').addEventListener('click', (e) => {
-          e.target.closest('.transformation-rule').remove()
-        })
+        ruleTemplate.querySelector('.remove-transformation-rule-button')
+          .addEventListener('click', (e) => {
+            e.target.closest('.transformation-rule').remove()
+          })
         let currentDocument
         if (e instanceof PointerEvent) { // Click on the `Add Rule` button
           currentDocument = document
@@ -337,63 +340,64 @@ window.addEventListener('DOMContentLoaded', () => {
       }
 
       // Save button
-      modalTemplate.getElementById('transformations-save-button').addEventListener('click', (e) => {
-        const modal = e.target.closest('#transformations-modal')
-        const messageBox = modal.querySelector('#transformations-message-box')
-        let thereIsAnError = false
-        const rules = []
-        Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
-          const regexpInput = rule.querySelector('[name="regexp"]')
-          const replaceInput = rule.querySelector('[name="replace"]')
-          if (!regexpInput.value) {
-            messageBox.classList.add('color-error')
-            messageBox.textContent = 'The RegExp field must not be empty'
-            setTimeout(() => {
-              messageBox.textContent = ''
-              messageBox.classList.remove('color-error')
-            }, 1500)
-            regexpInput.focus()
-            thereIsAnError = true
-            return false
-          } else if (!replaceInput.value) {
-            messageBox.classList.add('color-error')
-            messageBox.textContent = 'The Replace field must not be empty'
-            setTimeout(() => {
-              messageBox.textContent = ''
-              messageBox.classList.remove('color-error')
-            }, 1500)
-            replaceInput.focus()
-            thereIsAnError = true
-            return false
-          } else {
-            rules.push({
-              flags: rule.querySelector('[name="flags"]').value,
-              regexp: regexpInput.value,
-              replace: replaceInput.value
-            })
-            return true
-          }
-        })
-        if (!thereIsAnError) {
-          chrome.storage.sync.get(null, (storage) => {
-            const searchId = parentLi.getAttribute('data-id')
-            storage.fieldsets[searchId].transformations = {
-              rules,
-              toLowerCase: modal.querySelector('[name="toLowerCase"]').checked,
-              toUpperCase: modal.querySelector('[name="toUpperCase"]').checked,
-            }
-            chrome.storage.sync.set(storage, () => {
-              messageBox.classList.add('color-success')
-              messageBox.textContent = 'Saved'
+      modalTemplate.getElementById('transformations-save-button')
+        .addEventListener('click', (e) => {
+          const modal = e.target.closest('#transformations-modal')
+          const messageBox = modal.querySelector('#transformations-message-box')
+          let thereIsAnError = false
+          const rules = []
+          Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
+            const regexpInput = rule.querySelector('[name="regexp"]')
+            const replaceInput = rule.querySelector('[name="replace"]')
+            if (!regexpInput.value) {
+              messageBox.classList.add('color-error')
+              messageBox.textContent = 'The RegExp field must not be empty'
               setTimeout(() => {
                 messageBox.textContent = ''
-                messageBox.classList.remove('color-success')
+                messageBox.classList.remove('color-error')
               }, 1500)
-              parentLi.setAttribute('data-transformations', JSON.stringify(storage.fieldsets[searchId].transformations))
-            })
+              regexpInput.focus()
+              thereIsAnError = true
+              return false
+            } else if (!replaceInput.value) {
+              messageBox.classList.add('color-error')
+              messageBox.textContent = 'The Replace field must not be empty'
+              setTimeout(() => {
+                messageBox.textContent = ''
+                messageBox.classList.remove('color-error')
+              }, 1500)
+              replaceInput.focus()
+              thereIsAnError = true
+              return false
+            } else {
+              rules.push({
+                flags: rule.querySelector('[name="flags"]').value,
+                regexp: regexpInput.value,
+                replace: replaceInput.value
+              })
+              return true
+            }
           })
-        }
-      })
+          if (!thereIsAnError) {
+            chrome.storage.sync.get(null, (storage) => {
+              const searchId = parentLi.getAttribute('data-id')
+              storage.fieldsets[searchId].transformations = {
+                rules,
+                toLowerCase: modal.querySelector('[name="toLowerCase"]').checked,
+                toUpperCase: modal.querySelector('[name="toUpperCase"]').checked,
+              }
+              chrome.storage.sync.set(storage, () => {
+                messageBox.classList.add('color-success')
+                messageBox.textContent = 'Saved'
+                setTimeout(() => {
+                  messageBox.textContent = ''
+                  messageBox.classList.remove('color-success')
+                }, 1500)
+                parentLi.setAttribute('data-transformations', JSON.stringify(storage.fieldsets[searchId].transformations))
+              })
+            })
+          }
+        })
 
       // Close modal button
       modalTemplate.getElementById('transformations-close-modal-button')
