@@ -14,6 +14,7 @@
 body {
   color: var(--primary-color);
   display: flex;
+  /* For vertical arrangement of sections set `align-items: center;` */
   flex-direction: column;
   overflow: scroll;
 }
@@ -43,7 +44,7 @@ body {
   border-radius: .3rem;
   display: none;
   min-width: 18rem;
-  margin-top: 1rem;
+  margin: 1rem auto 0;
   padding: 1rem 1.5rem;
   position: relative;
   text-align: center;
@@ -371,7 +372,7 @@ header p {
 
 [data-title]:after {
   background: var(--primary-color);
-  border-radius: .3rem;
+  border-radius: .2rem;
   color: #fff;
   content: attr(data-title);
   font-size: .8rem;
