@@ -187,7 +187,7 @@ window.addEventListener('DOMContentLoaded', () => {
       chrome.downloads.download({
         url: url,
         filename: 'crx-context-menu-search.json',
-        saveAs: false,
+        saveAs: true,
       }, () => {})
     })
   })
