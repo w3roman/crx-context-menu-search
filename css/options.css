@@ -279,7 +279,7 @@ header p {
 }
 
 #top-notification-close-button,
-#transformations-close-modal-button {
+#transformations-modal-close-button {
   color: #f00;
   cursor: pointer;
   font-size: 1.2rem;
@@ -288,7 +288,7 @@ header p {
   right: .3rem;
 }
 
-#transformations-close-modal-button {
+#transformations-modal-close-button {
   top: -.6rem;
 }
 
