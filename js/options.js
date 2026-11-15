@@ -38,7 +38,8 @@ window.addEventListener('DOMContentLoaded', () => {
         let li = newFieldset.querySelector('li')
         newFieldset.querySelector('[name="searchName"]').value = fieldset.name
         newFieldset.querySelector('[name="searchUrl"]').value = fieldset.url
-        li.setAttribute('data-id', index) // Used when saving Transformations
+        // `data-id` is used when saving Transformations
+        li.setAttribute('data-id', index)
         // We attach the transformations to `<li>` because deleting a fieldset causes the indexes to shift
         li.setAttribute(
           'data-transformations',
@@ -91,6 +92,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   addSearchButton.addEventListener('click', () => {
     const template = fieldsetTemplate.content.cloneNode(true)
+    // `data-id` is used when saving Transformations
     template.querySelector('li').setAttribute('data-id', listOfFieldsets.querySelectorAll('[data-id]').length + 2)
     setDisabledAndTitleAttributes(template.querySelector('.transformations-button'))
     listOfFieldsets.appendChild(template)
