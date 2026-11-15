@@ -4,21 +4,15 @@ importScripts('config.js')
 
 function setContextMenuItems(fieldsets) {
   const contexts = ['image', 'selection']
-  for (const index in fieldsets) {
-    if (fieldsets[index].name === '_separator_') {
-      chrome.contextMenus.create({
-        id: index,
-        contexts,
-        type: 'separator',
-      })
+  fieldsets.forEach((fieldset, index) => {
+    const options = { id: '' + index,  contexts }
+    if (fieldset.name === '_separator_') {
+      options.type = 'separator'
     } else {
-      chrome.contextMenus.create({
-        id: index,
-        contexts,
-        title: fieldsets[index].name,
-      })
+      options.title = fieldset.name
     }
-  }
+    chrome.contextMenus.create(options)
+  })
 }
 
 // noinspection JSUnusedLocalSymbols
