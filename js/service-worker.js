@@ -28,12 +28,12 @@ chrome.runtime.onInstalled.addListener((details) => {
           chrome.runtime.openOptionsPage(() => {})
         })
       }
-      if (details.reason === 'update') {
-        chrome.storage.local.set(
-          { updateMessage: 'The extension has been updated!<br>1. Added the ability to transform selected text before searching.<br>2. Made minor fixes.' },
-          () => chrome.runtime.openOptionsPage()
-        )
-      }
+      // if (details.reason === 'update') {
+      //   chrome.storage.local.set(
+      //     { updateMessage: 'The extension has been updated!<br>1. Added the ability to transform selected text before searching.<br>2. Made minor fixes.' },
+      //     () => chrome.runtime.openOptionsPage()
+      //   )
+      // }
     })
   )
 })
