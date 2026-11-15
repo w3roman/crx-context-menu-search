@@ -65,22 +65,31 @@ body {
   position: relative;
 }
 
-[data-title]::after {
+[data-title]:after {
   background: var(--primary-color);
   border-radius: .3rem;
   color: #fff;
   content: attr(data-title);
   font-size: .8rem;
   position: absolute;
-  top: -21%;
-  transform: translateX(-121%);
   padding: .3rem .4rem;
   visibility: hidden;
+}
+
+[data-title]:hover:after {
+  visibility: visible;
+}
+
+.settings-section .transformations-button[data-title]:after {
+  top: -21%;
+  transform: translateX(-121%);
   white-space: nowrap;
 }
 
-[data-title]:hover::after {
-  visibility: visible;
+.donate-section a[data-title]:after {
+  width: 15rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-110%);
 }
 
 /*
@@ -375,11 +384,6 @@ header p {
 
 .donate-section h2 {
   font-weight: normal;
-}
-
-.donate-section p {
-  display: none;
-  margin: 0;
 }
 
 /*
