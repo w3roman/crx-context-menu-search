@@ -112,7 +112,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const unorderedFieldsets = {}
     fieldsets.forEach((fieldset) => {
       const nameInput = fieldset.querySelector('[name="searchName"]')
-      if (nameInput) {
+      if (nameInput) { // Else it is the separator
         unorderedFieldsets[nameInput.value] = fieldset
       }
     })
