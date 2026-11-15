@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const openInBackgroundCheckbox = document.getElementById('open-in-background-checkbox')
   const addUtmSourceCheckbox = document.getElementById('add-utm-source-checkbox')
   const saveButton = document.getElementById('save-button')
-  const revertChangesButton = document.getElementById('revert-changes-button')
+  const discardChangesButton = document.getElementById('discard-changes-button')
   const messageBox = document.getElementById('message-box')
 
   /*
@@ -58,17 +58,37 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   chrome.storage.sync.get(null, (storage) => {
+
     // Options
+
     setFieldsets(storage.fieldsets)
     openInBackgroundCheckbox.checked = storage.openInBackground
     addUtmSourceCheckbox.checked = storage.addUtmSource
 
     // Sortable
+
     Sortable.create(listOfFieldsets, {
       // [name="searchName"], [name="searchUrl"] doesn't work
       filter: 'input, button, .fieldset-remove-button',
       preventOnFilter: false,
     })
+
+    // Fieldsets Changes
+
+    const observer = new MutationObserver(async (mutations) => {
+      let needCheckChanges = false
+      for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+          if (node.nodeName === 'LI') needCheckChanges = true
+        }
+        for (const node of mutation.removedNodes) {
+          if (node.nodeName === 'LI') needCheckChanges = true
+        }
+      }
+      if (needCheckChanges) discardChangesButton.style.display = await fieldsetsChanged() ? 'block' : 'none'
+    })
+
+    observer.observe(listOfFieldsets, { childList: true })
   })
 
   // Top notification
@@ -124,7 +144,6 @@ window.addEventListener('DOMContentLoaded', () => {
       listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
         setDisabledAndTitleAttributes(e)
       })
-      revertChangesButton.style.display = 'block'
     })
   })
 
@@ -147,7 +166,6 @@ window.addEventListener('DOMContentLoaded', () => {
     for (let searchName in orderedFieldsets) {
       listOfFieldsets.appendChild(orderedFieldsets[searchName])
     }
-    revertChangesButton.style.display = 'block'
   })
 
   // Import
@@ -171,7 +189,6 @@ window.addEventListener('DOMContentLoaded', () => {
         listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
           setDisabledAndTitleAttributes(e)
         })
-        revertChangesButton.style.display = 'block'
       }
       reader.readAsText(file)
       form.reset()
@@ -263,15 +280,9 @@ window.addEventListener('DOMContentLoaded', () => {
           e.removeAttribute('disabled')
           e.removeAttribute('data-title')
         })
-        revertChangesButton.style.display = 'none'
+        discardChangesButton.style.display = 'none'
       })
     }
-  })
-
-  // Revert Changes
-
-  revertChangesButton.addEventListener('click', () => {
-    location.reload()
   })
 
   // Transformations
@@ -412,6 +423,66 @@ window.addEventListener('DOMContentLoaded', () => {
 
       document.body.appendChild(modalTemplate)
     }
+  })
+
+  // Discard Changes
+
+  discardChangesButton.addEventListener('click', () => {
+    location.reload()
+  })
+
+  async function fieldsetsChanged() {
+    // When loading defaults or importing
+    if (listOfFieldsets.querySelector('.transformations-button[disabled]')) return true
+
+    const storage = await chrome.storage.sync.get(null)
+    let fieldsets = listOfFieldsets.querySelectorAll('li')
+
+    if (fieldsets.length !== storage.fieldsets.length) {
+      return true
+    }
+
+    let fieldsetsNewValues = []
+    fieldsets.forEach((e) => {
+      let values
+      let nameInput = e.querySelector('[name="searchName"]')
+      if (nameInput) {
+        values = { name: nameInput.value, url: e.querySelector('[name="searchUrl"]').value }
+      } else {
+        values = { name: '_separator_' }
+      }
+      fieldsetsNewValues.push(values)
+    })
+    let changed = false
+    Array.from(storage.fieldsets).every((fieldset, index) => {
+      if (
+        (fieldset.name === '_separator_' && fieldsetsNewValues[index].name === '_separator_')
+        ||
+        (fieldset.name === fieldsetsNewValues[index]?.name && fieldset.url === fieldsetsNewValues[index].url)
+      ) {
+        return true
+      }
+      changed = true
+      return false
+    })
+
+    return changed
+  }
+
+  listOfFieldsets.addEventListener('input', async () => {
+    discardChangesButton.style.display = await fieldsetsChanged() ? 'block' : 'none'
+  })
+
+  openInBackgroundCheckbox.addEventListener('change', (e) => {
+    chrome.storage.sync.get(null, (storage) => {
+      discardChangesButton.style.display = storage.openInBackground !== e.target.checked ? 'block' : 'none'
+    })
+  })
+
+  addUtmSourceCheckbox.addEventListener('change', (e) => {
+    chrome.storage.sync.get(null, (storage) => {
+      discardChangesButton.style.display = storage.addUtmSource !== e.target.checked ? 'block' : 'none'
+    })
   })
 
 })
