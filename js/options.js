@@ -245,25 +245,23 @@ window.addEventListener('DOMContentLoaded', () => {
       }
       return true
     })
-
-    if (thereIsAnError) return
-
-    newStorage.openInBackground = openInBackgroundCheckbox.checked
-    newStorage.addUtmSource = addUtmSourceCheckbox.checked
-
-    chrome.storage.sync.set(newStorage, () => {
-      messageBox.classList.add('color-success')
-      messageBox.textContent = 'Saved'
-      setTimeout(() => {
-        messageBox.textContent = ''
-        messageBox.classList.remove('color-success')
-      }, 1500)
-      listOfFieldsets.querySelectorAll('.transformations-button[disabled]').forEach((e) => {
-        e.removeAttribute('disabled')
-        e.removeAttribute('data-title')
+    if (!thereIsAnError) {
+      newStorage.openInBackground = openInBackgroundCheckbox.checked
+      newStorage.addUtmSource = addUtmSourceCheckbox.checked
+      chrome.storage.sync.set(newStorage, () => {
+        messageBox.classList.add('color-success')
+        messageBox.textContent = 'Saved'
+        setTimeout(() => {
+          messageBox.textContent = ''
+          messageBox.classList.remove('color-success')
+        }, 1500)
+        listOfFieldsets.querySelectorAll('.transformations-button[disabled]').forEach((e) => {
+          e.removeAttribute('disabled')
+          e.removeAttribute('data-title')
+        })
+        revertChangesButton.style.display = 'none'
       })
-      revertChangesButton.style.display = 'none'
-    })
+    }
   })
 
   // Revert Changes
