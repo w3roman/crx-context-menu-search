@@ -204,11 +204,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   saveButton.addEventListener('click', () => {
     const newStorage = { fieldsets: [] }
-
     const fieldsets = listOfFieldsets.querySelectorAll('li')
-
     let thereIsAnError = false
-
     Array.from(fieldsets).every((fieldset) => {
       const nameInput = fieldset.querySelector('[name="searchName"]')
       if (nameInput) {
