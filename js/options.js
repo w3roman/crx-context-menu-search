@@ -94,6 +94,7 @@ window.addEventListener('DOMContentLoaded', () => {
     template.querySelector('li').setAttribute('data-id', listOfFieldsets.querySelectorAll('[data-id]').length + 2)
     setDisabledAndTitle(template.querySelector('.transformations-button'))
     listOfFieldsets.appendChild(template)
+    listOfFieldsets.querySelector('li:last-child [name="searchName"]').focus()
   })
 
   // Add Separator
