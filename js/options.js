@@ -263,6 +263,29 @@ window.addEventListener('DOMContentLoaded', () => {
     location.reload()
   })
 
+  document.getElementById('link-to-load-defaults-button').addEventListener('click', (e) => {
+    e.preventDefault()
+    let blinkCount = 0
+    const interval = setInterval(() => {
+      if (blinkCount > 5) {
+        clearInterval(interval)
+        loadDefaultsButton.style.color = 'initial'
+        loadDefaultsButton.style.fontWeight = 'initial'
+        return
+      }
+
+      if (blinkCount % 2) {
+        loadDefaultsButton.style.color = '#f00'
+        loadDefaultsButton.style.fontWeight = 'bold'
+      } else {
+        loadDefaultsButton.style.color = 'initial'
+        loadDefaultsButton.style.fontWeight = 'initial'
+      }
+      blinkCount++
+    }, 200)
+
+  })
+
   // Transformations
 
   listOfFieldsets.addEventListener('click', (e) => {

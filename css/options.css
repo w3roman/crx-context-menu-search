@@ -23,7 +23,6 @@ a {
 
 button,
 input[type="checkbox"],
-input[type="radio"],
 label {
   cursor: pointer;
 }
@@ -32,8 +31,7 @@ button[disabled] {
   cursor: not-allowed;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+input[type="checkbox"] {
   margin: 0 .5rem 0 0;
 }
 
