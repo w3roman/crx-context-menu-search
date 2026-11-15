@@ -208,6 +208,10 @@ header p {
   gap: 1rem;
 }
 
+#transformations-controls-box button {
+  width: 6rem;
+}
+
 .separator {
   border-top: 1px solid #bfbfbf;
   width: 90%;
