@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="top-notification">
-    <span id="top-notification-close-button"></span>
+    <div id="top-notification-close-button"></div>
   </div>
   <header>
     <h1>Options</h1>
@@ -66,11 +66,11 @@
   </div>
   <template id="fieldset-template">
     <li>
-      <span class="up-down-arrow">↕</span>
+      <div class="up-down-arrow">↕</div>
       <input type="text" name="searchName" placeholder="Name">
       <input type="text" name="searchUrl" placeholder="URL with %s in place of query">
       <button class="transformations-button">.*</button>
-      <span class="fieldset-remove-button"></span>
+      <div class="fieldset-remove-button"></div>
     </li>
   </template>
   <template id="transformations-modal-template">
@@ -98,18 +98,18 @@
   <template id="transformation-rule-template">
     <div class="transformation-rule">
       <div>
-        <span>/&nbsp;&nbsp;<input type="text" name="regexp" placeholder="RegExp">&nbsp;&nbsp;/</span>
+        <div>/&nbsp;&nbsp;<input type="text" name="regexp" placeholder="RegExp">&nbsp;&nbsp;/</div>
         <input type="text" name="flags" placeholder="Flags">
         <input type="text" name="replace" placeholder="Replace">
       </div>
-      <span class="transformation-rule-remove-button"></span>
+      <div class="transformation-rule-remove-button"></div>
     </div>
   </template>
   <template id="separator-template">
     <li>
-      <span class="up-down-arrow">↕</span>
-      <span class="separator"></span>
-      <span class="fieldset-remove-button"></span>
+      <div class="up-down-arrow">↕</div>
+      <div class="separator"></div>
+      <div class="fieldset-remove-button"></div>
     </li>
   </template>
 </body>
