@@ -101,7 +101,7 @@ button[disabled] {
 }
 
 input[type="checkbox"] {
-  margin: 0 .5rem 0 0;
+  margin: 0 .3rem 0 0;
 }
 
 input[type="text"] {
@@ -269,7 +269,7 @@ header p {
 
 #transformations-container > * {
   display: flex;
-  gap: .5rem;
+  gap: 1rem;
   justify-content: center;
 }
 
@@ -278,18 +278,27 @@ header p {
   margin-bottom: 1rem;
 }
 
+#transformations-container h3 {
+  margin-bottom: 1rem;
+}
+
 #transformations-casing-box {
-  margin-top: 1.5rem;
+  margin-bottom: .5rem;
+}
+
+#transformations-message-box {
+  min-height: 1rem;
+  margin-bottom: .5rem;
 }
 
 #transformations-casing-box + .transformation-rule {
-  margin-top: 1rem;
+  margin: 1rem 0 .5rem;
 }
 
 .transformation-rule > * {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem;
+  gap: 1rem;
   justify-content: center;
 }
 
@@ -300,14 +309,6 @@ header p {
 
 .transformation-rule [name="flags"] {
   width: 3rem;
-}
-
-#transformations-message-box {
-  min-height: 1rem;
-}
-
-#transformations-controls-box {
-  gap: 1rem;
 }
 
 #transformations-controls-box button {
