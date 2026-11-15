@@ -11,7 +11,6 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 1rem;
   overflow: scroll;
 }
 
@@ -39,7 +38,7 @@ body {
   background: #d4edda;
   border-radius: .3rem;
   display: none;
-  min-width: 30rem;
+  min-width: 18rem;
   padding: 1rem 1.5rem;
   text-align: center;
   position: relative;
@@ -167,10 +166,15 @@ header p {
 .options-body > div {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   width: 100%;
   max-width: 30rem;
 }
+
+/*
+ * ------------------------------------------------------------------------------
+ * Settings, Controls, Donate Sections
+ * ------------------------------------------------------------------------------
+*/
 
 .settings-section,
 .controls-section,
@@ -180,8 +184,13 @@ header p {
   gap: 1rem;
 }
 
+/*
+ * ------------------------------------------------------------------------------
+ * Settings Section
+ * ------------------------------------------------------------------------------
+*/
+
 #list-of-fieldsets {
-  list-style: none;
   margin: 0;
   padding-left: 0;
 }
@@ -189,6 +198,7 @@ header p {
 #list-of-fieldsets li {
   display: flex;
   align-items: center;
+  gap: .5rem;
   justify-content: space-between;
   margin: .5rem 0;
 }
@@ -202,7 +212,7 @@ header p {
 }
 
 #list-of-fieldsets li span {
-  margin-top: -3px;
+  margin-top: -.1rem;
 }
 
 #list-of-fieldsets .up-down-arrow {
@@ -218,6 +228,12 @@ header p {
 #list-of-fieldsets [name="searchUrl"] {
   width: 55%;
 }
+
+/*
+ * ------------------------------------------------------------------------------
+ * Transformations Modal
+ * ------------------------------------------------------------------------------
+*/
 
 #transformations-modal {
   background: rgb(100 100 100 / 0.5);
