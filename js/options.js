@@ -114,9 +114,9 @@ window.addEventListener('DOMContentLoaded', () => {
       addUtmSourceCheckbox.checked = storage.addUtmSource
       // To save the Defaults, the user must click the Save button in the Controls block. However, they may open
       // Transformations, change something there, click the Save button in the Transformations modal, and then close or
-      // reload the Options page without clicking the Save button in the Controls block. In this case, the imported
+      // reload the Options page without clicking the Save button in the Controls block. In this case, the loaded
       // Transformations may get attached to a different Search that has, if it has one at all, the same ordinal index
-      // as the imported Search.
+      // as the loaded Search.
       listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
         setDisabledAndTitleAttributes(e)
       })
@@ -161,7 +161,7 @@ window.addEventListener('DOMContentLoaded', () => {
         addUtmSourceCheckbox.checked = storage.addUtmSource
         // To save the import, the user must click the Save button in the Controls block. However, they may open
         // Transformations, change something there, click the Save button in the Transformations modal, and then close
-        // or reload the Options without clicking the Save button in the Controls block. In this case, the imported
+        // or reload the Options page without clicking the Save button in the Controls block. In this case, the imported
         // Transformations may get attached to a different Search that has, if it has one at all, the same ordinal index
         // as the imported Search.
         listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
