@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  function setDisabledAndTitle(e) {
+  function setDisabledAndTitleAttributes(e) {
     e.setAttribute('disabled', true)
     e.setAttribute('data-title', 'First, save the settings')
   }
@@ -92,7 +92,7 @@ window.addEventListener('DOMContentLoaded', () => {
   addSearchButton.addEventListener('click', () => {
     const template = fieldsetTemplate.content.cloneNode(true)
     template.querySelector('li').setAttribute('data-id', listOfFieldsets.querySelectorAll('[data-id]').length + 2)
-    setDisabledAndTitle(template.querySelector('.transformations-button'))
+    setDisabledAndTitleAttributes(template.querySelector('.transformations-button'))
     listOfFieldsets.appendChild(template)
     listOfFieldsets.querySelector('li:last-child [name="searchName"]').focus()
   })
@@ -145,7 +145,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // Transformations may get attached to a different Search that has, if it has one at all, the same ordinal index
         // as the imported Search.
         listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
-          setDisabledAndTitle(e)
+          setDisabledAndTitleAttributes(e)
         })
         revertChangesButton.style.display = 'block'
       }
@@ -186,7 +186,7 @@ window.addEventListener('DOMContentLoaded', () => {
       // Transformations may get attached to a different Search that has, if it has one at all, the same ordinal index
       // as the imported Search.
       listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
-        setDisabledAndTitle(e)
+        setDisabledAndTitleAttributes(e)
       })
       revertChangesButton.style.display = 'block'
     })
