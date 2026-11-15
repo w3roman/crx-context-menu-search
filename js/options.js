@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     Sortable.create(listOfFieldsets, {
       // [name="searchName"], [name="searchUrl"] doesn't work
-      filter: 'input, button, .fieldset-remove-button',
+      filter: 'button, input, .fieldset-remove-button',
       preventOnFilter: false,
     })
 
