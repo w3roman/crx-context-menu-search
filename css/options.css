@@ -39,9 +39,10 @@ body {
   border-radius: .3rem;
   display: none;
   min-width: 18rem;
+  margin-top: 1rem;
   padding: 1rem 1.5rem;
-  text-align: center;
   position: relative;
+  text-align: center;
 }
 
 #top-notification-close-button {
