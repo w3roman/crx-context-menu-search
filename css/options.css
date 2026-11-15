@@ -11,7 +11,6 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  flex-shrink: 1;
   margin: 1rem;
   overflow: scroll;
 }
