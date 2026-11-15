@@ -257,6 +257,7 @@ header p {
   background: #fff;
   border-radius: .3rem;
   width: 30rem;
+  margin-top: -5rem;
   padding: 1rem;
   position: fixed;
 }
@@ -295,7 +296,7 @@ header p {
   margin: 1rem 0 .5rem;
 }
 
-.transformation-rule > * {
+.transformation-rule > div {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -312,8 +313,14 @@ header p {
 }
 
 #transformations-controls-box button {
-  width: 6rem;
+  width: 7rem;
 }
+
+/*
+ * ------------------------------------------------------------------------------
+ * Separator
+ * ------------------------------------------------------------------------------
+*/
 
 .separator {
   border-top: 1px solid #bfbfbf;
