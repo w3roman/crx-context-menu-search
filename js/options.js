@@ -347,7 +347,7 @@ window.addEventListener('DOMContentLoaded', () => {
           const replaceInput = rule.querySelector('[name="replace"]')
           if (!regexpInput.value) {
             messageBox.classList.add('color-error')
-            messageBox.textContent = 'The "RegExp" field must not be empty'
+            messageBox.textContent = 'The RegExp field must not be empty'
             setTimeout(() => {
               messageBox.textContent = ''
               messageBox.classList.remove('color-error')
@@ -357,7 +357,7 @@ window.addEventListener('DOMContentLoaded', () => {
             return false
           } else if (!replaceInput.value) {
             messageBox.classList.add('color-error')
-            messageBox.textContent = 'The "Replace" field must not be empty'
+            messageBox.textContent = 'The Replace field must not be empty'
             setTimeout(() => {
               messageBox.textContent = ''
               messageBox.classList.remove('color-error')
