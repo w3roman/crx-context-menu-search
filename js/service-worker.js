@@ -64,7 +64,7 @@ chrome.contextMenus.onClicked.addListener((info) => {
   chrome.storage.sync.get(null, (storage) => {
     const fieldset = storage.fieldsets[info.menuItemId]
     let url = fieldset.url
-    // https://yandex.by/images/search?rpt=imageview&url=https://grinvik.com/img/grinvik-brand.png
+    // https://ya.ru/images/search?rpt=imageview&url=https://grinvik.com/img/grinvik-brand.png
     // https://grinvik.com/samples/sample.pdf
     // `mhjfbmdgcfjbbpaeojofohoefgiehjai` is the built-in extension ID for Google Chrome's internal PDF Viewer
     let text = info.srcUrl && info.srcUrl.search(/^chrome-extension:\/\/mhjfbmdgcfjbbpaeojofohoefgiehjai/) !== 0
