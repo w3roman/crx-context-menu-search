@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+:root {
+  --primary-color: #333;
+  --primary-border: 1px solid #bfbfbf;
+}
+
 *,
 *:before,
 *:after {
@@ -7,7 +12,7 @@
 }
 
 body {
-  color: #333;
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -62,7 +67,7 @@ body {
 }
 
 [data-title]::after {
-  background: #333;
+  background: var(--primary-color);
   border-radius: .3rem;
   color: #fff;
   content: attr(data-title);
@@ -105,7 +110,7 @@ input[type="checkbox"] {
 }
 
 input[type="text"] {
-  border: 1px solid #bfbfbf;
+  border: var(--primary-border);
   border-radius: .3rem;
   padding: .2rem;
 }
@@ -323,7 +328,7 @@ header p {
 */
 
 .separator {
-  border-top: 1px solid #bfbfbf;
+  border-top: var(--primary-border);
   width: 90%;
 }
 
