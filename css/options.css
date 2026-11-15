@@ -14,7 +14,6 @@
 body {
   color: var(--primary-color);
   display: flex;
-  align-items: center;
   flex-direction: column;
   overflow: scroll;
 }
@@ -130,7 +129,6 @@ code {
 h2,
 h3 {
   margin: 0;
-  text-align: center;
 }
 
 .color-error {
@@ -184,10 +182,12 @@ header p {
 
 .settings-section,
 .controls-section,
-.donate-section {
+.donate-section,
+.share-section {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  text-align: center;
 }
 
 /*
@@ -348,38 +348,44 @@ header p {
   width: 45%;
 }
 
-#save-button {
+.controls-box #save-button {
   margin: auto;
 }
 
-#message-box {
+.controls-box #message-box {
   height: 1rem;
   width: 100%;
-  text-align: center;
 }
 
-#revert-changes-button {
+.controls-box #revert-changes-button {
   display: none;
   margin: auto;
 }
 
 /*
  * ------------------------------------------------------------------------------
- * Controls Section
+ * Donate Section
  * ------------------------------------------------------------------------------
 */
 
 .donate-section {
   margin-top: auto;
-  text-align: center;
 }
 
 .donate-section h2 {
   font-weight: normal;
-  margin-top: .7rem;
 }
 
 .donate-section p {
-  width: 86%;
-  margin: 0 auto;
+  margin: 0;
+}
+
+/*
+ * ------------------------------------------------------------------------------
+ * Share Section
+ * ------------------------------------------------------------------------------
+*/
+
+.share-section p {
+  margin-bottom: 0;
 }
