@@ -318,7 +318,7 @@ window.addEventListener('DOMContentLoaded', () => {
       function addRule(e) {
         const ruleTemplate = transformationRuleTemplate.content.cloneNode(true)
         // It should be placed before `.after(ruleTemplate)`
-        ruleTemplate.querySelector('.remove-transformation-rule-button')
+        ruleTemplate.querySelector('.transformation-rule-remove-button')
           .addEventListener('click', (e) => {
             e.target.closest('.transformation-rule').remove()
           })
