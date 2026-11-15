@@ -249,7 +249,7 @@ header p {
 
 #transformations-modal-close-button {
   position: absolute;
-  top: -.6rem;
+  top: -.1rem;
   right: .3rem;
 }
 
@@ -257,7 +257,8 @@ header p {
   background: #fff;
   border-radius: .3rem;
   width: 30rem;
-  padding: .5rem;
+  padding: 1rem;
+  position: absolute;
 }
 
 @media (max-width: 640px) {
@@ -270,7 +271,6 @@ header p {
   display: flex;
   gap: .5rem;
   justify-content: center;
-  margin: .5rem 0;
 }
 
 #transformations-search-name-box {
