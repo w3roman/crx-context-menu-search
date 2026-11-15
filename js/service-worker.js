@@ -66,7 +66,8 @@ chrome.contextMenus.onClicked.addListener((info) => {
     let url = fieldset.url
     // https://yandex.by/images/search?rpt=imageview&url=https://grinvik.com/img/grinvik-brand.png
     // https://grinvik.com/samples/sample.pdf
-    let text = info.srcUrl && info.srcUrl.search(/^chrome-extension:\/\//) !== 0
+    // `mhjfbmdgcfjbbpaeojofohoefgiehjai` is the built-in extension ID for Google Chrome's internal PDF Viewer
+    let text = info.srcUrl && info.srcUrl.search(/^chrome-extension:\/\/mhjfbmdgcfjbbpaeojofohoefgiehjai\//) !== 0
         ? info.srcUrl
         : info.selectionText
     if (fieldset.transformations?.toLowerCase) {
