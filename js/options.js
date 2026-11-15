@@ -159,7 +159,6 @@ window.addEventListener('DOMContentLoaded', () => {
         setFieldsets(storage.fieldsets)
         openInBackgroundCheckbox.checked = storage.openInBackground
         addUtmSourceCheckbox.checked = storage.addUtmSource
-        listOfFieldsets.setAttribute('data-imported', true)
         // To save the import, the user must click the Save button in the Controls block. However, they may open
         // Transformations, change something there, click the Save button in the Transformations modal, and then close
         // or reload the Options without clicking the Save button in the Controls block. In this case, the imported
@@ -260,7 +259,6 @@ window.addEventListener('DOMContentLoaded', () => {
         e.removeAttribute('disabled')
         e.removeAttribute('data-title')
       })
-      listOfFieldsets.removeAttribute('data-imported')
       revertChangesButton.style.display = 'none'
     })
   })
