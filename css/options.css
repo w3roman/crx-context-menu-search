@@ -37,11 +37,10 @@ body {
 
 #top-notification {
   background: #d4edda;
-  border-radius: .5rem;
+  border-radius: .3rem;
   display: none;
-  min-height: 3rem;
   min-width: 30rem;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   text-align: center;
   position: relative;
 }
