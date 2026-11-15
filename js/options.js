@@ -64,7 +64,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Sortable
     Sortable.create(listOfFieldsets, {
       // [name="searchName"], [name="searchUrl"] doesn't work
-      filter: 'input, button, .remove-fieldset-button',
+      filter: 'input, button, .fieldset-remove-button',
       preventOnFilter: false,
     })
   })
@@ -195,7 +195,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // Remove
 
   listOfFieldsets.addEventListener('click', (eventObject) => {
-    if (eventObject.target.classList.contains('remove-fieldset-button')) {
+    if (eventObject.target.classList.contains('fieldset-remove-button')) {
       eventObject.target.parentElement.remove()
     }
   })

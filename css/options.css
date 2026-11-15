@@ -271,7 +271,7 @@ header p {
   position: relative;
 }
 
-.remove-fieldset-button,
+.fieldset-remove-button,
 .remove-transformation-rule-button {
   color: #f00;
   cursor: pointer;
