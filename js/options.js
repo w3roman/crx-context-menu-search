@@ -280,16 +280,20 @@ window.addEventListener('DOMContentLoaded', () => {
     if (e.target.classList.contains('transformations-button')) {
 
       // Modal Template
+
       const modalTemplate = transformationsModalTemplate.content.cloneNode(true)
 
       // Parent Li
+
       const parentLi = e.target.closest('li')
 
       // Search Name
+
       modalTemplate.querySelector('#transformations-search-name-box').textContent =
         parentLi.querySelector('[name="searchName"]').value
 
       // Casing
+
       const toLowerCaseCheckbox = modalTemplate.querySelector('[name="toLowerCase"]')
       const toUpperCaseCheckbox = modalTemplate.querySelector('[name="toUpperCase"]')
       toLowerCaseCheckbox.addEventListener('click', caseCheckboxHandler)
@@ -337,6 +341,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }
 
       // Save button
+
       modalTemplate.getElementById('transformations-save-button')
         .addEventListener('click', (e) => {
           const modal = e.target.closest('#transformations-modal')
@@ -397,12 +402,14 @@ window.addEventListener('DOMContentLoaded', () => {
         })
 
       // Close modal button
+
       modalTemplate.getElementById('transformations-modal-close-button')
         .addEventListener('click', () => {
           document.getElementById('transformations-modal').remove()
         })
 
       // Append
+
       document.body.appendChild(modalTemplate)
     }
   })
