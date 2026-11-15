@@ -65,7 +65,7 @@ chrome.contextMenus.onClicked.addListener((info) => {
     const fieldset = storage.fieldsets[info.menuItemId]
     let url = fieldset.url
     // https://yandex.by/images/search?rpt=imageview&url=https://grinvik.com/img/grinvik-brand.png
-    // https://pdfobject.com/pdf/sample.pdf
+    // https://grinvik.com/samples/sample.pdf
     let text = info.srcUrl && info.srcUrl.search(/^chrome-extension:\/\//) !== 0
         ? info.srcUrl
         : info.selectionText
