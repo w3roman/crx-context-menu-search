@@ -2,6 +2,8 @@
 
 window.addEventListener('DOMContentLoaded', () => {
 
+  const MSG_TIMEOUT = 1500
+
   const topNotification = document.getElementById('top-notification')
   const topNotificationCloseButton = document.getElementById('top-notification-close-button')
   const listOfFieldsets = document.getElementById('list-of-fieldsets')
@@ -216,7 +218,7 @@ window.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             messageBox.textContent = ''
             messageBox.classList.remove('color-error')
-          }, 1500)
+          }, MSG_TIMEOUT)
           thereIsAnError = true
           return false
         }
@@ -228,7 +230,7 @@ window.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             messageBox.textContent = ''
             messageBox.classList.remove('color-error')
-          }, 1500)
+          }, MSG_TIMEOUT)
           thereIsAnError = true
           return false
         }
@@ -254,7 +256,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           messageBox.textContent = ''
           messageBox.classList.remove('color-success')
-        }, 1500)
+        }, MSG_TIMEOUT)
         listOfFieldsets.querySelectorAll('.transformations-button[disabled]').forEach((e) => {
           e.removeAttribute('disabled')
           e.removeAttribute('data-title')
@@ -355,7 +357,7 @@ window.addEventListener('DOMContentLoaded', () => {
               setTimeout(() => {
                 messageBox.textContent = ''
                 messageBox.classList.remove('color-error')
-              }, 1500)
+              }, MSG_TIMEOUT)
               regexpInput.focus()
               thereIsAnError = true
               return false
@@ -365,7 +367,7 @@ window.addEventListener('DOMContentLoaded', () => {
               setTimeout(() => {
                 messageBox.textContent = ''
                 messageBox.classList.remove('color-error')
-              }, 1500)
+              }, MSG_TIMEOUT)
               replaceInput.focus()
               thereIsAnError = true
               return false
@@ -392,7 +394,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                   messageBox.textContent = ''
                   messageBox.classList.remove('color-success')
-                }, 1500)
+                }, MSG_TIMEOUT)
                 parentLi.setAttribute('data-transformations', JSON.stringify(storage.fieldsets[searchId].transformations))
               })
             })
