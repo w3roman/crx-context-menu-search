@@ -47,6 +47,19 @@ chrome.storage.onChanged.addListener((changes, area) => {
   }
 })
 
+/**
+ * General properties of the `info` object:
+ * {
+ *   editable: false,
+ *   frameId: 0,
+ *   frameUrl: "<url>",
+ *   menuItemId: "<id>",
+ *   pageUrl: "<url>",
+ * }
+ * When text is selected, `selectionText: "<text>"` is added
+ * When an image is clicked, `mediaType: "image"` and `srcUrl: "<url>"` are added
+ * When link text is selected or an image-link is clicked, the `linkUrl: "<url>"` property is added
+ */
 chrome.contextMenus.onClicked.addListener((info) => {
   chrome.storage.sync.get(null, (storage) => {
     const fieldset = storage.fieldsets[info.menuItemId]
