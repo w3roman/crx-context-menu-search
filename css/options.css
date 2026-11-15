@@ -37,7 +37,7 @@ body {
 
 #top-notification {
   background: #d4edda;
-  border-radius: .3rem;
+  border-radius: .2rem;
   display: none;
   min-width: 30rem;
   padding: 1rem 1.5rem;
@@ -68,7 +68,7 @@ body {
   content: attr(data-title);
   font-size: .8rem;
   position: absolute;
-  top: -.22rem;
+  top: -21%;
   transform: translateX(-121%);
   padding: .3rem .4rem;
   visibility: hidden;
