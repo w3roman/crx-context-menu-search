@@ -258,7 +258,7 @@ header p {
   border-radius: .3rem;
   width: 30rem;
   padding: 1rem;
-  position: absolute;
+  position: fixed;
 }
 
 @media (max-width: 640px) {
