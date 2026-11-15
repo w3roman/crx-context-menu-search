@@ -237,7 +237,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         newStorage.fieldsets.push({
           name: nameInput.value,
-          transformations: JSON.parse(fieldset.getAttribute('data-transformations')), // For Import and Load Defaults
+          // For Import and Defaults, since `.transformations` may not be present there, and when `setFieldsets()` is
+          // called, `defaultTransformations` will be set. And during a regular save, Transformations are already
+          // written to `chrome.storage.sync`.
+          transformations: JSON.parse(fieldset.getAttribute('data-transformations')),
           url: urlInput.value,
         })
       } else {
@@ -271,7 +274,7 @@ window.addEventListener('DOMContentLoaded', () => {
     location.reload()
   })
 
-  // Link to "Load Defaults"
+  // Link to "Load Defaults" button
   document.getElementById('link-to-load-defaults-button').addEventListener('click', (e) => {
     e.preventDefault()
     loadDefaultsButton.focus({focusVisible: true})
