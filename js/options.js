@@ -281,11 +281,8 @@ window.addEventListener('DOMContentLoaded', () => {
       const parentLi = e.target.closest('li')
 
       // Search Name
-      const searchNameBox = modalTemplate.querySelector('#transformations-search-name-box')
-      searchNameBox.textContent = searchNameBox.textContent.replace(
-        'name',
+      modalTemplate.querySelector('#transformations-search-name-box').textContent =
         parentLi.querySelector('[name="searchName"]').value
-      )
 
       // Casing
       const toLowerCaseCheckbox = modalTemplate.querySelector('[name="toLowerCase"]')

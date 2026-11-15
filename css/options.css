@@ -163,6 +163,11 @@ header p {
   margin: .5rem 0;
 }
 
+#transformations-search-name-box {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
 #transformations-casing-box {
   margin-top: 1.5rem;
 }
