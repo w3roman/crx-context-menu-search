@@ -260,6 +260,14 @@ header p {
   margin: 0 auto;
 }
 
+[id$="-close-button"]:after,
+[class$="-remove-button"]:after {
+  color: #f00;
+  content: '×';
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
 #top-notification {
   background: #d4edda;
   border-radius: .5rem;
@@ -271,18 +279,8 @@ header p {
   position: relative;
 }
 
-.fieldset-remove-button,
-.transformation-rule-remove-button {
-  color: #f00;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
 #top-notification-close-button,
 #transformations-modal-close-button {
-  color: #f00;
-  cursor: pointer;
-  font-size: 1.2rem;
   position: absolute;
   top: -.1rem;
   right: .3rem;
