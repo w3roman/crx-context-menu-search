@@ -38,8 +38,8 @@ window.addEventListener('DOMContentLoaded', () => {
         let li = newFieldset.querySelector('li')
         newFieldset.querySelector('[name="searchName"]').value = fieldset.name
         newFieldset.querySelector('[name="searchUrl"]').value = fieldset.url
-        li.setAttribute('data-id', index)
-        // We attach the transformations to <li>, since when Search is deleted, the indexes get overwritten
+        li.setAttribute('data-id', index) // Used when saving Transformations
+        // We attach the transformations to `<li>` because deleting a fieldset causes the indexes to shift
         li.setAttribute(
           'data-transformations',
           JSON.stringify(fieldset.transformations || defaultTransformations)
