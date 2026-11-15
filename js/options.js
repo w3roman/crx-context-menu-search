@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function setDisabledAndTitle(e) {
     e.setAttribute('disabled', true)
-    e.setAttribute('title', 'First, save the settings')
+    e.setAttribute('data-title', 'First, save the settings')
   }
 
   chrome.storage.sync.get(null, (storage) => {
@@ -257,7 +257,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }, 1500)
       listOfFieldsets.querySelectorAll('.transformations-button[disabled]').forEach((e) => {
         e.removeAttribute('disabled')
-        e.removeAttribute('title')
+        e.removeAttribute('data-title')
       })
       listOfFieldsets.removeAttribute('data-load-defaults')
       listOfFieldsets.removeAttribute('data-imported')

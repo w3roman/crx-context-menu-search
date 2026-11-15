@@ -291,3 +291,31 @@ header p {
 #transformations-close-modal-button {
   top: -.6rem;
 }
+
+/*
+ * ----------------------------------------
+ * [data-title]
+ * ----------------------------------------
+*/
+
+[data-title] {
+  position: relative;
+}
+
+[data-title]::after {
+  background: #333;
+  border-radius: .2rem;
+  color: #fff;
+  content: attr(data-title);
+  font-size: .8rem;
+  position: absolute;
+  top: -.22rem;
+  transform: translateX(-121%);
+  padding: .3rem .4rem;
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+[data-title]:hover::after {
+  visibility: visible;
+}
