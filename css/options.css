@@ -16,6 +16,78 @@ body {
   overflow: scroll;
 }
 
+
+
+/*
+ * ------------------------------------------------------------------------------
+ * Close / Remove Buttons
+ * ------------------------------------------------------------------------------
+*/
+
+[id$="-close-button"]:after,
+[class$="-remove-button"]:after {
+  color: #f00;
+  content: '×';
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/*
+ * ------------------------------------------------------------------------------
+ * Top Notification
+ * ------------------------------------------------------------------------------
+*/
+
+#top-notification {
+  background: #d4edda;
+  border-radius: .5rem;
+  display: none;
+  min-height: 3rem;
+  min-width: 30rem;
+  padding: 1rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+#top-notification-close-button,
+#transformations-modal-close-button {
+  position: absolute;
+  top: -.1rem;
+  right: .3rem;
+}
+
+#transformations-modal-close-button {
+  top: -.6rem;
+}
+
+/*
+ * ------------------------------------------------------------------------------
+ * [data-title]
+ * ------------------------------------------------------------------------------
+*/
+
+[data-title] {
+  position: relative;
+}
+
+[data-title]::after {
+  background: #333;
+  border-radius: .2rem;
+  color: #fff;
+  content: attr(data-title);
+  font-size: .8rem;
+  position: absolute;
+  top: -.22rem;
+  transform: translateX(-121%);
+  padding: .3rem .4rem;
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+[data-title]:hover::after {
+  visibility: visible;
+}
+
 .color-error {
   color: red;
 }
@@ -43,7 +115,7 @@ input[type="checkbox"] {
   margin: 0 .5rem 0 0;
 }
 
-input {
+input[type="text"] {
   border: 1px solid #bfbfbf;
   border-radius: .3rem;
   padding: .2rem;
@@ -258,62 +330,4 @@ header p {
 .donate-section p {
   width: 86%;
   margin: 0 auto;
-}
-
-[id$="-close-button"]:after,
-[class$="-remove-button"]:after {
-  color: #f00;
-  content: '×';
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-
-#top-notification {
-  background: #d4edda;
-  border-radius: .5rem;
-  display: none;
-  min-height: 3rem;
-  min-width: 30rem;
-  padding: 1rem 2rem;
-  text-align: center;
-  position: relative;
-}
-
-#top-notification-close-button,
-#transformations-modal-close-button {
-  position: absolute;
-  top: -.1rem;
-  right: .3rem;
-}
-
-#transformations-modal-close-button {
-  top: -.6rem;
-}
-
-/*
- * ----------------------------------------
- * [data-title]
- * ----------------------------------------
-*/
-
-[data-title] {
-  position: relative;
-}
-
-[data-title]::after {
-  background: #333;
-  border-radius: .2rem;
-  color: #fff;
-  content: attr(data-title);
-  font-size: .8rem;
-  position: absolute;
-  top: -.22rem;
-  transform: translateX(-121%);
-  padding: .3rem .4rem;
-  visibility: hidden;
-  white-space: nowrap;
-}
-
-[data-title]:hover::after {
-  visibility: visible;
 }
