@@ -396,9 +396,10 @@ window.addEventListener('DOMContentLoaded', () => {
       })
 
       // Close modal button
-      modalTemplate.getElementById('transformations-close-modal-button').addEventListener('click', () => {
-        document.getElementById('transformations-modal').remove()
-      })
+      modalTemplate.getElementById('transformations-close-modal-button')
+        .addEventListener('click', () => {
+          document.getElementById('transformations-modal').remove()
+        })
 
       // Append
       document.body.appendChild(modalTemplate)
