@@ -37,7 +37,7 @@ body {
 
 #top-notification {
   background: #d4edda;
-  border-radius: .2rem;
+  border-radius: .3rem;
   display: none;
   min-width: 30rem;
   padding: 1rem 1.5rem;
@@ -63,7 +63,7 @@ body {
 
 [data-title]::after {
   background: #333;
-  border-radius: .2rem;
+  border-radius: .3rem;
   color: #fff;
   content: attr(data-title);
   font-size: .8rem;
