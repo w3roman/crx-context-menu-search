@@ -258,18 +258,16 @@ header p {
   border-radius: .3rem;
   width: 30rem;
   padding: .5rem;
-  position: absolute;
 }
 
 @media (max-width: 640px) {
   #transformations-container {
-    width: 15rem;
+    width: 18rem;
   }
 }
 
 #transformations-container > * {
   display: flex;
-  flex-wrap: wrap;
   gap: .5rem;
   justify-content: center;
   margin: .5rem 0;
