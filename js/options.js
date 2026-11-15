@@ -325,9 +325,9 @@ window.addEventListener('DOMContentLoaded', () => {
           e.target.closest('.transformation-rule').remove()
         })
         let currentDocument
-        if (e instanceof PointerEvent) {
+        if (e instanceof PointerEvent) { // Click on the `Add Rule` button
           currentDocument = document
-        } else {
+        } else { // Opening the Transformations modal
           currentDocument = modalTemplate
           ruleTemplate.querySelector('[name="regexp"]').value = e.regexp
           ruleTemplate.querySelector('[name="flags"]').value = e.flags
