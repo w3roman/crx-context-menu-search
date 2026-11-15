@@ -263,6 +263,12 @@ window.addEventListener('DOMContentLoaded', () => {
     location.reload()
   })
 
+  // Link to "Load Defaults"
+  document.getElementById('link-to-load-defaults-button').addEventListener('click', (e) => {
+    e.preventDefault()
+    loadDefaultsButton.focus({focusVisible: true})
+  })
+
   // Transformations
 
   listOfFieldsets.addEventListener('click', (e) => {
