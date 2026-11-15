@@ -263,7 +263,7 @@ header p {
   border-radius: .3rem;
   width: 30rem;
   margin-top: -5rem;
-  padding: 1rem;
+  padding: 1.5rem;
   position: fixed;
 }
 
@@ -293,7 +293,7 @@ header p {
 }
 
 #transformations-message-box {
-  min-height: 1rem;
+  height: 1rem;
   margin-bottom: .5rem;
 }
 
@@ -332,10 +332,14 @@ header p {
   width: 90%;
 }
 
+/*
+ * ------------------------------------------------------------------------------
+ * Controls Section
+ * ------------------------------------------------------------------------------
+*/
+
 .controls-box {
   display: flex;
-  align-items: center;
-  gap: 1rem;
   justify-content: space-between;
 }
 
@@ -345,7 +349,6 @@ header p {
 }
 
 #save-button {
-  display: block;
   margin: auto;
 }
 
