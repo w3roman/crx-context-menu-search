@@ -378,6 +378,7 @@ header p {
 }
 
 .donate-section p {
+  display: none;
   margin: 0;
 }
 
