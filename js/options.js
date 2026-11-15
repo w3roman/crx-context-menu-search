@@ -261,6 +261,7 @@ window.addEventListener('DOMContentLoaded', () => {
       })
       listOfFieldsets.removeAttribute('data-load-defaults')
       listOfFieldsets.removeAttribute('data-imported')
+      revertChangesButton.style.display = 'none'
     })
   })
 
