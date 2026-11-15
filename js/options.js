@@ -74,7 +74,9 @@ window.addEventListener('DOMContentLoaded', () => {
   // Top notification
   chrome.storage.local.get(null, (localStorage) => {
     if (localStorage.updateMessage) {
-      topNotification.append(document.createTextNode(localStorage.updateMessage))
+      let div = document.createElement('div')
+      div.innerHTML = '' + localStorage.updateMessage
+      topNotification.append(div)
       topNotification.style.display = 'block'
       topNotificationCloseButton.addEventListener('click', () => {
         chrome.storage.local.remove('updateMessage', () => {
