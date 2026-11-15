@@ -16,8 +16,6 @@ body {
   overflow: scroll;
 }
 
-
-
 /*
  * ------------------------------------------------------------------------------
  * Close / Remove Buttons
@@ -49,15 +47,10 @@ body {
   position: relative;
 }
 
-#top-notification-close-button,
-#transformations-modal-close-button {
+#top-notification-close-button {
   position: absolute;
   top: -.1rem;
   right: .3rem;
-}
-
-#transformations-modal-close-button {
-  top: -.6rem;
 }
 
 /*
@@ -88,13 +81,11 @@ body {
   visibility: visible;
 }
 
-.color-error {
-  color: red;
-}
-
-.color-success {
-  color: green;
-}
+/*
+ * ------------------------------------------------------------------------------
+ * Common Styles
+ * ------------------------------------------------------------------------------
+*/
 
 a {
   color: #15c;
@@ -139,6 +130,20 @@ h3 {
   text-align: center;
 }
 
+.color-error {
+  color: red;
+}
+
+.color-success {
+  color: green;
+}
+
+/*
+ * ------------------------------------------------------------------------------
+ * Header
+ * ------------------------------------------------------------------------------
+*/
+
 header {
   margin-bottom: 1rem;
   text-align: center;
@@ -147,6 +152,12 @@ header {
 header p {
   margin: 0;
 }
+
+/*
+ * ------------------------------------------------------------------------------
+ * Options Body
+ * ------------------------------------------------------------------------------
+*/
 
 .options-body {
   display: flex;
@@ -219,6 +230,12 @@ header p {
   top: 0;
   width: 100%;
   height: 100%;
+}
+
+#transformations-modal-close-button {
+  position: absolute;
+  top: -.6rem;
+  right: .3rem;
 }
 
 #transformations-container {
