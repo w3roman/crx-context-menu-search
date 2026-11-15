@@ -253,6 +253,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     newStorage.openInBackground = openInBackgroundCheckbox.checked
     newStorage.addUtmSource = addUtmSourceCheckbox.checked
+
     chrome.storage.sync.set(newStorage, () => {
       messageBox.classList.add('color-success')
       messageBox.textContent = 'Saved'
