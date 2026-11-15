@@ -330,7 +330,7 @@ header p {
   width: 100%;
 }
 
-.controls-box #discard-changes-button {
+.controls-box #revert-changes-button {
   display: none;
   margin: auto;
 }

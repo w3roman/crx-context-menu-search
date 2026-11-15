@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const openInBackgroundCheckbox = document.getElementById('open-in-background-checkbox')
   const addUtmSourceCheckbox = document.getElementById('add-utm-source-checkbox')
   const saveButton = document.getElementById('save-button')
-  const discardChangesButton = document.getElementById('discard-changes-button')
+  const revertChangesButton = document.getElementById('revert-changes-button')
   const messageBox = document.getElementById('message-box')
 
   /*
@@ -122,7 +122,7 @@ window.addEventListener('DOMContentLoaded', () => {
       listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
         setDisabledAndTitleAttributes(e)
       })
-      discardChangesButton.style.display = 'block'
+      revertChangesButton.style.display = 'block'
     })
   })
 
@@ -145,7 +145,7 @@ window.addEventListener('DOMContentLoaded', () => {
     for (let searchName in orderedFieldsets) {
       listOfFieldsets.appendChild(orderedFieldsets[searchName])
     }
-    discardChangesButton.style.display = 'block'
+    revertChangesButton.style.display = 'block'
   })
 
   // Import
@@ -169,7 +169,7 @@ window.addEventListener('DOMContentLoaded', () => {
         listOfFieldsets.querySelectorAll('.transformations-button').forEach((e) => {
           setDisabledAndTitleAttributes(e)
         })
-        discardChangesButton.style.display = 'block'
+        revertChangesButton.style.display = 'block'
       }
       reader.readAsText(file)
       form.reset()
@@ -261,14 +261,14 @@ window.addEventListener('DOMContentLoaded', () => {
           e.removeAttribute('disabled')
           e.removeAttribute('data-title')
         })
-        discardChangesButton.style.display = 'none'
+        revertChangesButton.style.display = 'none'
       })
     }
   })
 
   // Revert Changes
 
-  discardChangesButton.addEventListener('click', () => {
+  revertChangesButton.addEventListener('click', () => {
     location.reload()
   })
 
