@@ -73,7 +73,8 @@ label {
   cursor: pointer;
 }
 
-button[disabled] {
+button[disabled],
+input[disabled] {
   cursor: not-allowed;
 }
 
@@ -190,14 +191,15 @@ header p {
   margin-bottom: 0;
 }
 
-#list-of-fieldsets li div {
-  margin-top: -.1rem;
-}
-
 #list-of-fieldsets .up-down-arrow {
   color: #15c;
   cursor: move;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  margin-top: -.2rem;
+}
+
+#list-of-fieldsets input[type="checkbox"] {
+  margin: 0;
 }
 
 #list-of-fieldsets [name="searchName"] {
@@ -206,6 +208,10 @@ header p {
 
 #list-of-fieldsets [name="searchUrl"] {
   width: 55%;
+}
+
+#list-of-fieldsets .fieldset-remove-button {
+  margin-top: -.1rem;
 }
 
 /*
@@ -348,6 +354,7 @@ header p {
 
 .donate-section h2 {
   font-weight: normal;
+  margin-top: 1rem;
 }
 
 /*
@@ -385,14 +392,22 @@ header p {
   visibility: visible;
 }
 
+.settings-section [type="checkbox"][data-title]:after {
+  width: 7.5rem;
+  top: -48%;
+  transform: translateX(17%);
+  text-align: center;
+}
+
 .settings-section .transformations-button[data-title]:after {
-  top: -21%;
-  transform: translateX(-121%);
-  white-space: nowrap;
+  width: 7.5rem;
+  top: -22%;
+  transform: translateX(-120%);
+  text-align: center;
 }
 
 .donate-section a[data-title]:after {
-  width: 15rem;
+  width: 25rem;
   left: 50%;
   transform: translateX(-50%) translateY(-110%);
 }

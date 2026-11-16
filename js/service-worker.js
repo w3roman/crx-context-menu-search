@@ -5,6 +5,9 @@ importScripts('config.js')
 function setContextMenuItems(fieldsets) {
   const contexts = ['image', 'selection']
   fieldsets.forEach((fieldset, index) => {
+    if (fieldset.enabled === false) {
+      return
+    }
     const options = { id: '' + index,  contexts }
     if (fieldset.name === '_separator_') {
       options.type = 'separator'
