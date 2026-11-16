@@ -273,26 +273,26 @@ window.addEventListener('DOMContentLoaded', () => {
       const nameInput = fieldset.querySelector('[name="searchName"]')
       if (nameInput) {
         if (!nameInput.value) {
+          thereIsAnError = true
+          nameInput.focus()
           controlsMessageBox.classList.add('color-error')
           controlsMessageBox.textContent = 'The Search name must not be empty'
-          nameInput.focus()
           setTimeout(() => {
             controlsMessageBox.textContent = ''
             controlsMessageBox.classList.remove('color-error')
           }, MSG_TIMEOUT)
-          thereIsAnError = true
           return false
         }
         const urlInput = fieldset.querySelector('[name="searchUrl"]')
         if (!urlInput.value) {
+          thereIsAnError = true
+          urlInput.focus()
           controlsMessageBox.classList.add('color-error')
           controlsMessageBox.textContent = 'The Search URL must not be empty'
-          urlInput.focus()
           setTimeout(() => {
             controlsMessageBox.textContent = ''
             controlsMessageBox.classList.remove('color-error')
           }, MSG_TIMEOUT)
-          thereIsAnError = true
           return false
         }
         newStorage.fieldsets.push({
@@ -313,12 +313,6 @@ window.addEventListener('DOMContentLoaded', () => {
       newStorage.openInBackground = openInBackgroundCheckbox.checked
       newStorage.addUtmSource = addUtmSourceCheckbox.checked
       chrome.storage.sync.set(newStorage, () => {
-        controlsMessageBox.classList.add('color-success')
-        controlsMessageBox.textContent = 'Saved'
-        setTimeout(() => {
-          controlsMessageBox.textContent = ''
-          controlsMessageBox.classList.remove('color-success')
-        }, MSG_TIMEOUT)
         listOfFieldsets.querySelectorAll('li').forEach((li) => {
           const enabledCheckbox = li.querySelector('[type="checkbox"]')
           if (enabledCheckbox) {
@@ -336,6 +330,12 @@ window.addEventListener('DOMContentLoaded', () => {
           checkboxOrButton.removeAttribute('data-title')
         })
         discardChangesButton.style.display = 'none'
+        controlsMessageBox.classList.add('color-success')
+        controlsMessageBox.textContent = 'Saved'
+        setTimeout(() => {
+          controlsMessageBox.textContent = ''
+          controlsMessageBox.classList.remove('color-success')
+        }, MSG_TIMEOUT)
       })
     }
   })
