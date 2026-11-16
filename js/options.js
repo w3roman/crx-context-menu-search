@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const addUtmSourceCheckbox = document.getElementById('add-utm-source-checkbox')
   const saveButton = document.getElementById('save-button')
   const discardChangesButton = document.getElementById('discard-changes-button')
-  const messageBox = document.getElementById('message-box')
+  const controlsMessageBox = document.getElementById('controls-message-box')
 
   /*
    * =============================================================================
@@ -272,24 +272,24 @@ window.addEventListener('DOMContentLoaded', () => {
       const nameInput = fieldset.querySelector('[name="searchName"]')
       if (nameInput) {
         if (!nameInput.value) {
-          messageBox.classList.add('color-error')
-          messageBox.textContent = 'The Search name must not be empty'
+          controlsMessageBox.classList.add('color-error')
+          controlsMessageBox.textContent = 'The Search name must not be empty'
           nameInput.focus()
           setTimeout(() => {
-            messageBox.textContent = ''
-            messageBox.classList.remove('color-error')
+            controlsMessageBox.textContent = ''
+            controlsMessageBox.classList.remove('color-error')
           }, MSG_TIMEOUT)
           thereIsAnError = true
           return false
         }
         const urlInput = fieldset.querySelector('[name="searchUrl"]')
         if (!urlInput.value) {
-          messageBox.classList.add('color-error')
-          messageBox.textContent = 'The Search URL must not be empty'
+          controlsMessageBox.classList.add('color-error')
+          controlsMessageBox.textContent = 'The Search URL must not be empty'
           urlInput.focus()
           setTimeout(() => {
-            messageBox.textContent = ''
-            messageBox.classList.remove('color-error')
+            controlsMessageBox.textContent = ''
+            controlsMessageBox.classList.remove('color-error')
           }, MSG_TIMEOUT)
           thereIsAnError = true
           return false
@@ -312,11 +312,11 @@ window.addEventListener('DOMContentLoaded', () => {
       newStorage.openInBackground = openInBackgroundCheckbox.checked
       newStorage.addUtmSource = addUtmSourceCheckbox.checked
       chrome.storage.sync.set(newStorage, () => {
-        messageBox.classList.add('color-success')
-        messageBox.textContent = 'Saved'
+        controlsMessageBox.classList.add('color-success')
+        controlsMessageBox.textContent = 'Saved'
         setTimeout(() => {
-          messageBox.textContent = ''
-          messageBox.classList.remove('color-success')
+          controlsMessageBox.textContent = ''
+          controlsMessageBox.classList.remove('color-success')
         }, MSG_TIMEOUT)
         listOfFieldsets.querySelectorAll('li').forEach((li) => {
           const enabledCheckbox = li.querySelector('[type="checkbox"]')

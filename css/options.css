@@ -332,7 +332,7 @@ header p {
   margin: auto;
 }
 
-.controls-box #message-box {
+#controls-message-box {
   height: 1rem;
   width: 100%;
 }
