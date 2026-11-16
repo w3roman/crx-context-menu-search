@@ -277,7 +277,7 @@ header p {
   margin-bottom: .5rem;
 }
 
-#transformations-casing-box + .transformation-rule {
+#transformations-casing-box ~ .transformation-rule {
   margin: 1rem 0 .5rem;
 }
 
