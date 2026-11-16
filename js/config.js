@@ -43,6 +43,10 @@ const defaultOptions = {
     enabled: true,
     name: 'Yandex Maps',
     url: 'https://ya.ru/maps/?clid=15525262&text=%s',
+  }, {
+    enabled: true,
+    name: 'Yandex Images by Image URL',
+    url: 'https://ya.ru/images/search?clid=15525262&rpt=imageview&url=%s',
   }],
   openInBackground: false,
   addUtmSource: true,
