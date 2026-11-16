@@ -256,9 +256,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Remove
 
-  listOfFieldsets.addEventListener('click', (eventObject) => {
-    if (eventObject.target.classList.contains('fieldset-remove-button')) {
-      eventObject.target.parentElement.remove()
+  listOfFieldsets.addEventListener('click', (e) => {
+    if (e.target.classList.contains('fieldset-remove-button')) {
+      e.target.parentElement.remove()
     }
   })
 
