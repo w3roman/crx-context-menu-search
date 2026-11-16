@@ -344,20 +344,20 @@ window.addEventListener('DOMContentLoaded', () => {
   listOfFieldsets.addEventListener('click', (e) => {
     if (e.target.classList.contains('transformations-button')) {
 
-      // Modal Template
+      //  Transformations modal template
 
       const modalTemplate = transformationsModalTemplate.content.cloneNode(true)
 
-      // Parent Li
+      // Parent <li>
 
       const parentLi = e.target.closest('li')
 
-      // Search Name
+      // Transformations search name
 
       modalTemplate.querySelector('#transformations-search-name-box').textContent =
         parentLi.querySelector('[name="searchName"]').value
 
-      // Casing
+      // Transformations casing
 
       const toLowerCaseCheckbox = modalTemplate.querySelector('[name="toLowerCase"]')
       const toUpperCaseCheckbox = modalTemplate.querySelector('[name="toUpperCase"]')
@@ -371,7 +371,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Rules
+      // Transformations rules
 
       const transformations = JSON.parse(parentLi.getAttribute('data-transformations'))
       toLowerCaseCheckbox.checked = transformations.toLowerCase
@@ -405,7 +405,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Save button
+      // Save Transformations button
 
       modalTemplate.getElementById('transformations-save-button')
         .addEventListener('click', (e) => {
@@ -466,14 +466,14 @@ window.addEventListener('DOMContentLoaded', () => {
           }
         })
 
-      // Close modal button
+      // Close Transformations modal button
 
       modalTemplate.getElementById('transformations-modal-close-button')
         .addEventListener('click', () => {
           document.getElementById('transformations-modal').remove()
         })
 
-      // Append
+      // Append Transformations modal
 
       document.body.appendChild(modalTemplate)
     }
