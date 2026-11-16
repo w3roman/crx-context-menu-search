@@ -78,6 +78,15 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  function showMessage(element, message, cssClass) {
+    element.classList.add(cssClass)
+    element.textContent = message
+    setTimeout(() => {
+      element.textContent = ''
+      element.classList.remove(cssClass)
+    }, MSG_TIMEOUT)
+  }
+
   chrome.storage.sync.get(null, (storage) => {
 
     // Options
@@ -275,24 +284,14 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!nameInput.value) {
           thereIsAnError = true
           nameInput.focus()
-          controlsMessageBox.classList.add('color-error')
-          controlsMessageBox.textContent = 'The Search name must not be empty'
-          setTimeout(() => {
-            controlsMessageBox.textContent = ''
-            controlsMessageBox.classList.remove('color-error')
-          }, MSG_TIMEOUT)
+          showMessage(controlsMessageBox, 'The Search name must not be empty', 'color-error')
           return false
         }
         const urlInput = fieldset.querySelector('[name="searchUrl"]')
         if (!urlInput.value) {
           thereIsAnError = true
           urlInput.focus()
-          controlsMessageBox.classList.add('color-error')
-          controlsMessageBox.textContent = 'The Search URL must not be empty'
-          setTimeout(() => {
-            controlsMessageBox.textContent = ''
-            controlsMessageBox.classList.remove('color-error')
-          }, MSG_TIMEOUT)
+          showMessage(controlsMessageBox, 'The Search URL must not be empty', 'color-error')
           return false
         }
         newStorage.fieldsets.push({
@@ -330,12 +329,7 @@ window.addEventListener('DOMContentLoaded', () => {
           checkboxOrButton.removeAttribute('data-title')
         })
         discardChangesButton.style.display = 'none'
-        controlsMessageBox.classList.add('color-success')
-        controlsMessageBox.textContent = 'Saved'
-        setTimeout(() => {
-          controlsMessageBox.textContent = ''
-          controlsMessageBox.classList.remove('color-success')
-        }, MSG_TIMEOUT)
+        showMessage(controlsMessageBox, 'Saved', 'color-success')
       })
     }
   })
@@ -420,22 +414,12 @@ window.addEventListener('DOMContentLoaded', () => {
             if (!regexpInput.value) {
               thereIsAnError = true
               regexpInput.focus()
-              transformationsMessageBox.classList.add('color-error')
-              transformationsMessageBox.textContent = 'The RegExp field must not be empty'
-              setTimeout(() => {
-                transformationsMessageBox.textContent = ''
-                transformationsMessageBox.classList.remove('color-error')
-              }, MSG_TIMEOUT)
+              showMessage(transformationsMessageBox, 'The RegExp field must not be empty', 'color-error')
               return false
             } else if (!replaceInput.value) {
               thereIsAnError = true
               replaceInput.focus()
-              transformationsMessageBox.classList.add('color-error')
-              transformationsMessageBox.textContent = 'The Replace field must not be empty'
-              setTimeout(() => {
-                transformationsMessageBox.textContent = ''
-                transformationsMessageBox.classList.remove('color-error')
-              }, MSG_TIMEOUT)
+              showMessage(transformationsMessageBox, 'The Replace field must not be empty', 'color-error')
               return false
             } else {
               rules.push({
@@ -456,12 +440,7 @@ window.addEventListener('DOMContentLoaded', () => {
               }
               chrome.storage.sync.set(storage, () => {
                 parentLi.setAttribute('data-transformations', JSON.stringify(storage.fieldsets[searchId].transformations))
-                transformationsMessageBox.classList.add('color-success')
-                transformationsMessageBox.textContent = 'Saved'
-                setTimeout(() => {
-                  transformationsMessageBox.textContent = ''
-                  transformationsMessageBox.classList.remove('color-success')
-                }, MSG_TIMEOUT)
+                showMessage(transformationsMessageBox, 'Saved', 'color-success')
               })
             })
           }
