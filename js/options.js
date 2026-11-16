@@ -411,31 +411,31 @@ window.addEventListener('DOMContentLoaded', () => {
       modalTemplate.getElementById('transformations-save-button')
         .addEventListener('click', (e) => {
           const modal = e.target.closest('#transformations-modal')
-          const messageBox = modal.querySelector('#transformations-message-box')
-          let thereIsAnError = false
+          const transformationsMessageBox = modal.querySelector('#transformations-message-box')
           const rules = []
+          let thereIsAnError = false
           Array.from(modal.querySelectorAll('.transformation-rule')).every((rule) => {
             const regexpInput = rule.querySelector('[name="regexp"]')
             const replaceInput = rule.querySelector('[name="replace"]')
             if (!regexpInput.value) {
-              messageBox.classList.add('color-error')
-              messageBox.textContent = 'The RegExp field must not be empty'
-              setTimeout(() => {
-                messageBox.textContent = ''
-                messageBox.classList.remove('color-error')
-              }, MSG_TIMEOUT)
-              regexpInput.focus()
               thereIsAnError = true
+              regexpInput.focus()
+              transformationsMessageBox.classList.add('color-error')
+              transformationsMessageBox.textContent = 'The RegExp field must not be empty'
+              setTimeout(() => {
+                transformationsMessageBox.textContent = ''
+                transformationsMessageBox.classList.remove('color-error')
+              }, MSG_TIMEOUT)
               return false
             } else if (!replaceInput.value) {
-              messageBox.classList.add('color-error')
-              messageBox.textContent = 'The Replace field must not be empty'
-              setTimeout(() => {
-                messageBox.textContent = ''
-                messageBox.classList.remove('color-error')
-              }, MSG_TIMEOUT)
-              replaceInput.focus()
               thereIsAnError = true
+              replaceInput.focus()
+              transformationsMessageBox.classList.add('color-error')
+              transformationsMessageBox.textContent = 'The Replace field must not be empty'
+              setTimeout(() => {
+                transformationsMessageBox.textContent = ''
+                transformationsMessageBox.classList.remove('color-error')
+              }, MSG_TIMEOUT)
               return false
             } else {
               rules.push({
@@ -455,13 +455,13 @@ window.addEventListener('DOMContentLoaded', () => {
                 toUpperCase: modal.querySelector('[name="toUpperCase"]').checked,
               }
               chrome.storage.sync.set(storage, () => {
-                messageBox.classList.add('color-success')
-                messageBox.textContent = 'Saved'
-                setTimeout(() => {
-                  messageBox.textContent = ''
-                  messageBox.classList.remove('color-success')
-                }, MSG_TIMEOUT)
                 parentLi.setAttribute('data-transformations', JSON.stringify(storage.fieldsets[searchId].transformations))
+                transformationsMessageBox.classList.add('color-success')
+                transformationsMessageBox.textContent = 'Saved'
+                setTimeout(() => {
+                  transformationsMessageBox.textContent = ''
+                  transformationsMessageBox.classList.remove('color-success')
+                }, MSG_TIMEOUT)
               })
             })
           }
