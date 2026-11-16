@@ -22,12 +22,13 @@ function setContextMenuItems(fieldsets) {
 chrome.runtime.onInstalled.addListener((details) => {
   // `chrome.storage.local.set(defaultOptions)` is required for the Options page
   chrome.storage.local.set(
-    defaultOptions,
+    defaultFieldsets,
     () => chrome.storage.sync.get(null, (storage) => {
       if (storage.fieldsets) {
         setContextMenuItems(storage.fieldsets)
       } else { // details.reason === 'install'
-        chrome.storage.sync.set(defaultOptions, () => {
+        // `setContextMenuItems()` will be called in the `chrome.storage.onChanged` handler
+        chrome.storage.sync.set(defaultFieldsets, () => {
           chrome.runtime.openOptionsPage(() => {})
         })
       }

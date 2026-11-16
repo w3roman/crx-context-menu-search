@@ -187,8 +187,8 @@ window.addEventListener('DOMContentLoaded', () => {
   loadDefaultsButton.addEventListener('click', () => {
     chrome.storage.local.get(null, (storage) => {
       setFieldsets(storage.fieldsets)
-      openInBackgroundCheckbox.checked = storage.openInBackground
-      addUtmSourceCheckbox.checked = storage.addUtmSource
+      openInBackgroundCheckbox.checked = false
+      addUtmSourceCheckbox.checked = true
       // To save the Defaults, the user must click the Save button in the Controls block. However, they may open
       // Transformations, change something there, click the Save button in the Transformations modal, and then close or
       // reload the Options page without clicking the Save button in the Controls block. In this case, the loaded
