@@ -337,7 +337,7 @@ header p {
   width: 100%;
 }
 
-.controls-box #discard-changes-button {
+#discard-changes-button {
   display: none;
   margin: auto;
 }
