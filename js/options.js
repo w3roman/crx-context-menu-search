@@ -118,6 +118,7 @@ window.addEventListener('DOMContentLoaded', () => {
   })
 
   // Top notification
+
   chrome.storage.local.get(null, (localStorage) => {
     if (localStorage.updateMessage) {
       let div = document.createElement('div')
@@ -138,7 +139,7 @@ window.addEventListener('DOMContentLoaded', () => {
    * =============================================================================
    */
 
-  // Enable / Disable Search
+  // Enable / Disable search checkbox
 
   listOfFieldsets.addEventListener('change', (e) => {
     if (e.target.classList.contains('fieldset-enabled')) {
@@ -155,7 +156,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  // Add Search
+  // "Add Search" button
 
   addSearchButton.addEventListener('click', () => {
     const template = fieldsetTemplate.content.cloneNode(true)
@@ -166,13 +167,13 @@ window.addEventListener('DOMContentLoaded', () => {
     listOfFieldsets.querySelector('li:last-child [name="searchName"]').focus()
   })
 
-  // Add Separator
+  // "Add Separator" button
 
   addSeparatorButton.addEventListener('click', () => {
     listOfFieldsets.appendChild(separatorTemplate.content.cloneNode(true))
   })
 
-  // Load Defaults
+  // "Load Defaults" button
 
   loadDefaultsButton.addEventListener('click', () => {
     chrome.storage.local.get(null, (storage) => {
@@ -189,7 +190,7 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  // Sort (A-Z)
+  // Sort (A-Z) fieldsets button
 
   sortAZButton.addEventListener('click', () => {
     const fieldsets = listOfFieldsets.querySelectorAll('li')
@@ -210,7 +211,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  // Import
+  // Import settings button
 
   importButton.addEventListener('click', () => {
     const fileChooser = document.createElement('input')
@@ -239,7 +240,7 @@ window.addEventListener('DOMContentLoaded', () => {
     fileChooser.click()
   })
 
-  // Export
+  // Export settings button
 
   exportButton.addEventListener('click', () => {
     chrome.storage.sync.get(null, (storage) => {
@@ -254,7 +255,7 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  // Remove
+  // Remove fieldset button
 
   listOfFieldsets.addEventListener('click', (e) => {
     if (e.target.classList.contains('fieldset-remove-button')) {
@@ -262,7 +263,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  // Save
+  // Save settings button
 
   controlsSaveButton.addEventListener('click', () => {
     const newStorage = { fieldsets: [] }
