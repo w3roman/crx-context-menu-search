@@ -65,13 +65,13 @@ window.addEventListener('DOMContentLoaded', () => {
    * @param lastChild When adding a Search
    */
   function disableEnabledAndTransformations(lastChild) {
-    listOfFieldsets.querySelectorAll(lastChild ? 'li:last-child' : 'li').forEach((e) => {
+    listOfFieldsets.querySelectorAll(lastChild ? 'li:last-child' : 'li').forEach((li) => {
       const title = 'Save Settings'
-      const enabledCheckbox = e.querySelector('[type="checkbox"]')
+      const enabledCheckbox = li.querySelector('[type="checkbox"]')
       if (enabledCheckbox) { // Not `_separator_`
         enabledCheckbox.setAttribute('disabled', true)
         enabledCheckbox.setAttribute('data-title', title)
-        const transformationsButton = e.querySelector('.transformations-button')
+        const transformationsButton = li.querySelector('.transformations-button')
         transformationsButton.setAttribute('disabled', true)
         transformationsButton.setAttribute('data-title', title)
       }
@@ -107,12 +107,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(listOfFieldsets, { childList: true })
 
-    listOfFieldsets.querySelectorAll('li').forEach((e) => {
-      let enabledCheckbox = e.querySelector('[type="checkbox"]')
+    listOfFieldsets.querySelectorAll('li').forEach((li) => {
+      let enabledCheckbox = li.querySelector('[type="checkbox"]')
       if (enabledCheckbox) { // Not `_separator_`
         enabledCheckbox.addEventListener('change', showDiscardButton)
-        e.querySelector('[name="searchName"]').addEventListener('input', showDiscardButton)
-        e.querySelector('[name="searchUrl"]').addEventListener('input', showDiscardButton)
+        li.querySelector('[name="searchName"]').addEventListener('input', showDiscardButton)
+        li.querySelector('[name="searchUrl"]').addEventListener('input', showDiscardButton)
       }
     })
   })
@@ -318,21 +318,21 @@ window.addEventListener('DOMContentLoaded', () => {
           messageBox.textContent = ''
           messageBox.classList.remove('color-success')
         }, MSG_TIMEOUT)
-        listOfFieldsets.querySelectorAll('li').forEach((e) => {
-          const enabledCheckbox = e.querySelector('[type="checkbox"]')
+        listOfFieldsets.querySelectorAll('li').forEach((li) => {
+          const enabledCheckbox = li.querySelector('[type="checkbox"]')
           if (enabledCheckbox) {
             enabledCheckbox.removeAttribute('disabled')
             enabledCheckbox.removeAttribute('data-title')
             if (enabledCheckbox.checked) {
-              const transformationsButton = e.querySelector('.transformations-button')
+              const transformationsButton = li.querySelector('.transformations-button')
               transformationsButton.removeAttribute('disabled')
               transformationsButton.removeAttribute('data-title')
             }
           }
         })
         listOfFieldsets.removeAttribute('data-show-discard-changes-button')
-        listOfFieldsets.querySelectorAll('[data-title]').forEach((e) => {
-          e.removeAttribute('data-title')
+        listOfFieldsets.querySelectorAll('[data-title]').forEach((checkboxOrButton) => {
+          checkboxOrButton.removeAttribute('data-title')
         })
         discardChangesButton.style.display = 'none'
       })
@@ -496,14 +496,14 @@ window.addEventListener('DOMContentLoaded', () => {
         changed = true
       } else {
         let fieldsetsNewValues = []
-        fieldsets.forEach((e) => {
+        fieldsets.forEach((fieldset) => {
           let values
-          let enabledCheckbox = e.querySelector('[type="checkbox"]')
+          let enabledCheckbox = fieldset.querySelector('[type="checkbox"]')
           if (enabledCheckbox) {
             values = {
               enabled: enabledCheckbox.checked,
-              name: e.querySelector('[name="searchName"]').value,
-              url: e.querySelector('[name="searchUrl"]').value,
+              name: fieldset.querySelector('[name="searchName"]').value,
+              url: fieldset.querySelector('[name="searchUrl"]').value,
             }
           } else {
             values = { name: '_separator_' }
