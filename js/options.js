@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const exportButton = document.getElementById('export-button')
   const openInBackgroundCheckbox = document.getElementById('open-in-background-checkbox')
   const addUtmSourceCheckbox = document.getElementById('add-utm-source-checkbox')
-  const saveButton = document.getElementById('save-button')
+  const controlsSaveButton = document.getElementById('controls-save-button')
   const discardChangesButton = document.getElementById('discard-changes-button')
   const controlsMessageBox = document.getElementById('controls-message-box')
 
@@ -264,7 +264,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Save
 
-  saveButton.addEventListener('click', () => {
+  controlsSaveButton.addEventListener('click', () => {
     const newStorage = { fieldsets: [] }
     const fieldsets = listOfFieldsets.querySelectorAll('li')
     let thereIsAnError = false
