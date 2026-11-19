@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@types/chrome": "^0.3.7",
+    "@types/dom-chromium-ai": "^0.0.18",
     "sortablejs": "^1.15.7"
   }
 }
