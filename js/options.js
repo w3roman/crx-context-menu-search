@@ -109,6 +109,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(listOfFieldsets, { childList: true })
 
+    // TODO: add event listeners after "Load Defaults" and Import
     listOfFieldsets.querySelectorAll('li').forEach((li) => {
       let enabledCheckbox = li.querySelector('[type="checkbox"]')
       if (enabledCheckbox) { // Not `_separator_`
