@@ -1,5 +1,10 @@
 
+/**
+ * Properties with a value that evaluates to `false` are not specified,
+ * since their presence still needs to be checked when updating the extension
+ */
 const defaultFieldsets = {
+  addUtmSource: true,
   fieldsets: [{
     name: 'Google Exact Match',
     url: 'https://www.google.com/search?q="%s"',
