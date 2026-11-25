@@ -169,8 +169,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
   addSearchButton.addEventListener('click', () => {
     const template = fieldsetTemplate.content.cloneNode(true)
+    const ids = []
+    listOfFieldsets.querySelectorAll('[data-id]').forEach((li) => {
+      ids.push(+li.getAttribute('data-id'))
+    })
+    const lastFieldsetId = Math.max(...ids)
     // `data-id` is used when saving Transformations
-    template.querySelector('li').setAttribute('data-id', listOfFieldsets.querySelectorAll('[data-id]').length + 2)
+    template.querySelector('li').setAttribute('data-id', lastFieldsetId + 1)
     listOfFieldsets.appendChild(template)
     disableEnabledAndTransformations(true)
     listOfFieldsets.querySelector('li:last-child [name="searchName"]').focus()
