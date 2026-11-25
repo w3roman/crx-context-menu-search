@@ -61,19 +61,12 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  /**
-   * @param lastChild When adding a Search
-   */
-  function disableEnabledAndTransformations(lastChild) {
-    listOfFieldsets.querySelectorAll(lastChild ? 'li:last-child' : 'li').forEach((li) => {
-      const title = 'Save Settings'
-      const enabledCheckbox = li.querySelector('[type="checkbox"]')
-      if (enabledCheckbox) { // Not `_separator_`
-        enabledCheckbox.setAttribute('disabled', true)
-        enabledCheckbox.setAttribute('data-title', title)
-        const transformationsButton = li.querySelector('.transformations-button')
+  function disableTransformations(addingSearch) {
+    listOfFieldsets.querySelectorAll(addingSearch ? 'li:last-child' : 'li').forEach((li) => {
+      const transformationsButton = li.querySelector('.transformations-button')
+      if (transformationsButton) { // Not `_separator_`
         transformationsButton.setAttribute('disabled', true)
-        transformationsButton.setAttribute('data-title', title)
+        transformationsButton.setAttribute('data-title', 'Save Settings')
       }
     })
   }
@@ -176,9 +169,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const lastFieldsetId = Math.max(...ids)
     // `data-id` is used when saving Transformations
     template.querySelector('li').setAttribute('data-id', lastFieldsetId + 1)
+    template.querySelector('[type="checkbox"]').checked = true
     listOfFieldsets.appendChild(template)
-    disableEnabledAndTransformations(true)
-    listOfFieldsets.querySelector('li:last-child [name="searchName"]').focus()
+    disableTransformations(true)
+    listOfFieldsets.querySelector('[name="searchName"]').focus()
   })
 
   // "Add Separator" button
@@ -199,7 +193,7 @@ window.addEventListener('DOMContentLoaded', () => {
       // reload the Options page without clicking the Save button in the Controls block. In this case, the loaded
       // Transformations may get attached to a different Search that has, if it has one at all, the same ordinal index
       // as the loaded Search.
-      disableEnabledAndTransformations()
+      disableTransformations()
       listOfFieldsets.setAttribute('data-show-discard-changes-button', true)
     })
   })
@@ -243,7 +237,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // or reload the Options page without clicking the Save button in the Controls block. In this case, the imported
         // Transformations may get attached to a different Search that has, if it has one at all, the same ordinal index
         // as the imported Search.
-        disableEnabledAndTransformations()
+        disableTransformations()
         listOfFieldsets.setAttribute('data-show-discard-changes-button', true)
       }
       reader.readAsText(file)
