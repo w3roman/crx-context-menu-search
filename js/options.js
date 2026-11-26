@@ -61,6 +61,14 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  function setShowDiscardButtonHandler() {
+    listOfFieldsets.querySelectorAll('li').forEach((li) => {
+      li.querySelector('[type="checkbox"]')?.addEventListener('change', showDiscardButton)
+      li.querySelector('[name="searchName"]')?.addEventListener('input', showDiscardButton)
+      li.querySelector('[name="searchUrl"]')?.addEventListener('input', showDiscardButton)
+    })
+  }
+
   function disableTransformations(addingSearch) {
     listOfFieldsets.querySelectorAll(addingSearch ? 'li:last-child' : 'li').forEach((li) => {
       const transformationsButton = li.querySelector('.transformations-button')
@@ -110,14 +118,7 @@ window.addEventListener('DOMContentLoaded', () => {
     observer.observe(listOfFieldsets, { childList: true })
 
     // TODO: add event listeners after "Load Defaults" and Import
-    listOfFieldsets.querySelectorAll('li').forEach((li) => {
-      let enabledCheckbox = li.querySelector('[type="checkbox"]')
-      if (enabledCheckbox) { // Not `_separator_`
-        enabledCheckbox.addEventListener('change', showDiscardButton)
-        li.querySelector('[name="searchName"]').addEventListener('input', showDiscardButton)
-        li.querySelector('[name="searchUrl"]').addEventListener('input', showDiscardButton)
-      }
-    })
+    setShowDiscardButtonHandler()
   })
 
   // Top notification
