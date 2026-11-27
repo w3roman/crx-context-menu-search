@@ -96,8 +96,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // Options
 
     setFieldsets(storage.fieldsets)
-    openInBackgroundCheckbox.checked = storage.openInBackground
-    addUtmSourceCheckbox.checked = storage.addUtmSource
+    openInBackgroundCheckbox.checked = !!storage.openInBackground
+    addUtmSourceCheckbox.checked = !!storage.addUtmSource
 
     // Sortable
 
