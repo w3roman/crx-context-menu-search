@@ -1,8 +1,4 @@
 
-/**
- * Properties with a value that evaluates to `false` are not specified,
- * since their presence still needs to be checked when updating the extension
- */
 const defaultFieldsets = {
   addUtmSource: true,
   fieldsets: [{
@@ -43,6 +39,7 @@ const defaultFieldsets = {
     name: 'Yandex Images by Image URL',
     url: 'https://ya.ru/images/search?clid=15525262&rpt=imageview&url=%s',
   }],
+  openInBackground: false,
 }
 
 const defaultTransformations = { rules: [], toLowerCase: false, toUpperCase: false }
