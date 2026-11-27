@@ -176,7 +176,7 @@ window.addEventListener('DOMContentLoaded', () => {
     template.querySelector('[type="checkbox"]').checked = true
     listOfFieldsets.appendChild(template)
     disableTransformations(true)
-    listOfFieldsets.querySelector('[name="searchName"]').focus()
+    listOfFieldsets.querySelector('li:last-child [name="searchName"]').focus()
   })
 
   // "Add Separator" button
