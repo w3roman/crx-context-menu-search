@@ -120,7 +120,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(listOfFieldsets, { childList: true })
 
-    // TODO: add event listeners after "Load Defaults" and Import
     setShowDiscardButtonHandler()
   })
 
@@ -333,6 +332,7 @@ window.addEventListener('DOMContentLoaded', () => {
           checkboxOrButton.removeAttribute('data-title')
         })
         discardChangesButton.style.display = 'none'
+        setShowDiscardButtonHandler()
         showMessage(controlsMessageBox, 'Saved', 'color-success')
       })
     }
