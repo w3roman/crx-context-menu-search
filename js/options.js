@@ -63,9 +63,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function setShowDiscardButtonHandler() {
     listOfFieldsets.querySelectorAll('li').forEach((li) => {
-      li.querySelector('[type="checkbox"]')?.addEventListener('change', showDiscardButton)
-      li.querySelector('[name="searchName"]')?.addEventListener('input', showDiscardButton)
-      li.querySelector('[name="searchUrl"]')?.addEventListener('input', showDiscardButton)
+      const enabledCheckbox = li.querySelector('[type="checkbox"]')
+      if (enabledCheckbox) { // Skip separators
+        enabledCheckbox.addEventListener('change', showDiscardButton)
+        li.querySelector('[name="searchName"]').addEventListener('input', showDiscardButton)
+        li.querySelector('[name="searchUrl"]').addEventListener('input', showDiscardButton)
+      }
     })
   }
 
